@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "trener.apps.TrenerConfig",
     'tailwind',
     'trener_style',
-    'django_browser_reload'
+    'django_browser_reload',
+    'ckeditor'
 ]
 
 TAILWIND_APP_NAME = 'trener_style'
@@ -134,3 +135,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ['Undo', 'Redo'],
+            ['Source']
+        ],
+        'height': 300
+    }
+}
+
