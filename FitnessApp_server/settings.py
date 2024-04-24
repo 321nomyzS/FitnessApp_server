@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 ]
 
 TAILWIND_APP_NAME = 'trener_style'
-NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+NPM_BIN_PATH = "D:/Programs/nodejs/npm.cmd"
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -145,7 +145,9 @@ CKEDITOR_CONFIGS = {
             ['Undo', 'Redo'],
             ['Source']
         ],
-        'height': 300
+        'resize_dir': 'both',
+        'height': 200,
+        'width': '150%'
     }
 }
 
