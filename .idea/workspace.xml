@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/trener_style/static/icons/exercise_icon.svg" afterDir="false" />
+    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="Add exercise page with backend">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FitnessApp_server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/add_exercise.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/add_exercise.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +118,7 @@
       <workItem from="1713903051190" duration="5688000" />
       <workItem from="1713955888680" duration="1650000" />
       <workItem from="1713972510878" duration="9369000" />
-      <workItem from="1713993710184" duration="13908000" />
+      <workItem from="1713993710184" duration="17586000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -157,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713985666209</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add exercise page with backend">
+      <created>1714139913603</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714139913603</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +178,7 @@
     <MESSAGE value="Create base template" />
     <MESSAGE value="Create add_exercise.html page" />
     <MESSAGE value="Create exercise models" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create exercise models" />
+    <MESSAGE value="Add exercise page with backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add exercise page with backend" />
   </component>
 </project>
