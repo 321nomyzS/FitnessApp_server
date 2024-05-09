@@ -10,9 +10,7 @@ def home(request):
 
 @csrf_protect
 def add_exercise(request):
-    print("Baza ćwiczeń:", Exercise.objects.all())
     if request.method == 'POST':
-        print(request.FILES)
         form = ExerciseForm(request.POST, request.FILES)
         if form.is_valid():
             exercise = Exercise(
@@ -37,8 +35,9 @@ def add_exercise(request):
         return render(request, 'add_exercise.html', {'form': form})
 
 
-def show_exercise(request):
-    return render(request, 'show_exercise.html')
+def show_exercises(request):
+    exercises = Exercise.objects.all()
+    return render(request, 'show_exercises.html', {"exercises": exercises})
 
 
 def add_training(request):
