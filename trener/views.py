@@ -40,6 +40,11 @@ def show_exercises(request):
     return render(request, 'show_exercises.html', {"exercises": exercises})
 
 
+def show_exercise(request, id):
+    exercise = Exercise.objects.get(id=id)
+    return render(request, 'show_exercise.html', {"exercise": exercise})
+
+
 def add_training(request):
     return render(request, 'add_training.html')
 

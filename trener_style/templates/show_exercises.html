@@ -35,7 +35,7 @@
                 <td class="py-5 px-6 border-b border-r border-gray-200">{{ exercise.type.type_name }}</td>
                 <td class="py-5 px-6 border-b border-r border-gray-200">{{ exercise.language.language_name }}</td>
                 <td class="py-5 px-6 border-b border-r border-gray-200 flex flex-row justify-around">
-                    <a href="#" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
+                    <a href="{% url 'show_exercise' id=exercise.id %}" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
                         <p class="text-white my-auto">
                             Pokaż
                         </p>

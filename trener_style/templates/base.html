@@ -42,15 +42,13 @@
             </div>
 
             <!-- Main content -->
-            <div class="flex flex-col flex-1 overflow-y-auto">
+            <div class="flex flex-col flex-1">
                 <div class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
-                    <div class="flex items-center px-4">
-                    </div>
-                    <div class="flex items-center pr-4">
+                    <div class="flex items-center pr-4 flex-1">
                         <!-- topbar -->
                     </div>
                 </div>
-                <div class="p-4">
+                <div class="p-4 overflow-y-auto flex-1">
                     {% block content %}{% endblock %}
                 </div>
             </div>
