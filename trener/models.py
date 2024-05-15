@@ -35,3 +35,33 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class GeneralWorkout(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+    exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
+
+    def __str__(self):
+        return f"General Workout #{self.pk}"
+
+
+class PersonalWorkout(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+    exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
+    workout_date = models.DateField()
+
+    def __str__(self):
+        return f"Personal Workout on {self.workout_date}"
+
+
+class WorkoutExercise(models.Model):
+    id = models.AutoField(primary_key=True)
+    general_workout = models.ForeignKey('GeneralWorkout', on_delete=models.CASCADE, null=True, blank=True)
+    personal_workout = models.ForeignKey('PersonalWorkout', on_delete=models.CASCADE, null=True, blank=True)
+    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)
+    comment = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.exercise.title} in {self.workout}"
