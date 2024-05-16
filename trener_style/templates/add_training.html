@@ -1,5 +1,114 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>Dodawania treningu</h1>
+
+    <form class="mx-auto mb-2 w-4/5 items-center" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Podstawowe informacje o treningu -->
+        <div>
+            <p class="font-medium text-gray-900 text-2xl mb-7">
+                Dodaj nowe trening
+            </p>
+        </div>
+        <div class="flex-1 w-2/3">
+            <div class="mb-5 w-4/5">
+                <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">Nazwa treningu</label>
+                <input class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                <p class="text-xs text-red-500">{{ form.errors.title }}</p>
+            </div>
+            <div class="flex flex-row justify-around mb-5 w-4/5">
+                <div class="flex items-center">
+                    <input checked id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
+                </div>
+                <div class="flex items-center">
+                    <input id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
+                </div>
+            </div>
+            <div class="mb-5 flex flex-row w-4/5 justify-between">
+                    <div class="w-2/5">
+                        <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
+                        <input id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                        <p class="text-xs text-red-500">{{ form.errors.type }}</p>
+                  </div>
+                    <div class="w-2/5">
+                        <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>
+                        <select id="training-person" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                        </select>
+                        <p class="text-xs text-red-500">{{ form.errors.language }}</p>
+                  </div>
+            </div>
+            <div class="flex flex-row justify-around mb-5 w-4/5">
+                <div class="flex items-center">
+                    <input checked id="visible-yes-radio" type="radio" value="yes" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <label for="visible-yes-radio" class="ms-2 text-sm font-medium text-gray-900">Widoczny</label>
+                </div>
+                <div class="flex items-center">
+                    <input id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <label for="visible-no-radio" class="ms-2 text-sm font-medium text-gray-900">Niewidoczny</label>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
+
+        <!-- Lista ćwiczeń -->
+        <div id="exercises-container" class="space-y-4 flex flex-col">
+            <div class="flex flex-row justify-between w-4/5" id="exercise" style="display: none">
+                <div>
+                    <label for="exercise-list" class="block mb-2 text-sm font-medium text-gray-900">Ćwiczenie</label>
+                    <select id="exercise-list" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                        {% for exercise in exercises %}
+                            <option value="{{ exercise.id }}">{{ exercise.id }} {{ exercise.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="w-1/2">
+                    <label for="tips" class="block mb-2 text-sm font-medium text-gray-900">Wskazówki</label>
+                    <textarea id="tips" class="w-full block p-1.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" rows="2"></textarea>
+                </div>
+                <div class="flex items-end justify-center flex-col">
+                    <a id="exercise-delete" class="delete-button bg-red-600 flex flex-row w-24 h-6 justify-around rounded-md text-sm hover:bg-red-900 my-auto">
+                        <p class="text-white my-auto">
+                            Usuń
+                        </p>
+                        <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                    </a>
+                    <a id="exercise-duplicate" class="duplicate-button bg-emerald-500 flex flex-row w-24 h-6 justify-around rounded-md text-sm hover:bg-emerald-700 my-auto">
+                        <p class="text-white my-auto">
+                            Duplikuj
+                        </p>
+                        <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
+
+        <!-- Przyciski na dole -->
+        <div class="flex flex-row">
+            <div class="flex justify-center mr-auto">
+                <button type="button" id="add-exercise" class="bg-blue-500 hover:bg-blue-700 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
+                    Dodaj ćwiczenie
+                </button>
+            </div>
+            <div class="flex justify-center">
+                <button type="submit" class="bg-blue-700 hover:bg-blue-900 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
+                    Zatwierdź
+                </button>
+            </div>
+        </div>
+
+
+
+    </form>
+
+    <script src="{% static "scripts/add_training.js"%}"></script>
 {% endblock %}

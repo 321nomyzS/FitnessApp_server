@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="Update show exercises table">
+    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/trener_style/static/scripts/add_training.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/05e40c65-a238-47d2-ad67-e7c5dc368183.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/8e4af1a0-0e22-48a9-9138-9cd34c1b97c2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/add_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/add_training.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +28,7 @@
       <list>
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -131,7 +137,8 @@
       <workItem from="1715023259047" duration="6523000" />
       <workItem from="1715245625502" duration="3631000" />
       <workItem from="1715598794969" duration="1511000" />
-      <workItem from="1715769825803" duration="1859000" />
+      <workItem from="1715769825803" duration="6330000" />
+      <workItem from="1715806219904" duration="9680000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -184,7 +191,21 @@
       <option name="project" value="LOCAL" />
       <updated>1715245725084</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Add Workout models">
+      <created>1715771990960</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715771990960</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Update database">
+      <created>1715772036613</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1715772036613</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +229,8 @@
     <MESSAGE value="Add exercise page with backend" />
     <MESSAGE value="Update sidebar" />
     <MESSAGE value="Update show exercises table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update show exercises table" />
+    <MESSAGE value="Add Workout models" />
+    <MESSAGE value="Update database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update database" />
   </component>
 </project>

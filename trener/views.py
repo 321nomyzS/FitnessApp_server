@@ -46,7 +46,8 @@ def show_exercise(request, id):
 
 
 def add_training(request):
-    return render(request, 'add_training.html')
+    exercises = Exercise.objects.all()
+    return render(request, 'add_training.html', {'exercises': exercises})
 
 
 def show_training(request):
