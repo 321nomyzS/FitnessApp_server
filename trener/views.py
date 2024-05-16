@@ -97,5 +97,9 @@ def add_training(request):
 
 def show_training(request):
     general_workout = GeneralWorkout.objects.all()
-    print(general_workout)
-    return render(request, 'show_training.html')
+    personal_workout = PersonalWorkout.objects.all()
+
+    return render(request, 'show_trainings.html', {
+        'general_workout': general_workout,
+        'personal_workout': personal_workout
+    })
