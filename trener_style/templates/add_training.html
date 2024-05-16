@@ -14,39 +14,38 @@
         <div class="flex-1 w-2/3">
             <div class="mb-5 w-4/5">
                 <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">Nazwa treningu</label>
-                <input class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                <input name="title" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ form.title }}">
                 <p class="text-xs text-red-500">{{ form.errors.title }}</p>
             </div>
             <div class="flex flex-row justify-around mb-5 w-4/5">
                 <div class="flex items-center">
-                    <input checked id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <input {% if form.training_type == "personal" or not form%} checked {% endif %} id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
                 </div>
                 <div class="flex items-center">
-                    <input id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <input {% if form.training_type == "general" %} checked {% endif %} id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
                 </div>
+                <p class="text-xs text-red-500">{{ form.errors.training_type }}</p>
             </div>
             <div class="mb-5 flex flex-row w-4/5 justify-between">
                     <div class="w-2/5">
                         <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
-                        <input id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
-                        <p class="text-xs text-red-500">{{ form.errors.type }}</p>
+                        <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
                   </div>
                     <div class="w-2/5">
                         <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>
-                        <select id="training-person" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                        <select name="workout-person" id="training-person" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
                         </select>
-                        <p class="text-xs text-red-500">{{ form.errors.language }}</p>
                   </div>
             </div>
             <div class="flex flex-row justify-around mb-5 w-4/5">
                 <div class="flex items-center">
-                    <input checked id="visible-yes-radio" type="radio" value="yes" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <input {% if form.visibility == "yes" or not form%} checked {% endif %} id="visible-yes-radio" type="radio" value="yes" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="visible-yes-radio" class="ms-2 text-sm font-medium text-gray-900">Widoczny</label>
                 </div>
                 <div class="flex items-center">
-                    <input id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <input {% if form.visibility == "no" %} checked {% endif %} id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="visible-no-radio" class="ms-2 text-sm font-medium text-gray-900">Niewidoczny</label>
                 </div>
             </div>
@@ -105,9 +104,6 @@
                 </button>
             </div>
         </div>
-
-
-
     </form>
 
     <script src="{% static "scripts/add_training.js"%}"></script>

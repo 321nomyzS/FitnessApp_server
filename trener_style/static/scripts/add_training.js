@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', function () {
         element.querySelector('.delete-button').id = 'exercise-delete-' + id;
         element.querySelector('.duplicate-button').id = 'exercise-duplicate-' + id;
 
+        element.querySelector('select').name = 'exercise-id-' + id;
+        element.querySelector('textarea').name = 'exercise-tips-' + id;
+
         element.querySelector('.delete-button').addEventListener('click', function () {
             element.remove();
         });

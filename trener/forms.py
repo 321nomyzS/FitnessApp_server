@@ -84,3 +84,51 @@ class ExerciseForm(forms.ModelForm):
     class Meta:
         model = Exercise
         fields = ['title', 'type', 'language', 'short_description', 'image', 'video_link', 'html_content']
+
+
+class MyTrainingForm:
+    def __init__(self, request_post):
+        self.errors = None
+        self.title = request_post['title']
+        self.training_type = request_post['training-type']
+        self.visibility = request_post['visible-radio']
+
+        self.exercises_ids = []
+        for key in request_post.keys():
+            split_key = key.split('-')
+            if split_key[0] == 'exercise' and split_key[1] == 'id':
+                self.exercises_ids.append(split_key[2])
+
+    def is_valid(self):
+        self.errors = MyTrainingErrors()
+        if len(self.title) > 100:
+            self.errors.title = "Nazwa treningu jest za długa."
+            self.errors.is_error = True
+
+        if self.training_type not in ["general", "personal"]:
+            self.errors.training_type = "Nieprawidłowy typ treningu"
+            self.errors.is_error = True
+
+        if self.visibility not in ["yes", "no"]:
+            self.errors.visibility = "Nieprawidłowa widoczność treningu"
+            self.errors.is_error = True
+
+        general_exercise_ids = [exercise.id for exercise in Exercise.objects.all()]
+
+        for exercise_id in self.exercises_ids:
+            if int(exercise_id) not in general_exercise_ids:
+                self.exercises_ids = "Wybrane ćwiczenie nie istnieje"
+                self.errors.is_error = True
+
+        return not self.errors.is_error
+
+
+class MyTrainingErrors:
+    def __init__(self):
+        self.title = ""
+        self.training_type = ""
+        self.visibility = ""
+        self.exercise_id = ""
+        self.is_error = False
+
+
