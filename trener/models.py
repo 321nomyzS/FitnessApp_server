@@ -41,6 +41,7 @@ class GeneralWorkout(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
+    visibility = models.BooleanField()
 
     def __str__(self):
         return f"General Workout #{self.pk}"
@@ -50,6 +51,7 @@ class PersonalWorkout(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
+    visibility = models.BooleanField()
     workout_date = models.DateField()
 
     def __str__(self):
@@ -64,4 +66,4 @@ class WorkoutExercise(models.Model):
     comment = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.exercise.title} in {self.workout}"
+        return f"{self.exercise.title} in {self.personal_workout} or {self.general_workout}"

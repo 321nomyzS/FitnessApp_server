@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_trainings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_training.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_trainings.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_trainings.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,36 +48,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Django Server.FitnessApp_server.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;X:/Repositories/FitnessApp_server/trener_style/templates&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django Server.FitnessApp_server.executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "X:/Python Projects/FitnessApp_server/trener_style/templates",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.completion",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="X:\Repositories\FitnessApp_server\trener_style\templates" />
       <recent name="X:\Python Projects\FitnessApp_server\trener_style\templates" />
+      <recent name="X:\Repositories\FitnessApp_server\trener_style\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="X:\Repositories\FitnessApp_server\trener_style\static\icons" />
@@ -134,7 +139,7 @@
       <workItem from="1715245625502" duration="3631000" />
       <workItem from="1715598794969" duration="1511000" />
       <workItem from="1715769825803" duration="6330000" />
-      <workItem from="1715806219904" duration="18656000" />
+      <workItem from="1715806219904" duration="25568000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -215,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715878639460</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add show_trainings page">
+      <created>1715881319147</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1715881319147</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,6 +255,7 @@
     <MESSAGE value="Update database" />
     <MESSAGE value="add_training.html page with mechanics" />
     <MESSAGE value="Adding training to database with server validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding training to database with server validation" />
+    <MESSAGE value="Add show_trainings page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add show_trainings page" />
   </component>
 </project>

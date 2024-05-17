@@ -49,10 +49,11 @@ def add_training(request):
     exercises = Exercise.objects.all()
     if request.method == "POST":
         form = MyTrainingForm(request.POST)
+        print(request.POST)
 
         if form.is_valid():
             exercise_id_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-')]
-            exercise_tips_keys = [key for key in request.POST.keys() if key.startswith('exercise-tips-')]
+            exercise_tips_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-tips-')]
             exercise_keys_id = list(set(exercise_id_keys) & set(exercise_tips_keys))
 
             if request.POST['training-type'] == 'personal':
@@ -61,6 +62,7 @@ def add_training(request):
                 new_training.title = request.POST['title']
                 new_training.workout_date = request.POST['workout_date']
                 # new_training.person = request.POST['workout-person']
+                new_training.visibility = request.POST['visible-radio'] == 'yes'
                 new_training.save()
 
                 # Creating WorkoutExercise objects
@@ -76,6 +78,8 @@ def add_training(request):
                 # Creating GeneralWorkout object
                 new_training = GeneralWorkout()
                 new_training.title = request.POST['title']
+                new_training.visibility = request.POST['visible-radio'] == 'yes'
+
                 new_training.save()
 
                 # Creating WorkoutExercise objects
@@ -84,7 +88,6 @@ def add_training(request):
                     workout_exercise.general_workout = new_training
                     workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
                     workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
-
                     workout_exercise.save()
 
             return redirect('show_training')
@@ -103,3 +106,17 @@ def show_training(request):
         'general_workout': general_workout,
         'personal_workout': personal_workout
     })
+
+
+def show_general_training(request, id):
+    general_training = GeneralWorkout.objects.get(id=id)
+    workout_exercises = WorkoutExercise.objects.filter(general_workout_id=id)
+
+    return render(request, 'show_training.html', {'training': general_training, 'workout_exercises': workout_exercises})
+
+
+def show_personal_training(request, id):
+    personal_training = PersonalWorkout.objects.get(id=id)
+    workout_exercises = WorkoutExercise.objects.filter(personal_workout_id=id)
+
+    return render(request, 'show_training.html', {'training': personal_training, 'workout_exercises': workout_exercises})

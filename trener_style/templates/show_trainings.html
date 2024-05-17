@@ -30,7 +30,7 @@
                 <td class="py-5 px-6 border-b border-r border-gray-200">{{ workout.id }}</td>
                 <td class="py-5 px-6 border-b border-r border-gray-200">{{ workout.title }}</td>
                 <td class="py-5 px-6 border-b border-r border-gray-200 flex flex-row justify-around">
-                    <a href="#" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
+                    <a href="{% url 'show_general_training' id=workout.id %}" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
                         <p class="text-white my-auto">
                             Pokaż
                         </p>
@@ -81,7 +81,7 @@
                 <td class="py-5 px-6 border-b border-r border-gray-200">{{ workout.workout_date }}</td>
                 <td class="py-5 px-6 border-b border-r border-gray-200">Jan Kowalski</td>
                 <td class="py-5 px-6 border-b border-r border-gray-200 flex flex-row justify-around">
-                    <a href="#" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
+                    <a href="{% url 'show_personal_training' id=workout.id %}" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
                         <p class="text-white my-auto">
                             Pokaż
                         </p>
