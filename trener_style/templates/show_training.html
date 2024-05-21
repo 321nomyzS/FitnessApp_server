@@ -19,13 +19,13 @@
             <div class="mb-5 w-4/5">
                 {% if training.workout_date %}
                 <div class="flex items-center">
-                    <input id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <input checked disabled id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
                 </div>
                 {% endif %}
                 {% if not training.workout_date %}
                 <div class="flex items-center">
-                    <input id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <input checked disabled id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
                 </div>
                 {% endif %}
@@ -35,7 +35,7 @@
             <div class="mb-5 flex flex-row w-4/5 justify-between">
                     <div class="w-2/5">
                         <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
-                        <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                        <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.workout_date }}" disabled>
                   </div>
                     <div class="w-2/5">
                         <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>
