@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_client.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_client.html" afterDir="false" />
-    </list>
+    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -134,7 +131,7 @@
       <workItem from="1715806219904" duration="25568000" />
       <workItem from="1715963998786" duration="267000" />
       <workItem from="1716124789891" duration="6880000" />
-      <workItem from="1716301207065" duration="11111000" />
+      <workItem from="1716301207065" duration="11418000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -278,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716324122606</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Fixing date on pages">
+      <created>1716324873323</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1716324873323</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,6 +318,7 @@
     <MESSAGE value="Add show client page" />
     <MESSAGE value="Commit database changes" />
     <MESSAGE value="Fixing styles" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing styles" />
+    <MESSAGE value="Fixing date on pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing date on pages" />
   </component>
 </project>
