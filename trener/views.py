@@ -130,7 +130,8 @@ def show_personal_training(request, id):
 
     return render(request, 'show_training.html', {'training': personal_training, 'workout_exercises': workout_exercises})
 
-@login_required()
+
+@login_required
 def add_client(request):
     if request.method == "POST":
         form = ClientForm(request.POST, request.FILES)
@@ -157,6 +158,12 @@ def add_client(request):
 
     form = ClientForm()
     return render(request, 'add_client.html', {'form': form})
+
+
+@login_required
+def show_clients(request):
+    clients = Client.objects.all()
+    return render(request, 'show_clients.html', {"clients": clients})
 
 
 def login_page(request):

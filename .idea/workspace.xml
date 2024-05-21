@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/trener_style/static/scripts/add_client.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trener_style/templates/add_client.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trener_style/templates/show_clients.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener_style/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -143,7 +137,7 @@
       <workItem from="1715806219904" duration="25568000" />
       <workItem from="1715963998786" duration="267000" />
       <workItem from="1716124789891" duration="6880000" />
-      <workItem from="1716301207065" duration="7446000" />
+      <workItem from="1716301207065" duration="9011000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -252,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716313140275</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Add adding client">
+      <created>1716318528817</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1716318528817</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -283,6 +284,7 @@
     <MESSAGE value="Add show_training page" />
     <MESSAGE value="Create login and logout" />
     <MESSAGE value="Update sidebar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update sidebar" />
+    <MESSAGE value="Add adding client" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add adding client" />
   </component>
 </project>

@@ -11,6 +11,7 @@ urlpatterns = [
     path('training/general/<id>', views.show_general_training, name='show_general_training'),
     path('training/personal/<id>', views.show_personal_training, name='show_personal_training'),
     path('client/add', views.add_client, name='add_client'),
+    path('client', views.show_clients, name='show_clients'),
     path('login', views.login_page, name='login'),
     path('logout', views.logout_tunnel, name='logout_tunnel')
 ]
