@@ -2,12 +2,16 @@ from .forms import ExerciseForm, MyTrainingForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from .models import *
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def home(request):
     return render(request, 'base.html')
 
 
+@login_required
 @csrf_protect
 def add_exercise(request):
     if request.method == 'POST':
@@ -35,21 +39,23 @@ def add_exercise(request):
         return render(request, 'add_exercise.html', {'form': form})
 
 
+@login_required
 def show_exercises(request):
     exercises = Exercise.objects.all()
     return render(request, 'show_exercises.html', {"exercises": exercises})
 
 
+@login_required
 def show_exercise(request, id):
     exercise = Exercise.objects.get(id=id)
     return render(request, 'show_exercise.html', {"exercise": exercise})
 
 
+@login_required
 def add_training(request):
     exercises = Exercise.objects.all()
     if request.method == "POST":
         form = MyTrainingForm(request.POST)
-        print(request.POST)
 
         if form.is_valid():
             exercise_id_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-')]
@@ -98,6 +104,7 @@ def add_training(request):
     return render(request, 'add_training.html', {'exercises': exercises})
 
 
+@login_required
 def show_training(request):
     general_workout = GeneralWorkout.objects.all()
     personal_workout = PersonalWorkout.objects.all()
@@ -108,6 +115,7 @@ def show_training(request):
     })
 
 
+@login_required
 def show_general_training(request, id):
     general_training = GeneralWorkout.objects.get(id=id)
     workout_exercises = WorkoutExercise.objects.filter(general_workout_id=id)
@@ -115,8 +123,29 @@ def show_general_training(request, id):
     return render(request, 'show_training.html', {'training': general_training, 'workout_exercises': workout_exercises})
 
 
+@login_required
 def show_personal_training(request, id):
     personal_training = PersonalWorkout.objects.get(id=id)
     workout_exercises = WorkoutExercise.objects.filter(personal_workout_id=id)
 
     return render(request, 'show_training.html', {'training': personal_training, 'workout_exercises': workout_exercises})
+
+
+def login_page(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+
+        if user:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'login.html', {'error': True})
+
+    return render(request, 'login.html')
+
+
+def logout_tunnel(request):
+    logout(request)
+    return redirect('login')
