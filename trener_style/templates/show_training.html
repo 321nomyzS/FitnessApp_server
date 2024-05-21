@@ -35,7 +35,7 @@
             <div class="mb-5 flex flex-row w-4/5 justify-between">
                     <div class="w-2/5">
                         <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
-                        <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.workout_date }}" disabled>
+                        <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.workout_date|date:'Y-m-d' }}" disabled>
                   </div>
                     <div class="w-2/5">
                         <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>

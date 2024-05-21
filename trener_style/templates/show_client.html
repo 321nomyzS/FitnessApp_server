@@ -52,7 +52,7 @@
                     {% if client.status == 'active_until' %}
                         <div class="w-1/2 ml-3">
                             <label for="active_until" class="block mb-2 text-sm font-medium text-gray-900">Data wygaśnięcia</label>
-                            <input disabled name="active_until" id="active_until" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                            <input disabled name="active_until" id="active_until" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ client.active_until|date:'Y-m-d' }}">
                         </div>
                     {% endif %}
                 </div>
