@@ -166,6 +166,12 @@ def show_clients(request):
     return render(request, 'show_clients.html', {"clients": clients})
 
 
+@login_required
+def show_client(request, id):
+    client = Client.objects.get(id=id)
+    return render(request, 'show_client.html', {'client': client})
+
+
 def login_page(request):
     if request.method == 'POST':
         username = request.POST['username']
