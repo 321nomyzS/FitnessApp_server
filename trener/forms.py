@@ -1,10 +1,11 @@
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 from django.core.validators import URLValidator, FileExtensionValidator
-from .models import Exercise, ExerciseType, ExerciseLanguage
+from .models import Exercise, ExerciseType, ExerciseLanguage, Client
 import hashlib
-from django.core.files.uploadedfile import InMemoryUploadedFile
 import os
+from django.core.exceptions import ValidationError
+import re
 
 
 class ExerciseForm(forms.ModelForm):
@@ -130,5 +131,46 @@ class MyTrainingErrors:
         self.visibility = ""
         self.exercise_id = ""
         self.is_error = False
+
+
+class ClientForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = ['first_name', 'last_name', 'photo', 'email', 'password', 'status', 'active_until']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'}),
+            'last_name': forms.TextInput(attrs={'class': 'w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'}),
+            'photo': forms.FileInput(attrs={'class': 'w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg file:bg-blue-50 file:border-blue-300 file:px-2.5 file:text-sm file:rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'}),
+            'email': forms.EmailInput(attrs={'class': 'w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'}),
+            'password': forms.PasswordInput(attrs={'class': 'w-4/5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'}),
+            'status': forms.Select(attrs={'class': 'w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'}),
+            'active_until': forms.DateInput(attrs={'class': 'w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5', 'type': 'date'}),
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if Client.objects.filter(email=email).exists():
+            raise ValidationError("Email is already in use.")
+        return email
+
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        if not re.match(r'^(?=.*\d)(?=.*[a-zA-Z]).{8,}$', password):
+            raise ValidationError("Password must be at least 8 characters long and include at least one letter and one number.")
+        return password
+
+    def clean_photo(self):
+        file = self.cleaned_data.get('photo', False)
+        if file:
+            md5 = hashlib.md5()
+            for chunk in file.chunks():
+                md5.update(chunk)
+            file_hash = md5.hexdigest()
+
+            extension = os.path.splitext(file.name)[1]
+            new_name = f"{file_hash}{extension}"
+
+            file.name = new_name
+            return file
 
 

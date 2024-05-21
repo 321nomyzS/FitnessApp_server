@@ -1,4 +1,4 @@
-from .forms import ExerciseForm, MyTrainingForm
+from .forms import ExerciseForm, MyTrainingForm, ClientForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from .models import *
@@ -129,6 +129,34 @@ def show_personal_training(request, id):
     workout_exercises = WorkoutExercise.objects.filter(personal_workout_id=id)
 
     return render(request, 'show_training.html', {'training': personal_training, 'workout_exercises': workout_exercises})
+
+@login_required()
+def add_client(request):
+    if request.method == "POST":
+        form = ClientForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            new_client = Client(
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password'],
+                status=form.cleaned_data['status'],
+                active_until=form.cleaned_data['active_until']
+            )
+
+            new_client.save()
+
+            new_client.photo = form.cleaned_data['photo']
+            if new_client.photo:
+                new_client.save()
+
+            return redirect('home')
+        else:
+            return render(request, 'add_client.html', {'form': form})
+
+    form = ClientForm()
+    return render(request, 'add_client.html', {'form': form})
 
 
 def login_page(request):

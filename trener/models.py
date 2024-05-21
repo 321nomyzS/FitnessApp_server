@@ -1,10 +1,14 @@
 from django.db import models
-from django.core.validators import FileExtensionValidator
-import os
+from django.contrib.auth.hashers import make_password
+from datetime import date
 
 
 def exercise_directory_path(instance, filename):
     return f'exercise/{instance.id}/{filename}'
+
+
+def client_directory_path(instance, filename):
+    return f'client/{instance.id}/{filename}'
 
 
 class ExerciseType(models.Model):
@@ -67,3 +71,33 @@ class WorkoutExercise(models.Model):
 
     def __str__(self):
         return f"{self.exercise.title} in {self.personal_workout} or {self.general_workout}"
+
+
+class Client(models.Model):
+    id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to=client_directory_path, blank=True, null=True)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=100)
+    STATUS_CHOICES = [
+        ('active', 'Active'),
+        ('inactive', 'Inactive'),
+        ('active_until', 'Active until specific date')
+    ]
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='active')
+    active_until = models.DateField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.password = make_password(self.password)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def is_active(self):
+        if self.status == 'active':
+            return True
+        elif self.status == 'active_until' and self.active_until >= date.today():
+            return True
+        return False
