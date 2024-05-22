@@ -51,17 +51,6 @@ class GeneralWorkout(models.Model):
         return f"General Workout #{self.pk}"
 
 
-class PersonalWorkout(models.Model):
-    id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=100)
-    exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
-    visibility = models.BooleanField()
-    workout_date = models.DateField()
-
-    def __str__(self):
-        return f"Personal Workout on {self.workout_date}"
-
-
 class WorkoutExercise(models.Model):
     id = models.AutoField(primary_key=True)
     general_workout = models.ForeignKey('GeneralWorkout', on_delete=models.CASCADE, null=True, blank=True)
@@ -101,3 +90,15 @@ class Client(models.Model):
         elif self.status == 'active_until' and self.active_until >= date.today():
             return True
         return False
+
+
+class PersonalWorkout(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+    exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
+    visibility = models.BooleanField()
+    workout_date = models.DateField()
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Personal Workout on {self.workout_date}"

@@ -54,6 +54,8 @@ def show_exercise(request, id):
 @login_required
 def add_training(request):
     exercises = Exercise.objects.all()
+    clients = Client.objects.all()
+
     if request.method == "POST":
         form = MyTrainingForm(request.POST)
 
@@ -67,8 +69,8 @@ def add_training(request):
                 new_training = PersonalWorkout()
                 new_training.title = request.POST['title']
                 new_training.workout_date = request.POST['workout_date']
-                # new_training.person = request.POST['workout-person']
                 new_training.visibility = request.POST['visible-radio'] == 'yes'
+                new_training.client = Client.objects.get(id=request.POST['workout-person'])
                 new_training.save()
 
                 # Creating WorkoutExercise objects
@@ -99,9 +101,9 @@ def add_training(request):
             return redirect('show_training')
 
         else:
-            return render(request, 'add_training.html', {'exercises': exercises, 'form': form})
+            return render(request, 'add_training.html', {'exercises': exercises, 'form': form, 'clients': clients})
 
-    return render(request, 'add_training.html', {'exercises': exercises})
+    return render(request, 'add_training.html', {'exercises': exercises, 'clients': clients})
 
 
 @login_required

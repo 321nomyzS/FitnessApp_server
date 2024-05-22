@@ -1943,27 +1943,27 @@ model</ColNames>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="631" parent="530" name="photo">
-      <DasType>varchar(100)|0s</DasType>
+    <column id="631" parent="530" name="email">
+      <DasType>varchar(254)|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="632" parent="530" name="email">
-      <DasType>varchar(254)|0s</DasType>
+    <column id="632" parent="530" name="password">
+      <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="633" parent="530" name="password">
-      <DasType>varchar(100)|0s</DasType>
+    <column id="633" parent="530" name="status">
+      <DasType>varchar(15)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="634" parent="530" name="status">
-      <DasType>varchar(15)|0s</DasType>
-      <NotNull>1</NotNull>
+    <column id="634" parent="530" name="active_until">
+      <DasType>date|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="635" parent="530" name="active_until">
-      <DasType>date|0s</DasType>
+    <column id="635" parent="530" name="photo">
+      <DasType>varchar(100)|0s</DasType>
       <Position>8</Position>
     </column>
     <index id="636" parent="530" name="sqlite_autoindex_trener_client_1">
@@ -2113,64 +2113,79 @@ model</ColNames>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <key id="666" parent="535">
+    <column id="666" parent="535" name="client_id">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <foreign-key id="667" parent="535">
+      <ColNames>client_id</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefColNames>id</RefColNames>
+      <RefTableName>trener_client</RefTableName>
+    </foreign-key>
+    <index id="668" parent="535" name="trener_personalworkout_client_id_ee356caa">
+      <ColNames>client_id</ColNames>
+    </index>
+    <key id="669" parent="535">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="667" parent="536" name="id">
+    <column id="670" parent="536" name="id">
       <AutoIncrement>1</AutoIncrement>
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="668" parent="536" name="comment">
+    <column id="671" parent="536" name="comment">
       <DasType>text|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="669" parent="536" name="exercise_id">
+    <column id="672" parent="536" name="exercise_id">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="670" parent="536" name="general_workout_id">
+    <column id="673" parent="536" name="general_workout_id">
       <DasType>integer|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="671" parent="536" name="personal_workout_id">
+    <column id="674" parent="536" name="personal_workout_id">
       <DasType>integer|0s</DasType>
       <Position>5</Position>
     </column>
-    <foreign-key id="672" parent="536">
+    <foreign-key id="675" parent="536">
       <ColNames>exercise_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>trener_exercise</RefTableName>
     </foreign-key>
-    <foreign-key id="673" parent="536">
+    <foreign-key id="676" parent="536">
       <ColNames>general_workout_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>trener_generalworkout</RefTableName>
     </foreign-key>
-    <foreign-key id="674" parent="536">
+    <foreign-key id="677" parent="536">
       <ColNames>personal_workout_id</ColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefColNames>id</RefColNames>
       <RefTableName>trener_personalworkout</RefTableName>
     </foreign-key>
-    <index id="675" parent="536" name="trener_workoutexercise_exercise_id_3db6fd50">
+    <index id="678" parent="536" name="trener_workoutexercise_exercise_id_3db6fd50">
       <ColNames>exercise_id</ColNames>
     </index>
-    <index id="676" parent="536" name="trener_workoutexercise_general_workout_id_17cbca27">
+    <index id="679" parent="536" name="trener_workoutexercise_general_workout_id_17cbca27">
       <ColNames>general_workout_id</ColNames>
     </index>
-    <index id="677" parent="536" name="trener_workoutexercise_personal_workout_id_79593da5">
+    <index id="680" parent="536" name="trener_workoutexercise_personal_workout_id_79593da5">
       <ColNames>personal_workout_id</ColNames>
     </index>
-    <key id="678" parent="536">
+    <key id="681" parent="536">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
