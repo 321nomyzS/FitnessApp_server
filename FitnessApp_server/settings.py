@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'tailwind',
     'trener_style',
     'django_browser_reload',
-    'ckeditor'
+    'ckeditor',
+    'rest_framework',
+    'api'
 ]
 
 TAILWIND_APP_NAME = 'trener_style'
