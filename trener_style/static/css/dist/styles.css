@@ -885,25 +885,12 @@ select {
   height: 1.5rem;
 }
 
-.h-max {
-  height: -moz-max-content;
-  height: max-content;
-}
-
 .h-px {
   height: 1px;
 }
 
 .h-screen {
   height: 100vh;
-}
-
-.h-full {
-  height: 100%;
-}
-
-.w-1\/12 {
-  width: 8.333333%;
 }
 
 .w-1\/2 {
@@ -960,6 +947,14 @@ select {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[10\%\] {
+  width: 10%;
+}
+
+.w-\[5\%\] {
+  width: 5%;
 }
 
 .max-w-md {
@@ -1220,20 +1215,12 @@ select {
   padding-right: 1rem;
 }
 
-.pt-px {
-  padding-top: 1px;
-}
-
 .text-left {
   text-align: left;
 }
 
 .text-center {
   text-align: center;
-}
-
-.align-middle {
-  vertical-align: middle;
 }
 
 .font-\[sans-serif\] {

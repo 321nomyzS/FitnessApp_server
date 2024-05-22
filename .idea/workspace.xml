@@ -7,8 +7,6 @@
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_exercises.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_exercises.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +134,8 @@
       <workItem from="1715806219904" duration="25568000" />
       <workItem from="1715963998786" duration="267000" />
       <workItem from="1716124789891" duration="6880000" />
-      <workItem from="1716301207065" duration="12373000" />
+      <workItem from="1716301207065" duration="12408000" />
+      <workItem from="1716407327907" duration="361000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -301,7 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716325178831</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Fixing show_exercises.html styles">
+      <created>1716325861426</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1716325861426</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,6 +346,7 @@
     <MESSAGE value="Fixing date on pages" />
     <MESSAGE value="Create alert on login page and change title" />
     <MESSAGE value="Change title in base" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change title in base" />
+    <MESSAGE value="Fixing show_exercises.html styles" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing show_exercises.html styles" />
   </component>
 </project>
