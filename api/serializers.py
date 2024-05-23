@@ -1,19 +1,14 @@
 from rest_framework import serializers
-from trener.models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise
+from trener.models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise, Person
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth.hashers import check_password
+from django.core.exceptions import ValidationError
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
         fields = '__all__'
-
-
-class GeneralWorkoutSerializer(serializers.ModelSerializer):
-    exercises = ExerciseSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = GeneralWorkout
-        fields = ['id', 'title', 'visibility', 'exercises']
 
 
 class PersonalWorkoutSerializer(serializers.ModelSerializer):
@@ -23,6 +18,16 @@ class PersonalWorkoutSerializer(serializers.ModelSerializer):
 
 
 class WorkoutExerciseSerializer(serializers.ModelSerializer):
+    exercise = ExerciseSerializer(read_only=True)
+
     class Meta:
         model = WorkoutExercise
-        fields = '__all__'
+        fields = ['exercise', 'comment']  # Tu dodajesz 'comment' do serializowanych pól
+
+
+class GeneralWorkoutSerializer(serializers.ModelSerializer):
+    exercises = WorkoutExerciseSerializer(source='workoutexercise_set', many=True, read_only=True)
+
+    class Meta:
+        model = GeneralWorkout
+        fields = ['id', 'title', 'visibility', 'exercises']

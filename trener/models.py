@@ -64,6 +64,7 @@ class WorkoutExercise(models.Model):
 
 
 class Person(AbstractUser):
+    email = models.EmailField(unique=True)
     photo = models.ImageField(upload_to=person_directory_path, blank=True, null=True)
     STATUS_CHOICES = [
         ('active', 'Active'),
@@ -72,6 +73,9 @@ class Person(AbstractUser):
     ]
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='active')
     active_until = models.DateField(null=True, blank=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

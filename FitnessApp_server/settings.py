@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'rest_framework',
     'api',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 TAILWIND_APP_NAME = 'trener_style'
@@ -167,3 +169,10 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'trener.Person'
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+}

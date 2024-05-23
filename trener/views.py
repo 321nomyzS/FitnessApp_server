@@ -143,18 +143,18 @@ def add_client(request):
                 first_name=form.cleaned_data['first_name'],
                 last_name=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'],
-                password=form.cleaned_data['password'],
                 status=form.cleaned_data['status'],
                 active_until=form.cleaned_data['active_until']
             )
 
+            new_client.set_password(form.cleaned_data['password'])
             new_client.save()
 
             new_client.photo = form.cleaned_data['photo']
             if new_client.photo:
                 new_client.save()
 
-            return redirect('home')
+            return redirect('show_clients')
         else:
             return render(request, 'add_client.html', {'form': form})
 
