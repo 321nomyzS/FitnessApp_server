@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'ckeditor',
     'rest_framework',
-    'api'
+    'api',
 ]
 
 TAILWIND_APP_NAME = 'trener_style'
@@ -160,3 +160,10 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+AUTH_USER_MODEL = 'trener.Person'

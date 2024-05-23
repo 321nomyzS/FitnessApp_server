@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2ed10f43-5fdc-407c-9244-407fdd2e2264.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2ed10f43-5fdc-407c-9244-407fdd2e2264.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessApp_server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessApp_server/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/client/3/5cc7e4ff4ed52b7bb6b6d0b5a9967d69.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/migrations/0002_generalworkout_visibility_personalworkout_visibility.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/migrations/0003_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/migrations/0004_personalworkout_client_alter_client_photo.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/add_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/add_training.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_trainings.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_trainings.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +150,9 @@
       <workItem from="1715963998786" duration="267000" />
       <workItem from="1716124789891" duration="6880000" />
       <workItem from="1716301207065" duration="12408000" />
-      <workItem from="1716407327907" duration="2537000" />
+      <workItem from="1716407327907" duration="10083000" />
+      <workItem from="1716475443078" duration="165000" />
+      <workItem from="1716475621674" duration="2877000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -326,7 +338,21 @@
       <option name="project" value="LOCAL" />
       <updated>1716409184710</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Connecting Clients with PersonalWorkout">
+      <created>1716409956531</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1716409956531</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Connecting Clients with PersonalWorkout">
+      <created>1716409966044</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1716409966044</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,6 +394,7 @@
     <MESSAGE value="Fixing show_exercises.html styles" />
     <MESSAGE value="Fixing show_clients.html styles" />
     <MESSAGE value="Creating API app" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating API app" />
+    <MESSAGE value="Connecting Clients with PersonalWorkout" />
+    <option name="LAST_COMMIT_MESSAGE" value="Connecting Clients with PersonalWorkout" />
   </component>
 </project>

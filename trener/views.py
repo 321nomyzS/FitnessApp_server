@@ -54,7 +54,7 @@ def show_exercise(request, id):
 @login_required
 def add_training(request):
     exercises = Exercise.objects.all()
-    clients = Client.objects.all()
+    clients = Person.objects.all()
 
     if request.method == "POST":
         form = MyTrainingForm(request.POST)
@@ -70,7 +70,7 @@ def add_training(request):
                 new_training.title = request.POST['title']
                 new_training.workout_date = request.POST['workout_date']
                 new_training.visibility = request.POST['visible-radio'] == 'yes'
-                new_training.client = Client.objects.get(id=request.POST['workout-person'])
+                new_training.client = Person.objects.get(id=request.POST['workout-person'])
                 new_training.save()
 
                 # Creating WorkoutExercise objects
@@ -139,7 +139,7 @@ def add_client(request):
         form = ClientForm(request.POST, request.FILES)
 
         if form.is_valid():
-            new_client = Client(
+            new_client = Person(
                 first_name=form.cleaned_data['first_name'],
                 last_name=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'],
@@ -164,13 +164,13 @@ def add_client(request):
 
 @login_required
 def show_clients(request):
-    clients = Client.objects.all()
+    clients = Person.objects.all()
     return render(request, 'show_clients.html', {"clients": clients})
 
 
 @login_required
 def show_client(request, id):
-    client = Client.objects.get(id=id)
+    client = Person.objects.get(id=id)
     return render(request, 'show_client.html', {'client': client})
 
 
@@ -180,6 +180,8 @@ def login_page(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
 
+        if user.is_superuser == 0:
+            return render(request, 'login.html', {'error': True})
         if user:
             login(request, user)
             return redirect('home')

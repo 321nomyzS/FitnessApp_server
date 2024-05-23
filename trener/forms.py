@@ -1,7 +1,7 @@
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 from django.core.validators import URLValidator, FileExtensionValidator
-from .models import Exercise, ExerciseType, ExerciseLanguage, Client
+from .models import Exercise, ExerciseType, ExerciseLanguage, Person
 import hashlib
 import os
 from django.core.exceptions import ValidationError
@@ -135,7 +135,7 @@ class MyTrainingErrors:
 
 class ClientForm(forms.ModelForm):
     class Meta:
-        model = Client
+        model = Person
         fields = ['first_name', 'last_name', 'photo', 'email', 'password', 'status', 'active_until']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'}),
@@ -149,7 +149,7 @@ class ClientForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if Client.objects.filter(email=email).exists():
+        if Person.objects.filter(email=email).exists():
             raise ValidationError("Email is already in use.")
         return email
 

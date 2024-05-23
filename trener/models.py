@@ -1,13 +1,14 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
 from datetime import date
+from django.contrib.auth.models import AbstractUser
 
 
 def exercise_directory_path(instance, filename):
     return f'exercise/{instance.id}/{filename}'
 
 
-def client_directory_path(instance, filename):
+def person_directory_path(instance, filename):
     return f'client/{instance.id}/{filename}'
 
 
@@ -62,13 +63,8 @@ class WorkoutExercise(models.Model):
         return f"{self.exercise.title} in {self.personal_workout} or {self.general_workout}"
 
 
-class Client(models.Model):
-    id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    photo = models.ImageField(upload_to=client_directory_path, blank=True, null=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
+class Person(AbstractUser):
+    photo = models.ImageField(upload_to=person_directory_path, blank=True, null=True)
     STATUS_CHOICES = [
         ('active', 'Active'),
         ('inactive', 'Inactive'),
@@ -76,10 +72,6 @@ class Client(models.Model):
     ]
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='active')
     active_until = models.DateField(null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        self.password = make_password(self.password)
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -98,7 +90,7 @@ class PersonalWorkout(models.Model):
     exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
     visibility = models.BooleanField()
     workout_date = models.DateField()
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(Person, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Personal Workout on {self.workout_date}"
