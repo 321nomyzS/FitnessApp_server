@@ -184,6 +184,46 @@ def show_personal_training(request, id):
 
     return render(request, 'show_training.html', {'training': personal_training, 'workout_exercises': workout_exercises})
 
+@login_required
+@csrf_protect
+def edit_general_training(request, id):
+    training = get_object_or_404(GeneralWorkout, id=id)
+    workout_exercises = WorkoutExercise.objects.filter(general_workout_id=id)
+    exercises = Exercise.objects.all()
+
+    if request.method == 'POST':
+        training.title = request.POST['title']
+        training.visibility = request.POST['visible-radio'] == 'yes'
+        for workout_exercise in workout_exercises:
+            workout_exercise.comment = request.POST.get(f'exercise-tips-{workout_exercise.id}', workout_exercise.comment)
+            workout_exercise.exercise_id = request.POST.get(f'exercise-id-{workout_exercise.id}', workout_exercise.exercise.id)
+            workout_exercise.save()
+        training.save()
+        return redirect('show_training')
+
+    return render(request, 'edit_training.html', {'training': training, 'workout_exercises': workout_exercises, 'exercises': exercises})
+
+@login_required
+@csrf_protect
+def edit_personal_training(request, id):
+    training = get_object_or_404(PersonalWorkout, id=id)
+    workout_exercises = WorkoutExercise.objects.filter(personal_workout_id=id)
+    exercises = Exercise.objects.all()
+    clients = Person.objects.all()
+
+    if request.method == 'POST':
+        training.title = request.POST['title']
+        training.visibility = request.POST['visible-radio'] == 'yes'
+        training.workout_date = request.POST['workout_date']
+        training.client_id = request.POST['workout-person']
+        for workout_exercise in workout_exercises:
+            workout_exercise.comment = request.POST.get(f'exercise-tips-{workout_exercise.id}', workout_exercise.comment)
+            workout_exercise.exercise_id = request.POST.get(f'exercise-id-{workout_exercise.id}', workout_exercise.exercise.id)
+            workout_exercise.save()
+        training.save()
+        return redirect('show_training')
+
+    return render(request, 'edit_training.html', {'training': training, 'workout_exercises': workout_exercises, 'exercises': exercises, 'clients': clients})
 
 @login_required
 def add_client(request):
