@@ -4,6 +4,15 @@ from django.views.decorators.csrf import csrf_protect
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+import os
+import shutil
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_protect
+from .forms import ExerciseForm, MyTrainingForm
+from .models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise
 
 
 @login_required
@@ -49,6 +58,49 @@ def show_exercises(request):
 def show_exercise(request, id):
     exercise = Exercise.objects.get(id=id)
     return render(request, 'show_exercise.html', {"exercise": exercise})
+
+@login_required
+def edit_exercise(request, id):
+    exercise = get_object_or_404(Exercise, id=id)
+
+    if request.method == 'POST':
+        form = ExerciseForm(request.POST, request.FILES, instance=exercise)
+
+        if form.is_valid():
+            # Usuń stare zdjęcie, jeśli przesyłane jest nowe
+            if 'image' in request.FILES:
+                if exercise.image:
+                    old_image_path = exercise.image.path
+                    if os.path.exists(old_image_path):
+                        os.remove(old_image_path)
+
+            updated_exercise = form.save(commit=False)
+            updated_exercise.save()
+
+            return redirect('/exercise')  # Przekierowanie do listy ćwiczeń
+        else:
+            print("Form is not valid")
+            print(form.errors)
+    else:
+        form = ExerciseForm(instance=exercise)
+
+    return render(request, 'edit_exercise.html', {'form': form, 'exercise': exercise})
+
+@login_required
+def delete_exercise(request, id):
+    if request.method == 'POST':
+        exercise = get_object_or_404(Exercise, id=id)
+        exercise_dir = os.path.join(settings.MEDIA_ROOT, f'exercise/{exercise.id}')
+
+        exercise.delete()
+
+        # Usuń katalog ćwiczenia po usunięciu ćwiczenia
+        if os.path.exists(exercise_dir):
+            shutil.rmtree(exercise_dir)
+
+        return JsonResponse({'status': 'success'})
+
+    return JsonResponse({'status': 'failed'}, status=400)
 
 
 @login_required
@@ -175,13 +227,15 @@ def show_client(request, id):
 
 
 def login_page(request):
+    users=Person.objects.all()
+    print(users)
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
 
-        if user.is_superuser == 0:
-            return render(request, 'login.html', {'error': True})
+        # if user.is_superuser == 0:
+        #     return render(request, 'login.html', {'error': True})
         if user:
             login(request, user)
             return redirect('home')

@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'FitnessApp_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': r'C:\Projekt-fitnes\FitnessApp_server\db.sqlite3',
     }
 }
 
