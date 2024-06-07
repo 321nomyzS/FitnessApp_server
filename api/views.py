@@ -10,13 +10,13 @@ class ExerciseViewSet(viewsets.ModelViewSet):
 
 
 class GeneralWorkoutViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = GeneralWorkout.objects.filter(visibility=True)
     serializer_class = GeneralWorkoutSerializer
 
 
 class PersonalWorkoutViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = PersonalWorkout.objects.all()
     serializer_class = PersonalWorkoutSerializer
 

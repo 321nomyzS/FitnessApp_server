@@ -198,14 +198,34 @@ def edit_general_training(request, id):
     if request.method == 'POST':
         training.title = request.POST['title']
         training.visibility = request.POST['visible-radio'] == 'yes'
+
+        # Aktualizacja istniejących ćwiczeń
+        existing_exercise_ids = []
         for workout_exercise in workout_exercises:
-            workout_exercise.comment = request.POST.get(f'exercise-tips-{workout_exercise.id}', workout_exercise.comment)
-            workout_exercise.exercise_id = request.POST.get(f'exercise-id-{workout_exercise.id}', workout_exercise.exercise.id)
-            workout_exercise.save()
+            if f'exercise-id-{workout_exercise.id}' in request.POST:
+                workout_exercise.comment = request.POST.get(f'exercise-tips-{workout_exercise.id}', workout_exercise.comment)
+                workout_exercise.exercise_id = request.POST.get(f'exercise-id-{workout_exercise.id}', workout_exercise.exercise.id)
+                workout_exercise.save()
+                existing_exercise_ids.append(str(workout_exercise.id))
+
+        # Usuwanie istniejących ćwiczeń, które zostały usunięte z formularza
+        for workout_exercise in workout_exercises:
+            if str(workout_exercise.id) not in existing_exercise_ids:
+                workout_exercise.delete()
+
+        # Obsługa nowych ćwiczeń
+        new_exercise_ids = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-') and key.split('-')[2].isdigit() and int(key.split('-')[2]) > len(workout_exercises)]
+        for new_id in new_exercise_ids:
+            exercise_id = request.POST.get(f'exercise-id-{new_id}')
+            comment = request.POST.get(f'exercise-tips-{new_id}')
+            if exercise_id and comment:
+                WorkoutExercise.objects.create(general_workout=training, exercise_id=exercise_id, comment=comment)
+
         training.save()
         return redirect('show_training')
 
-    return render(request, 'edit_training.html', {'training': training, 'workout_exercises': workout_exercises, 'exercises': exercises})
+    return render(request, 'edit_training.html',
+                  {'training': training, 'workout_exercises': workout_exercises, 'exercises': exercises})
 
 @login_required
 @csrf_protect
@@ -220,14 +240,35 @@ def edit_personal_training(request, id):
         training.visibility = request.POST['visible-radio'] == 'yes'
         training.workout_date = request.POST['workout_date']
         training.client_id = request.POST['workout-person']
+
+        # Aktualizacja istniejących ćwiczeń
+        existing_exercise_ids = []
         for workout_exercise in workout_exercises:
-            workout_exercise.comment = request.POST.get(f'exercise-tips-{workout_exercise.id}', workout_exercise.comment)
-            workout_exercise.exercise_id = request.POST.get(f'exercise-id-{workout_exercise.id}', workout_exercise.exercise.id)
-            workout_exercise.save()
+            if f'exercise-id-{workout_exercise.id}' in request.POST:
+                workout_exercise.comment = request.POST.get(f'exercise-tips-{workout_exercise.id}', workout_exercise.comment)
+                workout_exercise.exercise_id = request.POST.get(f'exercise-id-{workout_exercise.id}', workout_exercise.exercise.id)
+                workout_exercise.save()
+                existing_exercise_ids.append(str(workout_exercise.id))
+
+        # Usuwanie istniejących ćwiczeń, które zostały usunięte z formularza
+        for workout_exercise in workout_exercises:
+            if str(workout_exercise.id) not in existing_exercise_ids:
+                workout_exercise.delete()
+
+        # Obsługa nowych ćwiczeń
+        new_exercise_ids = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-') and key.split('-')[2].isdigit() and int(key.split('-')[2]) > len(workout_exercises)]
+        for new_id in new_exercise_ids:
+            exercise_id = request.POST.get(f'exercise-id-{new_id}')
+            comment = request.POST.get(f'exercise-tips-{new_id}')
+            if exercise_id and comment:
+                WorkoutExercise.objects.create(personal_workout=training, exercise_id=exercise_id, comment=comment)
+
         training.save()
         return redirect('show_training')
 
-    return render(request, 'edit_training.html', {'training': training, 'workout_exercises': workout_exercises, 'exercises': exercises, 'clients': clients})
+    return render(request, 'edit_training.html',
+                  {'training': training, 'workout_exercises': workout_exercises, 'exercises': exercises, 'clients': clients})
+
 
 @login_required
 def add_client(request):

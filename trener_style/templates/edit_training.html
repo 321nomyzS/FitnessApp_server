@@ -4,31 +4,14 @@
 {% block content %}
     <form class="mx-auto mb-2 w-4/5 items-center" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <!-- Podstawowe informacje o treningu -->
         <div>
-            <p class="font-medium text-gray-900 text-2xl mb-7">
-                Edytuj Trening
-            </p>
+            <p class="font-medium text-gray-900 text-2xl mb-7">Edytuj Trening</p>
         </div>
         <div class="flex-1 w-2/3">
             <div class="mb-5 w-4/5">
                 <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">Nazwa treningu</label>
                 <input name="title" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.title }}">
                 <p class="text-xs text-red-500">{{ form.errors.title }}</p>
-            </div>
-            <div class="mb-5 w-4/5">
-                {% if training.workout_date %}
-                <div class="flex items-center">
-                    <input checked disabled id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
-                </div>
-                {% endif %}
-                {% if not training.workout_date %}
-                <div class="flex items-center">
-                    <input checked disabled id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
-                </div>
-                {% endif %}
             </div>
             {% if training.workout_date %}
             <div class="mb-5 flex flex-row w-4/5 justify-between">
@@ -60,7 +43,6 @@
 
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
 
-        <!-- Lista ćwiczeń -->
         <div id="exercises-container" class="space-y-4 flex flex-col">
             {% for workout_exercise in workout_exercises %}
             <div class="flex flex-row justify-between" id="exercise-{{ workout_exercise.id }}">
@@ -76,19 +58,163 @@
                     <label for="tips-{{ workout_exercise.id }}" class="block mb-2 text-sm font-medium text-gray-900">Wskazówki</label>
                     <textarea name="exercise-tips-{{ workout_exercise.id }}" id="tips-{{ workout_exercise.id }}" class="w-full block p-1.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" rows="2">{{ workout_exercise.comment }}</textarea>
                 </div>
+                <div class="flex items-end justify-center flex-col">
+                    <a id="exercise-delete-{{ workout_exercise.id }}" class="delete-button bg-red-600 flex flex-row w-24 h-6 justify-around rounded-md text-sm hover:bg-red-900 my-auto">
+                        <p class="text-white my-auto">Usuń</p>
+                        <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                    </a>
+                    <a id="exercise-duplicate-{{ workout_exercise.id }}" class="duplicate-button bg-emerald-500 flex flex-row w-24 h-6 justify-around rounded-md text-sm hover:bg-emerald-700 my-auto">
+                        <p class="text-white my-auto">Duplikuj</p>
+                        <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
             {% endfor %}
         </div>
 
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
 
-        <!-- Przyciski na dole -->
         <div class="flex flex-row">
             <div class="flex justify-center mr-auto">
+                <button type="button" id="add-exercise" class="bg-blue-500 hover:bg-blue-700 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
+                    Dodaj ćwiczenie
+                </button>
+            </div>
+            <div class="flex justify-center">
                 <button type="submit" class="bg-blue-700 hover:bg-blue-900 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
                     Zatwierdź
                 </button>
             </div>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM w pełni załadowany i przetworzony');
+            const container = document.getElementById('exercises-container');
+            let exerciseId = {{ workout_exercises|length }}; // Initialize with the current number of exercises
+
+            // Attach event listeners to existing exercises
+            {% for workout_exercise in workout_exercises %}
+            addEventListenersToExercise({{ workout_exercise.id }}, false);
+            {% endfor %}
+
+            document.getElementById('add-exercise').addEventListener('click', function () {
+                console.log('Dodaj ćwiczenie kliknięte');
+                exerciseId++;
+                const newExercise = createExerciseElement(exerciseId);
+                if (newExercise) {
+                    container.appendChild(newExercise);
+                }
+            });
+
+            function createExerciseElement(id) {
+                console.log('Tworzenie elementu ćwiczenia', id);
+                const element = document.createElement('div');
+                element.className = 'flex flex-row justify-between';
+                element.id = 'exercise-' + id; // Zmienione dla nowych ćwiczeń
+
+                element.innerHTML = `
+                    <div class="w-1/3">
+                        <label for="exercise-list-${id}" class="block mb-2 text-sm font-medium text-gray-900">Ćwiczenie</label>
+                        <select name="exercise-id-${id}" id="exercise-list-${id}" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                            {% for exercise in exercises %}
+                                <option value="{{ exercise.id }}">{{ exercise.id }} {{ exercise.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="w-1/2">
+                        <label for="tips-${id}" class="block mb-2 text-sm font-medium text-gray-900">Wskazówki</label>
+                        <textarea name="exercise-tips-${id}" id="tips-${id}" class="w-full block p-1.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" rows="2"></textarea>
+                    </div>
+                    <div class="flex items-end justify-center flex-col">
+                        <a id="exercise-delete-${id}" class="delete-button bg-red-600 flex flex-row w-24 h-6 justify-around rounded-md text-sm hover:bg-red-900 my-auto">
+                            <p class="text-white my-auto">Usuń</p>
+                            <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>
+                        </a>
+                        <a id="exercise-duplicate-${id}" class="duplicate-button bg-emerald-500 flex flex-row w-24 h-6 justify-around rounded-md text-sm hover:bg-emerald-700 my-auto">
+                            <p class="text-white my-auto">Duplikuj</p>
+                            <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </a>
+                    </div>
+                `;
+
+                addEventListenersToExercise(id, true); // true oznacza nowe ćwiczenie
+
+                return element;
+            }
+
+            function addEventListenersToExercise(id, isNew) {
+                const deleteButton = document.getElementById(`exercise-delete-${id}`);
+                const duplicateButton = document.getElementById(`exercise-duplicate-${id}`);
+
+                if (deleteButton) {
+                    deleteButton.addEventListener('click', function () {
+                        console.log('Usuń ćwiczenie kliknięte', id);
+                        const exerciseElement = document.getElementById(`exercise-${id}`);
+                        if (exerciseElement) {
+                            exerciseElement.remove();
+                        }
+                    });
+                }
+
+                if (duplicateButton) {
+                    duplicateButton.addEventListener('click', function () {
+                        console.log('Duplikuj ćwiczenie kliknięte', id);
+                        exerciseId++;
+                        const duplicatedExercise = createExerciseElement(exerciseId);
+
+                        const originalElement = document.getElementById(`exercise-${id}`);
+                        if (originalElement) {
+                            const selectElement = originalElement.querySelector('select');
+                            const textAreaElement = originalElement.querySelector('textarea');
+
+                            // Copy values to the duplicated exercise
+                            if (selectElement && textAreaElement) {
+                                duplicatedExercise.querySelector('select').value = selectElement.value;
+                                duplicatedExercise.querySelector('textarea').value = textAreaElement.value;
+                            }
+
+                            container.appendChild(duplicatedExercise);
+                        }
+                    });
+                }
+            }
+        });
+
+        function toggleFields() {
+            console.log('Wywołanie toggleFields');
+            const personalTrainingRadio = document.getElementById('personal-training-radio');
+            const trainingDate = document.getElementById('training-date');
+            const trainingPerson = document.getElementById('training-person');
+
+            if (personalTrainingRadio && trainingDate && trainingPerson) {
+                const isPersonalTraining = personalTrainingRadio.checked;
+                trainingDate.disabled = !isPersonalTraining;
+                trainingPerson.disabled = !isPersonalTraining;
+            }
+        }
+
+        const personalRadio = document.getElementById('personal-training-radio');
+        const generalRadio = document.getElementById('general-training-radio');
+        if (personalRadio) personalRadio.addEventListener('change', toggleFields);
+        if (generalRadio) generalRadio.addEventListener('change', toggleFields);
+        window.onload = toggleFields;
+    </script>
 {% endblock %}

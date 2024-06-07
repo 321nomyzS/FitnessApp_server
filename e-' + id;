@@ -1,0 +1,215 @@
+[33mcommit 11bf931fd71a7174eae0474204fd5247f837a75e[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Wojciech Tobolski <72449959+Wojciech-Tobolski@users.noreply.github.com>
+Date:   Thu Jun 6 00:22:03 2024 +0200
+
+    duplicate work
+
+[33mcommit 7e2f400a519a8f2f308696755c0a0cc4e5e532f6[m
+Author: Wojciech Tobolski <72449959+Wojciech-Tobolski@users.noreply.github.com>
+Date:   Wed Jun 5 22:30:55 2024 +0200
+
+    test
+
+[33mcommit 06ef7343cec4dd83215d3d6b54440bf6b51bef4d[m
+Author: Wojciech Tobolski <72449959+Wojciech-Tobolski@users.noreply.github.com>
+Date:   Sun May 26 19:27:51 2024 +0200
+
+    deleted and edit training with users in progress
+
+[33mcommit b5dc8e81fa9c2ee54105907d1347b7962bc10b5e[m
+Author: Wojciech Tobolski <72449959+Wojciech-Tobolski@users.noreply.github.com>
+Date:   Sun May 26 17:18:10 2024 +0200
+
+    deleted and edit exercise copleted with users
+
+[33mcommit b1bf4fb28e8bbe700863eb687858cec4bfde52e8[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Thu May 23 20:10:01 2024 +0200
+
+    Creating API for Application
+
+[33mcommit d052ff66f6ab7c101acdf07d0c1ffaec05416ca1[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Thu May 23 18:52:05 2024 +0200
+
+    Fixing problem with Clients and convert to Person model
+
+[33mcommit 69168455fd052b391bef8aec0b0da52362192a01[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Wed May 22 22:32:45 2024 +0200
+
+    Connecting Clients with PersonalWorkout
+
+[33mcommit e1feaef1b6e6cce1dd829178380d04beaba8fc16[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Wed May 22 22:32:36 2024 +0200
+
+    Connecting Clients with PersonalWorkout
+
+[33mcommit 26ff49d334cb5c3d12dd0d19d6ab8f068c54caa8[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Wed May 22 22:19:44 2024 +0200
+
+    Creating API app
+
+[33mcommit dbdbfb6483cebe61cbe81af7385502ff61487d7b[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Wed May 22 21:59:59 2024 +0200
+
+    Fixing show_clients.html styles
+
+[33mcommit 5422607bbd4993a0beec5dff198e84ce79ca57b5[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 23:11:01 2024 +0200
+
+    Fixing show_exercises.html styles
+
+[33mcommit 155cb772d3dfe5fc9559382df2334a02f523ae78[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 22:59:38 2024 +0200
+
+    Change title in base
+
+[33mcommit 3ae5172ad9c5f1d5654c46eea1a5cbddf26e00d2[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 22:58:35 2024 +0200
+
+    Create alert on login page and change title
+
+[33mcommit 12e52c5f76f42a0d2182b346fe6abd4af751dbcc[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 22:54:33 2024 +0200
+
+    Fixing date on pages
+
+[33mcommit 5c6f814b78622d8f32090dede14570e38af72adf[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 22:42:02 2024 +0200
+
+    Fixing styles
+
+[33mcommit d1a3aac3b61f53b7300be256bed3ad5ad1d376e1[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 22:32:52 2024 +0200
+
+    Commit database changes
+
+[33mcommit 681ab2bceb1891011ec26faa0c1e0d83e8ec8f7b[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 22:31:46 2024 +0200
+
+    Add show client page
+
+[33mcommit 5b50a5c97c6321c6509abd3e0ee79b16338bd02c[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 22:15:25 2024 +0200
+
+    Add show clients page
+
+[33mcommit 2b5d15b90fb1c993a4b353732acd50e3efb0d1d4[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 21:08:48 2024 +0200
+
+    Add adding client
+
+[33mcommit b98f51502e158f52b5f84db9e306689c49382700[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 19:39:00 2024 +0200
+
+    Update sidebar
+
+[33mcommit 62dd9ad8c358612fa0b8fd76d3a515ac10c37e3a[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue May 21 19:20:42 2024 +0200
+
+    Create login and logout
+
+[33mcommit 1795fe57213e2d810e4e5252a3c83a1da9d240d9[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Fri May 17 18:42:06 2024 +0200
+
+    Add show_training page
+
+[33mcommit 8032aaa86da51138bbb509ea5a1fa0bb0c56fce1[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Thu May 16 19:41:58 2024 +0200
+
+    Add show_trainings page
+
+[33mcommit ead3b2e2a8cc91b5eb7f9bb0e74e67901f9ee6ff[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Thu May 16 18:57:19 2024 +0200
+
+    Adding training to database with server validation
+
+[33mcommit cb85f8c4109d10501ed151fc5a94f73f0668f5ef[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Thu May 16 13:13:58 2024 +0200
+
+    add_training.html page with mechanics
+
+[33mcommit 9c7ddb53967c0ad578fafcc9e785e72775b97277[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Wed May 15 13:20:36 2024 +0200
+
+    Update database
+
+[33mcommit 447e483c101de242a1e4814655beb550eb5f98bc[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Wed May 15 13:19:50 2024 +0200
+
+    Add Workout models
+
+[33mcommit 9de3fde558f06b603bf2516a63e76aac098f5e04[m[33m ([m[1;31morigin/Wojtek[m[33m)[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Fri May 10 13:50:29 2024 +0200
+
+    Create show_exercise page
+
+[33mcommit 82a388d241b363007feb971974b46196a1d33082[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Thu May 9 11:08:44 2024 +0200
+
+    Update show exercises table
+
+[33mcommit 23a8f55dc3d70eae1bd5fe030845a1d04b702faa[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Sat Apr 27 11:01:17 2024 +0200
+
+    Update sidebar
+
+[33mcommit f8adf93c11dd6ae430900c34c4c5e8fcc2879102[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Fri Apr 26 15:58:33 2024 +0200
+
+    Add exercise page with backend
+
+[33mcommit e2a6b6f3ab91ebe7a639003608614c5512e393fe[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Wed Apr 24 21:07:46 2024 +0200
+
+    Create exercise models
+
+[33mcommit e0f026571adc38e01d5cdf043cf110a1bcc5c7f6[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Wed Apr 24 21:07:05 2024 +0200
+
+    Create add_exercise.html page
+
+[33mcommit 3d1a44ea5dddb3660fdfd63441ad128e7f00732b[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Tue Apr 23 21:26:09 2024 +0200
+
+    Create form templates
+
+[33mcommit 49cd56a69333c1eb2f6cba15b7c5d4450bb04830[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Thu Apr 18 22:37:26 2024 +0200
+
+    Create base template
+
+[33mcommit 2a1f23489dadd49bd06530662f3418d49a74297d[m
+Author: 321nomyzS <balinskiszymon@gmail.com>
+Date:   Thu Apr 18 22:37:16 2024 +0200
+
+    Create base template
