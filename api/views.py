@@ -1,7 +1,11 @@
 from rest_framework import viewsets
-from .serializers import (ExerciseSerializer, GeneralWorkoutSerializer, PersonalWorkoutSerializer, WorkoutExerciseSerializer)
-from trener.models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise, Person
+from .serializers import (ExerciseSerializer, ExerciseTypeSerializer, GeneralWorkoutSerializer, PersonalWorkoutSerializer, WorkoutExerciseSerializer)
+from trener.models import Exercise, ExerciseType, GeneralWorkout, PersonalWorkout, WorkoutExercise, Person
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
@@ -27,3 +31,9 @@ class PersonalWorkoutViewSet(viewsets.ModelViewSet):
 class WorkoutExerciseViewSet(viewsets.ModelViewSet):
     queryset = WorkoutExercise.objects.all()
     serializer_class = WorkoutExerciseSerializer
+
+class ExerciseTypeListView(APIView):
+    def get(self, request):
+        categories = ExerciseType.objects.all()
+        serializer = ExerciseTypeSerializer(categories, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

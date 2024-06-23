@@ -27,7 +27,10 @@ SECRET_KEY = 'django-insecure-h1#739!n_%#o+d)kd22&*9z^6u-by#!a1o#t75+j5*bq&^2fqn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.59']
+
+
+CORS_ALLOW_ALL_ORIGINS = True  # Nie zalecane do produkcji, pozwala na wszystkie źródła
 
 
 # Application definition
@@ -47,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
 ]
 
 TAILWIND_APP_NAME = 'trener_style'
@@ -57,6 +61,8 @@ INTERNAL_IPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+
 ]
 
 ROOT_URLCONF = 'FitnessApp_server.urls'
