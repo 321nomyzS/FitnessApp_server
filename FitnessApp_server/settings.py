@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-h1#739!n_%#o+d)kd22&*9z^6u-by#!a1o#t75+j5*bq&^2fqn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.59']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.59', '192.168.1.32', '192.168.76.185']
 
 
 CORS_ALLOW_ALL_ORIGINS = True  # Nie zalecane do produkcji, pozwala na wszystkie źródła
@@ -152,6 +152,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = "/login"
+LOGIN_URL = "/login"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -174,9 +175,9 @@ CKEDITOR_CONFIGS = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+#    'DEFAULT_AUTHENTICATION_CLASSES': (
+#        'rest_framework_simplejwt.authentication.JWTAuthentication',
+#    )
 }
 
 AUTH_USER_MODEL = 'trener.Person'

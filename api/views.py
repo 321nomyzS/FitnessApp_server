@@ -25,8 +25,8 @@ class PersonalWorkoutViewSet(viewsets.ModelViewSet):
     serializer_class = PersonalWorkoutSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(client=self.request.user)
-
+        #return self.queryset.filter(client=self.request.user)
+        return self.queryset
 
 class WorkoutExerciseViewSet(viewsets.ModelViewSet):
     queryset = WorkoutExercise.objects.all()

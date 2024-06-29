@@ -181,12 +181,15 @@ def show_general_training(request, id):
     return render(request, 'show_training.html', {'training': general_training, 'workout_exercises': workout_exercises})
 
 
-@login_required
+#@login_required
 def show_personal_training(request, id):
-    personal_training = PersonalWorkout.objects.get(id=id)
-    workout_exercises = WorkoutExercise.objects.filter(personal_workout_id=id)
-
-    return render(request, 'show_training.html', {'training': personal_training, 'workout_exercises': workout_exercises})
+    if request.user.is_authenticated:
+        personal_training = PersonalWorkout.objects.get(id=id)
+        workout_exercises = WorkoutExercise.objects.filter(personal_workout_id=id)
+        return render(request, 'show_training.html', {'training': personal_training, 'workout_exercises': workout_exercises})
+    else:
+        # Obsłuż przypadek, gdy użytkownik jest anonimowy
+        return redirect('login')  # lub inna odpowiednia akcja
 
 @login_required
 @csrf_protect
