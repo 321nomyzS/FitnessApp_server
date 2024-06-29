@@ -11,18 +11,20 @@ class ExerciseSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PersonalWorkoutSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PersonalWorkout
-        fields = '__all__'
-
-
 class WorkoutExerciseSerializer(serializers.ModelSerializer):
     exercise = ExerciseSerializer(read_only=True)
 
     class Meta:
         model = WorkoutExercise
-        fields = ['exercise', 'comment']  # Tu dodajesz 'comment' do serializowanych pól
+        fields = ['exercise', 'comment']
+
+
+class PersonalWorkoutSerializer(serializers.ModelSerializer):
+    exercises = WorkoutExerciseSerializer(source='workoutexercise_set', many=True, read_only=True)
+
+    class Meta:
+        model = PersonalWorkout
+        fields = ['id', 'title', 'visibility', 'workout_date', 'client', 'exercises']
 
 
 class GeneralWorkoutSerializer(serializers.ModelSerializer):
@@ -31,6 +33,7 @@ class GeneralWorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = GeneralWorkout
         fields = ['id', 'title', 'visibility', 'exercises']
+
 
 class ExerciseTypeSerializer(serializers.ModelSerializer):
     class Meta:
