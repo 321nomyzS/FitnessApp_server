@@ -13,20 +13,29 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 from datetime import timedelta
+import environ
+
+
+env = environ.Env(
+    DEBUG=(bool, False),
+    ALLOWED_HOSTS=(list, [])
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+environ.Env.read_env(os.path.join(BASE_DIR, 'FitnessApp_server/settings.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h1#739!n_%#o+d)kd22&*9z^6u-by#!a1o#t75+j5*bq&^2fqn'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.59', '192.168.1.32', '192.168.76.185']
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 CORS_ALLOW_ALL_ORIGINS = True  # Nie zalecane do produkcji, pozwala na wszystkie źródła
 
@@ -51,7 +60,7 @@ INSTALLED_APPS = [
 ]
 
 TAILWIND_APP_NAME = 'trener_style'
-NPM_BIN_PATH = "D:/Programs/nodejs/npm.cmd"
+NPM_BIN_PATH = env('NPM_BIN_PATH')
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -97,8 +106,12 @@ WSGI_APPLICATION = 'FitnessApp_server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env('DATABASE_ENGINE'),
+        'NAME': BASE_DIR / env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASS'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT': env('DATABASE_PORT')
     }
 }
 
