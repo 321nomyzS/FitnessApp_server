@@ -21,7 +21,7 @@ class ExerciseForm(forms.ModelForm):
     image = forms.ImageField(
         widget=forms.FileInput(attrs={'id': 'dropzone-file', 'class': 'hidden'}),
         label="Zdjęcie lub GIF",
-        validators=[FileExtensionValidator(['gif', 'png', 'jpg', 'jpeg'])]  # Dodajemy walidator dla rozszerzenia pliku
+        validators=[FileExtensionValidator(['gif', 'png', 'jpg', 'jpeg'])]
     )
     video_link = forms.URLField(
         required=False,
@@ -117,18 +117,18 @@ class MyTrainingForm:
             self.errors.is_error = True
 
         if self.training_type not in ["general", "personal"]:
-            self.errors.training_type = "Nieprawidłowy typ treningu"
+            self.errors.training_type = "Invalid training type"
             self.errors.is_error = True
 
         if self.visibility not in ["yes", "no"]:
-            self.errors.visibility = "Nieprawidłowa widoczność treningu"
+            self.errors.visibility = "Invalid visibility type"
             self.errors.is_error = True
 
         general_exercise_ids = [str(exercise.id) for exercise in Exercise.objects.all()]
 
         for exercise_id in self.exercises_ids:
             if exercise_id not in general_exercise_ids:
-                self.errors.exercise_id = "Wybrane ćwiczenie nie istnieje"
+                self.errors.exercise_id = "Exercise does not exist"
                 self.errors.is_error = True
 
         return not self.errors.is_error
