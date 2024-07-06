@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2ed10f43-5fdc-407c-9244-407fdd2e2264.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessApp_server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +28,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -77,6 +84,7 @@
       <recent name="X:\Repositories\FitnessApp_server\trener_style\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="X:\Repositories\FitnessApp_server" />
       <recent name="X:\Repositories\FitnessApp_server\trener_style\static\icons" />
       <recent name="X:\Python Projects\FitnessApp_server\trener" />
     </key>
@@ -151,6 +159,7 @@
       <workItem from="1719474146265" duration="882000" />
       <workItem from="1719487241192" duration="2705000" />
       <workItem from="1719561351589" duration="8950000" />
+      <workItem from="1720292416611" duration="305000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
