@@ -65,27 +65,27 @@ class ExerciseForm(forms.ModelForm):
         except ExerciseLanguage.DoesNotExist:
             raise forms.ValidationError("Language does not exist")
 
-    def clean_image(self):
-        file = self.cleaned_data.get('image', False)
-        if file:
-            return file
-        return self.instance.image if self.instance else None
-
     # def clean_image(self):
     #     file = self.cleaned_data.get('image', False)
     #     if file:
-    #         md5 = hashlib.md5()
-    #         for chunk in file.chunks():
-    #             md5.update(chunk)
-    #         file_hash = md5.hexdigest()
-    #
-    #         extension = os.path.splitext(file.name)[1]
-    #         new_name = f"{file_hash}{extension}"
-    #
-    #         file.name = new_name
     #         return file
-    #     else:
-    #         raise forms.ValidationError("No file uploaded.")
+    #     return self.instance.image if self.instance else None
+
+    def clean_image(self):
+        file = self.cleaned_data.get('image', False)
+        if file:
+            md5 = hashlib.md5()
+            for chunk in file.chunks():
+                md5.update(chunk)
+            file_hash = md5.hexdigest()
+
+            extension = os.path.splitext(file.name)[1]
+            new_name = f"{file_hash}{extension}"
+
+            file.name = new_name
+            return file
+        else:
+            raise forms.ValidationError("No file uploaded.")
 
 
     class Meta:
