@@ -12,7 +12,7 @@
 
 {% block content %}
     <p class="font-medium text-gray-900 text-2xl mb-7">
-            Pokaż ćwiczenia
+            Pokaż użytkowników
         </p>
 
         <table class="w-full table-fixed" datatable id="exercise-table">
@@ -35,13 +35,19 @@
                 <td class="py-5 px-6 border-b border-r border-gray-200">{{ client.email }}</td>
                 <td class="py-5 px-6 border-b border-r border-gray-200">
                     {% if client.status == 'active'%}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <div title="Aktywny">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
                     {% endif %}
                     {% if client.status == 'inactive'%}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                        <div title="Nieaktywny">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                        </div>
                     {% endif %}
                     {% if client.status == 'active_until'%}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <div title="Aktywny do...">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </div>
                     {% endif %}
 
                 </td>
