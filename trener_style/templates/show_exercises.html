@@ -108,7 +108,7 @@
                         <a href="{% url 'edit_exercise' id=exercise.id %}" class="bg-blue-500 rounded-md text-sm hover:bg-blue-700 text-white flex items-center justify-center">
                             Edytuj
                         </a>
-                        <a href="#" onclick="confirmDelete({{ exercise.id }});" class="bg-red-700 rounded-md text-sm hover:bg-red-900 text-white flex items-center justify-center">
+                        <a href="{% url 'delete_exercise' id=exercise.id %}" class="bg-red-700 rounded-md text-sm hover:bg-red-900 text-white flex items-center justify-center">
                             Usuń
                         </a>
                     </div>
@@ -131,23 +131,5 @@
                 "searching": false  // Wyłącza pasek wyszukiwania
             });
         });
-
-        function confirmDelete(id) {
-            const token = '{{ csrf_token }}'; // Zapewnia dostępność tokena CSRF
-            if (confirm("Czy na pewno chcesz usunąć to ćwiczenie?")) {
-                fetch(`{% url 'delete_exercise' id=999 %}`.replace('999', id), {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': token
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        window.location.reload(); // Odśwież stronę po udanym usunięciu
-                    } else {
-                        alert('Nie udało się usunąć ćwiczenia.');
-                    }
-                });
-            }
-        }
     </script>
 {% endblock %}

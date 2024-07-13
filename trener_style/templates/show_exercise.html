@@ -55,7 +55,7 @@
                         Edytuj
                     </a>
 
-                    <a href="#" onclick="confirmDelete({{ exercise.id }});" class="bg-red-700 hover:bg-red-900 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
+                    <a href="{% url 'delete_exercise' id=exercise.id %}" class="bg-red-700 hover:bg-red-900 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
                         Usuń
                     </a>
                 </div>
@@ -63,23 +63,4 @@
         </div>
 
     </form>
-       <script>
-    function confirmDelete(id) {
-        const token = '{{ csrf_token }}'; // Zapewnia dostępność tokena CSRF
-        if (confirm("Czy na pewno chcesz usunąć to ćwiczenie?")) {
-            fetch(`{% url 'delete_exercise' id=999 %}`.replace('999', id), {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': token
-                }
-            }).then(response => {
-                if (response.ok) {
-                    window.location.href = '/exercise';
-                } else {
-                    alert('Nie udało się usunąć ćwiczenia.');
-                }
-            });
-        }
-    }
-    </script>
 {% endblock %}

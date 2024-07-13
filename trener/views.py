@@ -1,17 +1,13 @@
-from .forms import ExerciseForm, MyTrainingForm, ClientForm
-from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_protect
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
 import os
 import shutil
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect
-from .forms import ExerciseForm, MyTrainingForm
+from .forms import ExerciseForm, MyTrainingForm, ClientForm
 from .models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise
 
 
@@ -40,7 +36,7 @@ def add_exercise(request):
             if exercise.image:
                 exercise.save()
 
-            return redirect('home')  # Przekierowanie na inną stronę po udanym dodaniu
+            return redirect('show_exercise')
         else:
             return render(request, 'add_exercise.html', {'form': form})
     else:
@@ -58,6 +54,7 @@ def show_exercises(request):
 def show_exercise(request, id):
     exercise = Exercise.objects.get(id=id)
     return render(request, 'show_exercise.html', {"exercise": exercise})
+
 
 @login_required
 def edit_exercise(request, id):
@@ -83,21 +80,18 @@ def edit_exercise(request, id):
 
     return render(request, 'edit_exercise.html', {'form': form, 'exercise': exercise})
 
+
 @login_required
 def delete_exercise(request, id):
-    if request.method == 'POST':
-        exercise = get_object_or_404(Exercise, id=id)
-        exercise_dir = os.path.join(settings.MEDIA_ROOT, f'exercise/{exercise.id}')
+    exercise = get_object_or_404(Exercise, id=id)
+    exercise_dir = os.path.join(settings.MEDIA_ROOT, f'exercise/{exercise.id}')
 
-        exercise.delete()
+    exercise.delete()
 
-        # Usuń katalog ćwiczenia po usunięciu ćwiczenia
-        if os.path.exists(exercise_dir):
-            shutil.rmtree(exercise_dir)
+    if os.path.exists(exercise_dir):
+        shutil.rmtree(exercise_dir)
 
-        return JsonResponse({'status': 'success'})
-
-    return JsonResponse({'status': 'failed'}, status=400)
+    return redirect('show_exercise')
 
 
 @login_required
@@ -148,8 +142,6 @@ def add_training(request):
             return render(request, 'add_training.html', {'exercises': exercises, 'form': form, 'clients': clients})
 
     return render(request, 'add_training.html', {'exercises': exercises, 'clients': clients})
-
-
 
 
 @login_required

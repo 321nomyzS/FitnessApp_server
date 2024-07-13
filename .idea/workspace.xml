@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_clients.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_clients.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_exercises.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_exercises.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +162,7 @@
       <workItem from="1720292416611" duration="305000" />
       <workItem from="1720298659399" duration="400000" />
       <workItem from="1720299112209" duration="12000" />
-      <workItem from="1720871768244" duration="2193000" />
+      <workItem from="1720871768244" duration="3297000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -402,7 +404,21 @@
       <option name="project" value="LOCAL" />
       <updated>1720873614057</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Small update show_clients.html">
+      <created>1720873982567</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1720873982567</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Delete all print for debuging">
+      <created>1720874071409</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1720874071410</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,8 +439,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update database" />
-    <MESSAGE value="add_training.html page with mechanics" />
     <MESSAGE value="Adding training to database with server validation" />
     <MESSAGE value="Add show_trainings page" />
     <MESSAGE value="Add show_training page" />
@@ -448,6 +462,8 @@
     <MESSAGE value="Fixing problem with editing general workout" />
     <MESSAGE value="Fixing problem with editing personal workout" />
     <MESSAGE value="Quick fix with display clients name in show_training.html page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Quick fix with display clients name in show_training.html page" />
+    <MESSAGE value="Small update show_clients.html" />
+    <MESSAGE value="Delete all print for debuging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete all print for debuging" />
   </component>
 </project>
