@@ -78,9 +78,6 @@ def edit_exercise(request, id):
             updated_exercise.save()
 
             return redirect('/exercise')  # Przekierowanie do listy ćwiczeń
-        else:
-            print("Form is not valid")
-            print(form.errors)
     else:
         form = ExerciseForm(instance=exercise)
 
@@ -117,10 +114,6 @@ def add_training(request):
             exercise_tips_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-tips-')]
             exercise_keys_id = list(set(exercise_id_keys) & set(exercise_tips_keys))
 
-            print("exercise_id_keys:", exercise_id_keys)
-            print("exercise_tips_keys:", exercise_tips_keys)
-            print("exercise_keys_id:", exercise_keys_id)
-
             if request.POST['training-type'] == 'personal':
                 new_training = PersonalWorkout()
                 new_training.title = request.POST['title']
@@ -130,7 +123,6 @@ def add_training(request):
                 new_training.save()
 
                 for key_id in exercise_keys_id:
-                    print(f"Przetwarzanie ćwiczenia {key_id}")
                     workout_exercise = WorkoutExercise()
                     workout_exercise.personal_workout = new_training
                     workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
@@ -144,7 +136,6 @@ def add_training(request):
                 new_training.save()
 
                 for key_id in exercise_keys_id:
-                    print(f"Przetwarzanie ćwiczenia {key_id}")
                     workout_exercise = WorkoutExercise()
                     workout_exercise.general_workout = new_training
                     workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
@@ -154,7 +145,6 @@ def add_training(request):
             return redirect('show_training')
 
         else:
-            print("Formularz jest niepoprawny:", form.errors)
             return render(request, 'add_training.html', {'exercises': exercises, 'form': form, 'clients': clients})
 
     return render(request, 'add_training.html', {'exercises': exercises, 'clients': clients})
@@ -306,7 +296,6 @@ def show_client(request, id):
 
 def login_page(request):
     users=Person.objects.all()
-    print(users)
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
