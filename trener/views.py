@@ -242,27 +242,23 @@ def edit_personal_training(request, id):
         training.workout_date = request.POST['workout_date']
         training.client_id = request.POST['workout-person']
 
-        # Aktualizacja istniejących ćwiczeń
-        existing_exercise_ids = []
+        # Processing workout exercises
+        # Deleting old workout exercises
+        workout_exercises = WorkoutExercise.objects.filter(personal_workout=training)
         for workout_exercise in workout_exercises:
-            if f'exercise-id-{workout_exercise.id}' in request.POST:
-                workout_exercise.comment = request.POST.get(f'exercise-tips-{workout_exercise.id}', workout_exercise.comment)
-                workout_exercise.exercise_id = request.POST.get(f'exercise-id-{workout_exercise.id}', workout_exercise.exercise.id)
-                workout_exercise.save()
-                existing_exercise_ids.append(str(workout_exercise.id))
+            workout_exercise.delete()
 
-        # Usuwanie istniejących ćwiczeń, które zostały usunięte z formularza
-        for workout_exercise in workout_exercises:
-            if str(workout_exercise.id) not in existing_exercise_ids:
-                workout_exercise.delete()
+        # Adding new workout exercises
+        exercise_id_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-')]
+        exercise_tips_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-tips-')]
+        exercise_keys_id = list(set(exercise_id_keys) & set(exercise_tips_keys))
 
-        # Obsługa nowych ćwiczeń
-        new_exercise_ids = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-') and key.split('-')[2].isdigit() and int(key.split('-')[2]) > len(workout_exercises)]
-        for new_id in new_exercise_ids:
-            exercise_id = request.POST.get(f'exercise-id-{new_id}')
-            comment = request.POST.get(f'exercise-tips-{new_id}')
-            if exercise_id and comment:
-                WorkoutExercise.objects.create(personal_workout=training, exercise_id=exercise_id, comment=comment)
+        for key_id in exercise_keys_id:
+            workout_exercise = WorkoutExercise()
+            workout_exercise.personal_workout = training
+            workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
+            workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
+            workout_exercise.save()
 
         training.save()
         return redirect('show_training')

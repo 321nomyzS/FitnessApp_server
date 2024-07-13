@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2ed10f43-5fdc-407c-9244-407fdd2e2264.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FitnessApp_server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,6 +160,9 @@
       <workItem from="1719487241192" duration="2705000" />
       <workItem from="1719561351589" duration="8950000" />
       <workItem from="1720292416611" duration="305000" />
+      <workItem from="1720298659399" duration="400000" />
+      <workItem from="1720299112209" duration="12000" />
+      <workItem from="1720871768244" duration="1549000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -366,11 +369,35 @@
       <option name="project" value="LOCAL" />
       <updated>1716483126083</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Add requirements.txt">
+      <created>1720298932207</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1720298932208</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Update settings.env.example">
+      <created>1720299057273</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1720299057273</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Fixing problem with editing general workout">
+      <created>1720873154017</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1720873154017</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -384,9 +411,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create add_exercise.html page" />
-    <MESSAGE value="Create exercise models" />
-    <MESSAGE value="Add exercise page with backend" />
     <MESSAGE value="Update show exercises table" />
     <MESSAGE value="Add Workout models" />
     <MESSAGE value="Update database" />
@@ -409,6 +433,9 @@
     <MESSAGE value="Creating API app" />
     <MESSAGE value="Connecting Clients with PersonalWorkout" />
     <MESSAGE value="Fixing problem with Clients and convert to Person model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing problem with Clients and convert to Person model" />
+    <MESSAGE value="Add requirements.txt" />
+    <MESSAGE value="Update settings.env.example" />
+    <MESSAGE value="Fixing problem with editing general workout" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing problem with editing general workout" />
   </component>
 </project>
