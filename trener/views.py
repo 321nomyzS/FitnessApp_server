@@ -246,6 +246,33 @@ def edit_personal_training(request, id):
 
 
 @login_required
+@csrf_protect
+def delete_general_training(request, id):
+    general_training = GeneralWorkout.objects.get(id=id)
+    workout_exercises = WorkoutExercise.objects.filter(general_workout=general_training)
+
+    for workout_exercise in workout_exercises:
+        workout_exercise.delete()
+
+    general_training.delete()
+
+    return redirect('show_training')
+
+
+@login_required
+@csrf_protect
+def delete_personal_training(request, id):
+    personal_training = PersonalWorkout.objects.get(id=id)
+    workout_exercises = WorkoutExercise.objects.filter(personal_workout=personal_training)
+
+    for workout_exercise in workout_exercises:
+        workout_exercise.delete()
+
+    personal_training.delete()
+
+    return redirect('show_training')
+
+@login_required
 def add_client(request):
     if request.method == "POST":
         form = ClientForm(request.POST, request.FILES)
