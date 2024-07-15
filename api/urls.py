@@ -1,8 +1,8 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (ExerciseViewSet, GeneralWorkoutViewSet,
-                    PersonalWorkoutViewSet, WorkoutExerciseViewSet, ExerciseTypeListView)
-from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
+                    PersonalWorkoutViewSet, WorkoutExerciseViewSet, ExerciseTypeListView, BlacklistTokenUpdateView)
+from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, TokenBlacklistView)
 
 
 router = DefaultRouter()
@@ -17,4 +17,5 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('exercise-types/', ExerciseTypeListView.as_view(), name='exercise-type-list'),
     path('', include(router.urls)),
+    path('token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
 ]

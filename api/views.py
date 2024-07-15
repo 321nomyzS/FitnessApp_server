@@ -5,6 +5,36 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework import generics, status
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import AllowAny
+from .serializers import RegisterSerializer, MyTokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from trener.models import Person
+from rest_framework_simplejwt.views import TokenBlacklistView
+
+class BlacklistTokenUpdateView(TokenBlacklistView):
+    permission_classes = [IsAuthenticated]
+
+class RegisterView(generics.CreateAPIView):
+    queryset = Person.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }, status=status.HTTP_201_CREATED)
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    permission_classes = (AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
+
 
 
 
@@ -25,8 +55,8 @@ class PersonalWorkoutViewSet(viewsets.ModelViewSet):
     serializer_class = PersonalWorkoutSerializer
 
     def get_queryset(self):
-        #return self.queryset.filter(client=self.request.user)
-        return self.queryset
+        return self.queryset.filter(client=self.request.user)
+
 
 class WorkoutExerciseViewSet(viewsets.ModelViewSet):
     queryset = WorkoutExercise.objects.all()
