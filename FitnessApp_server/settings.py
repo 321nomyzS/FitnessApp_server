@@ -30,7 +30,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, 'FitnessApp_server/settings.env'))
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY='django-insecure-h1#739!n_%#o+d)kd22&*9z^6u-by#!a1o#t75+j5*bq&^2fqn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
