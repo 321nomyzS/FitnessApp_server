@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-h1#739!n_%#o+d)kd22&*9z^6u-by#!a1o#t75+j5*bq&^2fqn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.59', '192.168.1.32', '192.168.76.185', '192.168.80.185', '192.168.7.185']
+ALLOWED_HOSTS = ['192.168.1.32','127.0.0.1', 'localhost', '192.168.60.185', '192.168.1.32', '192.168.76.185', '192.168.80.185', '192.168.7.185', '192.168.163.185']
 
 
 CORS_ALLOW_ALL_ORIGINS = True  # Nie zalecane do produkcji, pozwala na wszystkie źródła
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'rest_framework',
     'api',
+    'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
 ]

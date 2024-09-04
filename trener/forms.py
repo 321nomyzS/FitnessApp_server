@@ -1,12 +1,27 @@
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 from django.core.validators import URLValidator, FileExtensionValidator
-from .models import Exercise, ExerciseType, ExerciseLanguage, Person
+from .models import Plant, Exercise, ExerciseType, ExerciseLanguage, Person
 import hashlib
 import os
 from django.core.exceptions import ValidationError
 import re
 
+class PlantForm(forms.ModelForm):
+    class Meta:
+        model = Plant
+        fields = [
+            'name', 'description', 'image', 'water_need',
+            'light_requirement', 'care_level', 'is_indoor'
+        ]
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Nazwa rośliny'}),
+            'description': forms.Textarea(attrs={'class': 'form-textarea', 'placeholder': 'Opis rośliny'}),
+            'water_need': forms.Select(attrs={'class': 'form-select'}),
+            'light_requirement': forms.Select(attrs={'class': 'form-select'}),
+            'care_level': forms.Select(attrs={'class': 'form-select'}),
+            'is_indoor': forms.CheckboxInput(attrs={'class': 'form-checkbox'}),
+        }
 
 class ExerciseForm(forms.ModelForm):
     title = forms.CharField(

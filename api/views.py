@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from .serializers import (ExerciseSerializer, ExerciseTypeSerializer, GeneralWorkoutSerializer, PersonalWorkoutSerializer, WorkoutExerciseSerializer)
+from .serializers import (PersonSerializer, ExerciseSerializer, ExerciseTypeSerializer, GeneralWorkoutSerializer, PersonalWorkoutSerializer, WorkoutExerciseSerializer)
 from trener.models import Exercise, ExerciseType, GeneralWorkout, PersonalWorkout, WorkoutExercise, Person
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -12,6 +12,7 @@ from .serializers import RegisterSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from trener.models import Person
 from rest_framework_simplejwt.views import TokenBlacklistView
+from trener.models import Exercise
 
 class BlacklistTokenUpdateView(TokenBlacklistView):
     permission_classes = [IsAuthenticated]
@@ -67,3 +68,11 @@ class ExerciseTypeListView(APIView):
         categories = ExerciseType.objects.all()
         serializer = ExerciseTypeSerializer(categories, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = PersonSerializer(user)
+        return Response(serializer.data)

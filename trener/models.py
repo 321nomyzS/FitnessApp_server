@@ -27,6 +27,41 @@ class ExerciseLanguage(models.Model):
     def __str__(self):
         return str(self.id)
 
+from django.db import models
+
+class WaterNeed(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Potrzeba wody")
+    description = models.TextField(verbose_name="Opis", blank=True)
+
+    def __str__(self):
+        return self.name
+
+class LightRequirement(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Wymagania świetlne")
+    description = models.TextField(verbose_name="Opis", blank=True)
+
+    def __str__(self):
+        return self.name
+
+class CareLevel(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Poziom pielęgnacji")
+    description = models.TextField(verbose_name="Opis", blank=True)
+
+    def __str__(self):
+        return self.name
+
+class Plant(models.Model):
+    name = models.CharField(max_length=255, verbose_name="Nazwa")
+    description = models.TextField(verbose_name="Opis")
+    image = models.ImageField(upload_to='images/', verbose_name="Zdjęcie")
+    water_need = models.ForeignKey(WaterNeed, on_delete=models.CASCADE, verbose_name="Potrzeba wody")
+    light_requirement = models.ForeignKey(LightRequirement, on_delete=models.CASCADE, verbose_name="Wymagania świetlne")
+    care_level = models.ForeignKey(CareLevel, on_delete=models.CASCADE, verbose_name="Poziom pielęgnacji")
+    is_indoor = models.BooleanField(default=True, verbose_name="Do uprawy wewnątrz")
+
+    def __str__(self):
+        return self.name
+
 
 class Exercise(models.Model):
     id = models.AutoField(primary_key=True)
@@ -64,6 +99,7 @@ class WorkoutExercise(models.Model):
 
 
 class Person(AbstractUser):
+    plants = models.ManyToManyField(Plant, related_name='owners')
     email = models.EmailField(unique=True)
     photo = models.ImageField(upload_to=person_directory_path, blank=True, null=True)
     STATUS_CHOICES = [

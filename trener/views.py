@@ -4,54 +4,89 @@ from django.views.decorators.csrf import csrf_protect
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 import os
 import shutil
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect
-from .forms import ExerciseForm, MyTrainingForm
-from .models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise
+from .forms import ExerciseForm, MyTrainingForm, PlantForm
+# from .models import Plant, WaterNeed, LightRequirement, CareLevel, Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise
 
 
 @login_required
 def home(request):
     return render(request, 'base.html')
 
+from django.db import models
+
+
+
+def plant_list(request):
+    plants = Plant.objects.all()
+    return render(request, 'plant_list.html', {'plants': plants})
+
+
+def add_plant(request):
+    if request.method == 'POST':
+        form = PlantForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = PlantForm()
+
+    return render(request, 'add_plant.html', {'form': form})
+
+def delete_plant(request, id):
+    plant = get_object_or_404(Plant, id=id)
+    plant.delete()
+    return redirect(reverse('plant_list'))
+
+def edit_plant(request, id):
+    plant = get_object_or_404(Plant, id=id)
+    if request.method == 'POST':
+        form = PlantForm(request.POST, request.FILES, instance=plant)
+        if form.is_valid():
+            form.save()
+            return redirect('show_plants')  # Zmień na odpowiednią nazwę widoku listy roślin
+    else:
+        form = PlantForm(instance=plant)
+    return render(request, 'edit_plant.html', {'form': form, 'plant': plant})
 
 @login_required
-@csrf_protect
-def add_exercise(request):
+def assign_plant_to_user(request):
+    user = request.user
+    person = Person.objects.get(user=user)
+
     if request.method == 'POST':
-        form = ExerciseForm(request.POST, request.FILES)
-        if form.is_valid():
-            exercise = Exercise(
-                title=form.cleaned_data['title'],
-                short_description=form.cleaned_data['short_description'],
-                video_link=form.cleaned_data['video_link'],
-                html_content=form.cleaned_data['html_content'],
-                type=form.cleaned_data['type'],
-                language=form.cleaned_data['language']
-            )
-            exercise.save()
+        plant_id = request.POST.get('plant_id')
+        plant = Plant.objects.get(id=plant_id)
+        person.plants.add(plant)  # Dodanie rośliny do konta użytkownika
+        return redirect('profile')
 
-            exercise.image = form.cleaned_data['image']
-            if exercise.image:
-                exercise.save()
+    plants = Plant.objects.all()
+    return render(request, 'assign_plant.html', {'plants': plants})
 
-            return redirect('home')  # Przekierowanie na inną stronę po udanym dodaniu
-        else:
-            return render(request, 'add_exercise.html', {'form': form})
-    else:
-        form = ExerciseForm()
-        return render(request, 'add_exercise.html', {'form': form})
+def show_plants(request):
+    plants = Plant.objects.all()  # Pobieranie wszystkich roślin z bazy danych
+    return render(request, 'show_plants.html', {'plants': plants})
+def show_plant(request, id):
+    plant = get_object_or_404(Plant, id=id)
+    return render(request, 'show_plant.html', {'plant': plant})
 
+@login_required
+def show_user_plants(request):
+    user = request.user
+    person = Person.objects.get(user=user)
+    plants = person.plants.all()  # Rośliny przypisane do użytkownika
+    return render(request, 'user_plants.html', {'plants': plants})
 
 @login_required
 def show_exercises(request):
     exercises = Exercise.objects.all()
-    return render(request, 'show_exercises.html', {"exercises": exercises})
+    return render(request, 'show_plants.html', {"exercises": exercises})
 
 
 @login_required

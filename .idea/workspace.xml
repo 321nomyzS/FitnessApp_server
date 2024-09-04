@@ -5,12 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trener_style/templates/add_plant.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trener_style/templates/show_plants.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7c7e8dde-c08c-4d21-9274-6ce0bb49f06d/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FitnessApp_server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/add_exercise.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_exercises.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +170,19 @@
       <workItem from="1719487241192" duration="2705000" />
       <workItem from="1719561351589" duration="15321000" />
       <workItem from="1719932871038" duration="17687000" />
-      <workItem from="1721040145913" duration="2606000" />
+      <workItem from="1721040145913" duration="5805000" />
+      <workItem from="1721202740466" duration="4339000" />
+      <workItem from="1721561383145" duration="366000" />
+      <workItem from="1721624268101" duration="1216000" />
+      <workItem from="1721650517406" duration="615000" />
+      <workItem from="1721920398249" duration="16818000" />
+      <workItem from="1724062237440" duration="2009000" />
+      <workItem from="1724358600113" duration="1171000" />
+      <workItem from="1724674095909" duration="209000" />
+      <workItem from="1724851835290" duration="4273000" />
+      <workItem from="1725362497053" duration="911000" />
+      <workItem from="1725455104999" duration="6559000" />
+      <workItem from="1725488375475" duration="4910000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />

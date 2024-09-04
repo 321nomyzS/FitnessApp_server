@@ -67,3 +67,8 @@ class ExerciseTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExerciseType
         fields = ['id', 'type_name']
+
+class PersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ['first_name', 'last_name', 'email', 'photo', 'status', 'active_until']

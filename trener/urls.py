@@ -3,7 +3,7 @@ import trener.views as views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('exercise/add', views.add_exercise, name='add_exercise'),
+    path('plant/add/', views.add_plant, name='add_plant'),
     path('exercise', views.show_exercises, name='show_exercise'),
     path('exercise/<id>', views.show_exercise, name='show_exercise'),
     path('delete_exercise/<id>/', views.delete_exercise, name='delete_exercise'),
@@ -18,5 +18,9 @@ urlpatterns = [
     path('client', views.show_clients, name='show_clients'),
     path('client/<id>', views.show_client, name='show_client'),
     path('login', views.login_page, name='login'),
-    path('logout', views.logout_tunnel, name='logout_tunnel')
+    path('logout', views.logout_tunnel, name='logout_tunnel'),
+    path('plant/delete/<int:id>/', views.delete_plant, name='delete_plant'),
+    path('plants/', views.show_plants, name='show_plants'),
+    path('plant/<int:id>/', views.show_plant, name='show_plant'),
+    path('plant/edit/<int:id>/', views.edit_plant, name='edit_plant'),
 ]
