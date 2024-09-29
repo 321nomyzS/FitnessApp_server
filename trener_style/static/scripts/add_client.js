@@ -1,4 +1,5 @@
 function generatePassword(length = 12) {
+    console.log("TEST");
     const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let password = "";
     for (let i = 0, n = charset.length; i < length; ++i) {

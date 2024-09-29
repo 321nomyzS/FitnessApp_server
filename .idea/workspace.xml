@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessApp_server/settings.env" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/settings.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessApp_server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessApp_server/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_trainings.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_trainings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/static/scripts/add_client.js" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/scripts/add_client.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,6 +171,8 @@
       <workItem from="1720298659399" duration="400000" />
       <workItem from="1720299112209" duration="12000" />
       <workItem from="1720871768244" duration="4638000" />
+      <workItem from="1727442030891" duration="881000" />
+      <workItem from="1727634158394" duration="406000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />

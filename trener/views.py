@@ -65,11 +65,11 @@ def edit_exercise(request, id):
 
         if form.is_valid():
             # Usuń stare zdjęcie, jeśli przesyłane jest nowe
-            if 'image' in request.FILES:
-                if exercise.image:
-                    old_image_path = exercise.image.path
-                    if os.path.exists(old_image_path):
-                        os.remove(old_image_path)
+            # if 'image' in request.FILES:
+            #     if exercise.image:
+            #         old_image_path = exercise.image.path
+            #         if os.path.exists(old_image_path):
+            #             os.remove(old_image_path)
 
             updated_exercise = form.save(commit=False)
             updated_exercise.save()
@@ -101,45 +101,45 @@ def add_training(request):
     clients = Person.objects.all()
 
     if request.method == "POST":
-        form = MyTrainingForm(request.POST)
+        #form = MyTrainingForm(request.POST)
 
-        if form.is_valid():
-            exercise_id_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-')]
-            exercise_tips_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-tips-')]
-            exercise_keys_id = list(set(exercise_id_keys) & set(exercise_tips_keys))
+        #if form.is_valid():
+        exercise_id_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-')]
+        exercise_tips_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-tips-')]
+        exercise_keys_id = list(set(exercise_id_keys) & set(exercise_tips_keys))
 
-            if request.POST['training-type'] == 'personal':
-                new_training = PersonalWorkout()
-                new_training.title = request.POST['title']
-                new_training.workout_date = request.POST['workout_date']
-                new_training.visibility = request.POST['visible-radio'] == 'yes'
-                new_training.client = Person.objects.get(id=request.POST['workout-person'])
-                new_training.save()
+        if request.POST['training-type'] == 'personal':
+            new_training = PersonalWorkout()
+            new_training.title = request.POST['title']
+            new_training.workout_date = request.POST['workout_date']
+            new_training.visibility = request.POST['visible-radio'] == 'yes'
+            new_training.client = Person.objects.get(id=request.POST['workout-person'])
+            new_training.save()
 
-                for key_id in exercise_keys_id:
-                    workout_exercise = WorkoutExercise()
-                    workout_exercise.personal_workout = new_training
-                    workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
-                    workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
-                    workout_exercise.save()
+            for key_id in exercise_keys_id:
+                workout_exercise = WorkoutExercise()
+                workout_exercise.personal_workout = new_training
+                workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
+                workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
+                workout_exercise.save()
 
-            elif request.POST['training-type'] == 'general':
-                new_training = GeneralWorkout()
-                new_training.title = request.POST['title']
-                new_training.visibility = request.POST['visible-radio'] == 'yes'
-                new_training.save()
+        elif request.POST['training-type'] == 'general':
+            new_training = GeneralWorkout()
+            new_training.title = request.POST['title']
+            new_training.visibility = request.POST['visible-radio'] == 'yes'
+            new_training.save()
 
-                for key_id in exercise_keys_id:
-                    workout_exercise = WorkoutExercise()
-                    workout_exercise.general_workout = new_training
-                    workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
-                    workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
-                    workout_exercise.save()
+            for key_id in exercise_keys_id:
+                workout_exercise = WorkoutExercise()
+                workout_exercise.general_workout = new_training
+                workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
+                workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
+                workout_exercise.save()
 
-            return redirect('show_training')
+        return redirect('show_training')
 
-        else:
-            return render(request, 'add_training.html', {'exercises': exercises, 'form': form, 'clients': clients})
+        #else:
+            #return render(request, 'add_training.html', {'exercises': exercises, 'form': form, 'clients': clients})
 
     return render(request, 'add_training.html', {'exercises': exercises, 'clients': clients})
 
