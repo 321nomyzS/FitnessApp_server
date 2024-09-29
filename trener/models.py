@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.hashers import make_password
 from datetime import date
 from django.contrib.auth.models import AbstractUser
+import hashlib, os
 
 
 def exercise_directory_path(instance, filename):
@@ -32,7 +33,7 @@ class Exercise(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     short_description = models.TextField()
-    image = models.ImageField(upload_to=exercise_directory_path, blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
     video_link = models.URLField(blank=True, null=True)
     html_content = models.TextField()
     type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE)
@@ -40,6 +41,31 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            try:
+                old_instance = Exercise.objects.get(pk=self.pk)
+
+                if old_instance.image and self.image != old_instance.image:
+                    old_instance.image.delete(save=False)
+            except Exercise.DoesNotExist:
+                pass
+
+        if self.image:
+            file = self.image
+            md5 = hashlib.md5()
+
+            for chunk in file.chunks():
+                md5.update(chunk)
+            file_hash = md5.hexdigest()
+
+            extension = os.path.splitext(file.name)[1]
+            new_name = f"{self.id}/{file_hash}{extension}"
+
+            self.image.name = os.path.join('exercise', new_name)
+
+        super().save(*args, **kwargs)
 
 
 class GeneralWorkout(models.Model):

@@ -64,17 +64,10 @@ def edit_exercise(request, id):
         form = ExerciseForm(request.POST, request.FILES, instance=exercise)
 
         if form.is_valid():
-            # Usuń stare zdjęcie, jeśli przesyłane jest nowe
-            # if 'image' in request.FILES:
-            #     if exercise.image:
-            #         old_image_path = exercise.image.path
-            #         if os.path.exists(old_image_path):
-            #             os.remove(old_image_path)
-
             updated_exercise = form.save(commit=False)
             updated_exercise.save()
 
-            return redirect('/exercise')  # Przekierowanie do listy ćwiczeń
+            return redirect('show_exercise')
     else:
         form = ExerciseForm(instance=exercise)
 
