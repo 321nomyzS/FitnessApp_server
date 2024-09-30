@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FitnessApp_server/settings.env" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/settings.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FitnessApp_server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_exercises.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_exercises.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +162,7 @@
       <workItem from="1720871768244" duration="4638000" />
       <workItem from="1727442030891" duration="881000" />
       <workItem from="1727634158394" duration="6670000" />
-      <workItem from="1727687134217" duration="2688000" />
+      <workItem from="1727687134217" duration="3160000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -444,7 +439,21 @@
       <option name="project" value="LOCAL" />
       <updated>1727638498596</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Fixing problem with icons in page show_exercises.html">
+      <created>1727689910639</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1727689910639</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Update gitignore">
+      <created>1727690057190</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1727690057190</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,8 +485,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create login and logout" />
-    <MESSAGE value="Update sidebar" />
     <MESSAGE value="Add adding client" />
     <MESSAGE value="Add show clients page" />
     <MESSAGE value="Add show client page" />
@@ -501,6 +508,8 @@
     <MESSAGE value="Add delete exercise" />
     <MESSAGE value="Checkpoint from server" />
     <MESSAGE value="Fixing problem with editing exercise" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing problem with editing exercise" />
+    <MESSAGE value="Fixing problem with icons in page show_exercises.html" />
+    <MESSAGE value="Update gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update gitignore" />
   </component>
 </project>
