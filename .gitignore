@@ -141,5 +141,5 @@ cython_debug/
 /.idea
 
 /media
-/FitnessApp_server/settings.env
+FitnessApp_server/settings.env
 /db.sqlite3
