@@ -62,20 +62,28 @@
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
 
         <!-- Lista ćwiczeń -->
-        <div id="exercises-container" class="space-y-4 flex flex-col">
+                <table class="min-w-full border border-neutral-200 text-center text-sm font-light text-surface bg-white">
+        <thead class="border-neutral-200 font-medium">
+            <tr>
+                <th class="border-e border-neutral-200 px-6 py-4">L.p.</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Ćwiczenie</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Powtórzenia/Serie</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Obciążenie</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Komentarz</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
             {% for workout_exercise in workout_exercises %}
-            <div class="flex flex-row justify-between" id="exercise">
-                <div class="w-1/3">
-                    <label for="exercise-list" class="block mb-2 text-sm font-medium text-gray-900">Ćwiczenie</label>
-                    <input value="{{ workout_exercise.exercise.id }} {{ workout_exercise.exercise.title }}" id="exercise-list" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" disabled>
-                </div>
-                <div class="w-1/2">
-                    <label for="tips" class="block mb-2 text-sm font-medium text-gray-900">Wskazówki</label>
-                    <textarea disabled id="tips" class="w-full block p-1.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" rows="2">{{ workout_exercise.comment }}</textarea>
-                </div>
-            </div>
+                <tr>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ forloop.counter }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="rounded-m border-neutral-200 w-full" type="text" value="{{ workout_exercise.exercise.title }}" disabled></td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="rounded-m border-none w-full" type="text" value="{{ workout_exercise.sets }}" disabled></td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="w-full border-none" type="text" value="{{ workout_exercise.weight }}" disabled></td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="w-full border-none" type="text" value="{{ workout_exercise.comment }}" disabled></td>
+                </tr>
             {% endfor %}
-        </div>
+        </table>
 
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
     </form>

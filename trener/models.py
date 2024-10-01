@@ -83,7 +83,11 @@ class WorkoutExercise(models.Model):
     general_workout = models.ForeignKey('GeneralWorkout', on_delete=models.CASCADE, null=True, blank=True)
     personal_workout = models.ForeignKey('PersonalWorkout', on_delete=models.CASCADE, null=True, blank=True)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)
+    sets = models.TextField(blank=True, null=True)
+    weight = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
+
+
 
     def __str__(self):
         return f"{self.exercise.title} in {self.personal_workout} or {self.general_workout}"

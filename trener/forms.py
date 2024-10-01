@@ -88,16 +88,6 @@ class MyTrainingForm:
         self.training_type = request_post.get('training-type', '')
         self.visibility = request_post.get('visible-radio', '')
 
-        self.exercises_ids = []
-        self.exercises_tips = {}
-        for key, value in request_post.items():
-            split_key = key.split('-')
-            if len(split_key) == 3 and split_key[0] == 'exercise':
-                if split_key[1] == 'id':
-                    self.exercises_ids.append(split_key[2])
-                elif split_key[1] == 'tips':
-                    self.exercises_tips[split_key[2]] = value
-
     def is_valid(self):
         self.errors = MyTrainingErrors()
         if len(self.title) > 100:
@@ -111,13 +101,6 @@ class MyTrainingForm:
         if self.visibility not in ["yes", "no"]:
             self.errors.visibility = "Invalid visibility type"
             self.errors.is_error = True
-
-        general_exercise_ids = [str(exercise.id) for exercise in Exercise.objects.all()]
-
-        for exercise_id in self.exercises_ids:
-            if exercise_id not in general_exercise_ids:
-                self.errors.exercise_id = "Exercise does not exist"
-                self.errors.is_error = True
 
         return not self.errors.is_error
 

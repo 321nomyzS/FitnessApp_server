@@ -93,14 +93,11 @@ def add_training(request):
     exercises = Exercise.objects.all()
     clients = Person.objects.all()
 
-    if request.method == "POST":
+    if request.method == 'POST':
         form = MyTrainingForm(request.POST)
 
         if form.is_valid():
-            exercise_id_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-')]
-            exercise_tips_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-tips-')]
-            exercise_keys_id = list(set(exercise_id_keys) & set(exercise_tips_keys))
-
+            # Creating new training
             if request.POST['training-type'] == 'personal':
                 new_training = PersonalWorkout()
                 new_training.title = request.POST['title']
@@ -109,11 +106,21 @@ def add_training(request):
                 new_training.client = Person.objects.get(id=request.POST['workout-person'])
                 new_training.save()
 
-                for key_id in exercise_keys_id:
+                # Add exercises
+                row_count = int(request.POST['rowCount'])
+                for i in range(1, row_count + 1):
+                    exercise_id = request.POST[f'exercise-{str(i)}']
+                    sets = request.POST[f'sets-{str(i)}']
+                    weight = request.POST[f'weight-{str(i)}']
+                    comment = request.POST[f'comment-{str(i)}']
+
                     workout_exercise = WorkoutExercise()
                     workout_exercise.personal_workout = new_training
-                    workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
-                    workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
+                    workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
+                    workout_exercise.sets = sets
+                    workout_exercise.weight = weight
+                    workout_exercise.comment = comment
+
                     workout_exercise.save()
 
             elif request.POST['training-type'] == 'general':
@@ -122,11 +129,21 @@ def add_training(request):
                 new_training.visibility = request.POST['visible-radio'] == 'yes'
                 new_training.save()
 
-                for key_id in exercise_keys_id:
+                # Add exercises
+                row_count = int(request.POST['rowCount'])
+                for i in range(1, row_count + 1):
+                    exercise_id = request.POST[f'exercise-{str(i)}']
+                    sets = request.POST[f'sets-{str(i)}']
+                    weight = request.POST[f'weight-{str(i)}']
+                    comment = request.POST[f'comment-{str(i)}']
+
                     workout_exercise = WorkoutExercise()
                     workout_exercise.general_workout = new_training
-                    workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
-                    workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
+                    workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
+                    workout_exercise.sets = sets
+                    workout_exercise.weight = weight
+                    workout_exercise.comment = comment
+
                     workout_exercise.save()
 
             return redirect('show_training')
@@ -179,16 +196,21 @@ def edit_general_training(request, id):
         for workout_exercise in workout_exercises:
             workout_exercise.delete()
 
-        # Adding new workout exercises
-        exercise_id_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-')]
-        exercise_tips_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-tips-')]
-        exercise_keys_id = list(set(exercise_id_keys) & set(exercise_tips_keys))
+        # Add exercises
+        row_count = int(request.POST['rowCount'])
+        for i in range(1, row_count + 1):
+            exercise_id = request.POST[f'exercise-{str(i)}']
+            sets = request.POST[f'sets-{str(i)}']
+            weight = request.POST[f'weight-{str(i)}']
+            comment = request.POST[f'comment-{str(i)}']
 
-        for key_id in exercise_keys_id:
             workout_exercise = WorkoutExercise()
             workout_exercise.general_workout = training
-            workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
-            workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
+            workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
+            workout_exercise.sets = sets
+            workout_exercise.weight = weight
+            workout_exercise.comment = comment
+
             workout_exercise.save()
 
         training.save()
@@ -218,16 +240,21 @@ def edit_personal_training(request, id):
         for workout_exercise in workout_exercises:
             workout_exercise.delete()
 
-        # Adding new workout exercises
-        exercise_id_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-id-')]
-        exercise_tips_keys = [key.split('-')[2] for key in request.POST.keys() if key.startswith('exercise-tips-')]
-        exercise_keys_id = list(set(exercise_id_keys) & set(exercise_tips_keys))
+        # Add exercises
+        row_count = int(request.POST['rowCount'])
+        for i in range(1, row_count + 1):
+            exercise_id = request.POST[f'exercise-{str(i)}']
+            sets = request.POST[f'sets-{str(i)}']
+            weight = request.POST[f'weight-{str(i)}']
+            comment = request.POST[f'comment-{str(i)}']
 
-        for key_id in exercise_keys_id:
             workout_exercise = WorkoutExercise()
             workout_exercise.personal_workout = training
-            workout_exercise.exercise = Exercise.objects.get(id=request.POST[f'exercise-id-{key_id}'])
-            workout_exercise.comment = request.POST[f'exercise-tips-{key_id}']
+            workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
+            workout_exercise.sets = sets
+            workout_exercise.weight = weight
+            workout_exercise.comment = comment
+
             workout_exercise.save()
 
         training.save()
