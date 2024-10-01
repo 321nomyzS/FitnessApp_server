@@ -321,6 +321,7 @@ def add_client(request):
     return render(request, 'add_client.html', {'form': form})
 
 
+@login_required
 def edit_client(request, id):
     client = Person.objects.get(id=id)
     if request.method == 'POST':
@@ -358,7 +359,7 @@ def edit_client(request, id):
 
 @login_required
 def show_clients(request):
-    clients = Person.objects.all()
+    clients = Person.objects.exclude(status='hidden')
     return render(request, 'show_clients.html', {"clients": clients})
 
 
@@ -366,6 +367,15 @@ def show_clients(request):
 def show_client(request, id):
     client = Person.objects.get(id=id)
     return render(request, 'show_client.html', {'client': client})
+
+
+@login_required
+def delete_client(request, id):
+    client = Person.objects.get(id=id)
+    if not client.is_staff:
+        client.status = 'hidden'
+        client.save()
+    return redirect('show_clients')
 
 
 def login_page(request):

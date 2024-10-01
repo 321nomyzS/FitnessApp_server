@@ -20,6 +20,7 @@ urlpatterns = [
     path('client', views.show_clients, name='show_clients'),
     path('client/<id>', views.show_client, name='show_client'),
     path('client/edit/<id>', views.edit_client, name='edit_client'),
+    path('client/delete/<id>', views.delete_client, name='delete_client'),
     path('login', views.login_page, name='login'),
     path('logout', views.logout_tunnel, name='logout_tunnel')
 ]

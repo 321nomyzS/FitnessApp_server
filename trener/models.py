@@ -99,7 +99,8 @@ class Person(AbstractUser):
     STATUS_CHOICES = [
         ('active', 'Active'),
         ('inactive', 'Inactive'),
-        ('active_until', 'Active until specific date')
+        ('active_until', 'Active until specific date'),
+        ('hidden', 'Hidden')
     ]
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='active')
     active_until = models.DateField(null=True, blank=True)
