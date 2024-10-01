@@ -321,6 +321,41 @@ def add_client(request):
     return render(request, 'add_client.html', {'form': form})
 
 
+def edit_client(request, id):
+    client = Person.objects.get(id=id)
+    if request.method == 'POST':
+        client.first_name = request.POST['first_name']
+        client.last_name = request.POST['last_name']
+        client.email = request.POST['email']
+        client.status = request.POST['status']
+
+        if request.POST["password"] != '':
+            client.set_password(request.POST['password'])
+
+        if request.FILES:
+            file = request.FILES['photo']
+
+            if file:
+                md5 = hashlib.md5()
+                for chunk in file.chunks():
+                    md5.update(chunk)
+                file_hash = md5.hexdigest()
+
+                extension = os.path.splitext(file.name)[1]
+                new_name = f"{file_hash}{extension}"
+                file.name = new_name
+
+                # Delete old photo
+                client.photo.delete()
+                client.photo = file
+
+        client.save()
+        return redirect('show_clients')
+    else:
+        form = ClientForm(instance=client)
+    return render(request, 'edit_client.html', {'client': client, 'form': form})
+
+
 @login_required
 def show_clients(request):
     clients = Person.objects.all()
