@@ -1,7 +1,7 @@
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 from django.core.validators import URLValidator, FileExtensionValidator
-from .models import Exercise, ExerciseType, ExerciseLanguage, Person
+from .models import Exercise, ExerciseLanguage, Person
 import hashlib
 import os
 from django.core.exceptions import ValidationError
@@ -34,15 +34,7 @@ class ExerciseForm(forms.ModelForm):
         label="Długi opis"
     )
 
-    type_choices = [(type_obj.id, type_obj.type_name) for type_obj in ExerciseType.objects.all()]
     language_choices = [(language_obj.id, language_obj.language_name) for language_obj in ExerciseLanguage.objects.all()]
-
-    type = forms.ChoiceField(
-        choices=type_choices,
-        widget=forms.Select(attrs={
-            'class': 'w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'}),
-        label="Typ ćwiczenia"
-    )
 
     language = forms.ChoiceField(
         choices=language_choices,
@@ -50,13 +42,6 @@ class ExerciseForm(forms.ModelForm):
             'class': 'w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5'}),
         label="Język"
     )
-
-    def clean_type(self):
-        type_id = self.cleaned_data.get('type')
-        try:
-            return ExerciseType.objects.get(id=type_id)
-        except ExerciseType.DoesNotExist:
-            raise forms.ValidationError("Type does not exist")
 
     def clean_language(self):
         language_id = self.cleaned_data.get('language')
@@ -78,7 +63,7 @@ class ExerciseForm(forms.ModelForm):
 
     class Meta:
         model = Exercise
-        fields = ['title', 'type', 'language', 'short_description', 'image', 'video_link', 'html_content']
+        fields = ['title', 'language', 'short_description', 'image', 'video_link', 'html_content']
 
 
 class MyTrainingForm:
@@ -112,7 +97,6 @@ class MyTrainingErrors:
         self.visibility = ""
         self.exercise_id = ""
         self.is_error = False
-
 
 
 class ClientForm(forms.ModelForm):

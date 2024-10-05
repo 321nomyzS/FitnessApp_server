@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/trener_style/templates/add_tag.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trener_style/templates/edit_tag.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trener_style/templates/show_tag.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trener_style/templates/show_tags.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessApp_server/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener_style/templates/add_exercise.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/add_exercise.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/edit_exercise.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/edit_exercise.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_exercise.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_exercise.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_exercises.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_exercises.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +177,7 @@
       <workItem from="1727690637937" duration="2009000" />
       <workItem from="1727776724212" duration="17682000" />
       <workItem from="1727989967187" duration="3061000" />
-      <workItem from="1728133679141" duration="8854000" />
+      <workItem from="1728133679141" duration="12972000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -517,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1728135327106</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Create tags mechanics CRUD">
+      <created>1728143099585</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1728143099585</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,7 +556,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Change title in base" />
     <MESSAGE value="Fixing show_exercises.html styles" />
     <MESSAGE value="Fixing show_clients.html styles" />
     <MESSAGE value="Creating API app" />
@@ -574,6 +580,7 @@
     <MESSAGE value="Add delete client mechanics" />
     <MESSAGE value="Small fixes" />
     <MESSAGE value="Create tags models" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create tags models" />
+    <MESSAGE value="Create tags mechanics CRUD" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create tags mechanics CRUD" />
   </component>
 </project>

@@ -18,6 +18,9 @@ def home(request):
 @login_required
 @csrf_protect
 def add_exercise(request):
+    muscle_tags = MuscleTag.objects.all()
+    exercise_type_tags = ExerciseTypeTag.objects.all()
+
     if request.method == 'POST':
         form = ExerciseForm(request.POST, request.FILES)
         if form.is_valid():
@@ -26,7 +29,6 @@ def add_exercise(request):
                 short_description=form.cleaned_data['short_description'],
                 video_link=form.cleaned_data['video_link'],
                 html_content=form.cleaned_data['html_content'],
-                type=form.cleaned_data['type'],
                 language=form.cleaned_data['language']
             )
             exercise.save()
@@ -35,13 +37,25 @@ def add_exercise(request):
             if exercise.image:
                 exercise.save()
 
+            # Dodawanie tagów
+            exercise_type_tag_pattern = "exercise-type-tag"
+            muscle_tag_pattern = "muscle-tag"
+            for key in request.POST:
+                if key[:len(exercise_type_tag_pattern)] == exercise_type_tag_pattern:
+                    if request.POST[key] == 'on':
+                        tag_id = key.split('-')[-1]
+                        tag = ExerciseTypeTag.objects.get(id=tag_id)
+                        exercise.exercise_type_tags.add(tag)
+                if key[:len(muscle_tag_pattern)] == muscle_tag_pattern:
+                    if request.POST[key] == 'on':
+                        tag_id = key.split('-')[-1]
+                        tag = MuscleTag.objects.get(id=tag_id)
+                        exercise.muscle_tags.add(tag)
             return redirect('show_exercise')
         else:
             return render(request, 'add_exercise.html', {'form': form})
     else:
         form = ExerciseForm()
-        muscle_tags = MuscleTag.objects.all()
-        exercise_type_tags = ExerciseTypeTag.objects.all()
         return render(request, 'add_exercise.html', {'form': form,
                                                      'muscle_tags': muscle_tags,
                                                      'exercise_type_tags': exercise_type_tags})
@@ -56,12 +70,17 @@ def show_exercises(request):
 @login_required
 def show_exercise(request, id):
     exercise = Exercise.objects.get(id=id)
-    return render(request, 'show_exercise.html', {"exercise": exercise})
+    muscle_tags = MuscleTag.objects.all()
+    exercise_type_tags = ExerciseTypeTag.objects.all()
+    return render(request, 'show_exercise.html', {"exercise": exercise, 'muscle_tags': muscle_tags,
+                                                  'exercise_type_tags': exercise_type_tags})
 
 
 @login_required
 def edit_exercise(request, id):
     exercise = get_object_or_404(Exercise, id=id)
+    muscle_tags = MuscleTag.objects.all()
+    exercise_type_tags = ExerciseTypeTag.objects.all()
 
     if request.method == 'POST':
         form = ExerciseForm(request.POST, request.FILES, instance=exercise)
@@ -70,11 +89,37 @@ def edit_exercise(request, id):
             updated_exercise = form.save(commit=False)
             updated_exercise.save()
 
+            # Usuwanie poprzednich tagów
+            all_exercise_type_tags = ExerciseTypeTag.objects.all()
+            for tag in all_exercise_type_tags:
+                updated_exercise.exercise_type_tags.remove(tag)
+
+            all_muscle_tags = MuscleTag.objects.all()
+            for tag in all_muscle_tags:
+                updated_exercise.muscle_tags.remove(tag)
+
+            # Dodawanie tagów
+            exercise_type_tag_pattern = "exercise-type-tag"
+            muscle_tag_pattern = "muscle-tag"
+            for key in request.POST:
+                if key[:len(exercise_type_tag_pattern)] == exercise_type_tag_pattern:
+                    if request.POST[key] == 'on':
+                        tag_id = key.split('-')[-1]
+                        tag = ExerciseTypeTag.objects.get(id=tag_id)
+                        updated_exercise.exercise_type_tags.add(tag)
+                if key[:len(muscle_tag_pattern)] == muscle_tag_pattern:
+                    if request.POST[key] == 'on':
+                        tag_id = key.split('-')[-1]
+                        tag = MuscleTag.objects.get(id=tag_id)
+                        updated_exercise.muscle_tags.add(tag)
+            updated_exercise.save()
+
             return redirect('show_exercise')
     else:
         form = ExerciseForm(instance=exercise)
 
-    return render(request, 'edit_exercise.html', {'form': form, 'exercise': exercise})
+    return render(request, 'edit_exercise.html', {'form': form, 'exercise': exercise, 'muscle_tags': muscle_tags,
+                                                  'exercise_type_tags': exercise_type_tags})
 
 
 @login_required

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from trener.models import Exercise, GeneralWorkout, ExerciseType, PersonalWorkout, WorkoutExercise, Person
+from trener.models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise, Person
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.hashers import check_password
 from django.core.exceptions import ValidationError
@@ -62,11 +62,6 @@ class GeneralWorkoutSerializer(serializers.ModelSerializer):
         model = GeneralWorkout
         fields = ['id', 'title', 'visibility', 'exercises']
 
-
-class ExerciseTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExerciseType
-        fields = ['id', 'type_name']
 
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:

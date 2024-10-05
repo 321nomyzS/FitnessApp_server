@@ -28,7 +28,7 @@
                 <th class="w-1/10 py-5 px-6 text-left text-gray-600 font-bold uppercase">ID</th>
                 <th class="w-1/5 py-5 px-6 text-left text-gray-600 font-bold uppercase">Nazwa</th>
                 <th class="w-1/3 py-5 px-6 text-left text-gray-600 font-bold uppercase">Krótki opis</th>
-                <th class="w-1/10 py-5 px-6 text-left text-gray-600 font-bold uppercase">Typ</th>
+                <th class="w-1/10 py-5 px-6 text-left text-gray-600 font-bold uppercase">Tagi</th>
                 <th class="w-1/10 py-5 px-6 text-left text-gray-600 font-bold uppercase">Język</th>
                 <th class="w-1/5 py-5 px-6 text-left text-gray-600 font-bold uppercase">Akcje</th>
             </tr>
@@ -39,7 +39,16 @@
                 <td class="py-5 px-6 border-t border-r border-gray-200">{{ exercise.id }}</td>
                 <td class="py-5 px-6 border-t border-r border-gray-200">{{ exercise.title }}</td>
                 <td class="py-5 px-6 border-t border-r border-gray-200">{{ exercise.short_description }}</td>
-                <td class="py-5 px-6 border-t border-r border-gray-200">{{ exercise.type.type_name }}</td>
+                <td class="py-5 px-6 border-t border-r border-gray-200 text-sm">
+                    {% for tag in exercise.exercise_type_tags.all %}
+                        {{ tag.name }}
+                        <br>
+                    {% endfor %}
+                    {% for tag in exercise.muscle_tags.all %}
+                        {{ tag.name }}
+                        <br>
+                    {% endfor %}
+                </td>
                 <td class="py-5 px-6 border-t border-r border-gray-200">{{ exercise.language.language_name }}</td>
                 <td class="py-5 px-6 border-t flex flex-row justify-around h-full">
                     <a href="{% url 'show_exercise' id=exercise.id %}" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">

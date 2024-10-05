@@ -22,14 +22,6 @@ def muscle_tag_directory_path(instance, filename):
     return f'tags/muscle/{instance.id}/{filename}'
 
 
-class ExerciseType(models.Model):
-    id = models.AutoField(primary_key=True)
-    type_name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return str(self.id)
-
-
 class ExerciseTypeTag(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
@@ -57,8 +49,9 @@ class Exercise(models.Model):
     image = models.ImageField(blank=True, null=True)
     video_link = models.URLField(blank=True, null=True)
     html_content = models.TextField()
-    type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE)
     language = models.ForeignKey(ExerciseLanguage, on_delete=models.CASCADE)
+    exercise_type_tags = models.ManyToManyField(ExerciseTypeTag, related_name='exercises', blank=True)
+    muscle_tags = models.ManyToManyField(MuscleTag, related_name='exercises', blank=True)
 
     def __str__(self):
         return self.title
