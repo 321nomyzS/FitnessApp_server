@@ -13,7 +13,7 @@
                 selects[0].name = `exercise-${index + 1}`; // First input is for exercise
                 inputs[0].name = `sets-${index + 1}`;     // Second input is for reps
                 inputs[1].name = `weight-${index + 1}`;     // Third input is for sets
-                inputs[2].name = `tip-${index + 1}`;      // Fourth input is for tip
+                inputs[2].name = `comment-${index + 1}`;      // Fourth input is for tip
             });
         }
         function addRow() {
@@ -98,7 +98,7 @@
 {% endblock %}
 
 {% block content %}
-    <form class="mx-auto mb-2 w-4/5 items-center" method="post" enctype="multipart/form-data">
+    <form class="mx-auto mb-2 w-4/5 items-center" method="post" enctype="multip-art/form-data">
         {% csrf_token %}
         <div>
             <p class="font-medium text-gray-900 text-2xl mb-7">Dodaj nowe trening</p>

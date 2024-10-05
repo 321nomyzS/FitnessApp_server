@@ -1,8 +1,9 @@
-from django.db import models
-from django.contrib.auth.hashers import make_password
+import hashlib
+import os
 from datetime import date
+
 from django.contrib.auth.models import AbstractUser
-import hashlib, os
+from django.db import models
 
 
 def exercise_directory_path(instance, filename):
@@ -86,8 +87,6 @@ class WorkoutExercise(models.Model):
     sets = models.TextField(blank=True, null=True)
     weight = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
-
-
 
     def __str__(self):
         return f"{self.exercise.title} in {self.personal_workout} or {self.general_workout}"

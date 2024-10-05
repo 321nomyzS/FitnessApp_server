@@ -5,7 +5,6 @@ import os
 import shutil
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect
 from .forms import ExerciseForm, MyTrainingForm, ClientForm
 from .models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise
@@ -176,7 +175,8 @@ def show_general_training(request, id):
 def show_personal_training(request, id):
     personal_training = PersonalWorkout.objects.get(id=id)
     workout_exercises = WorkoutExercise.objects.filter(personal_workout_id=id)
-    return render(request, 'show_training.html', {'training': personal_training, 'workout_exercises': workout_exercises})
+    return render(request, 'show_training.html',
+                  {'training': personal_training, 'workout_exercises': workout_exercises})
 
 
 @login_required
@@ -261,7 +261,11 @@ def edit_personal_training(request, id):
         return redirect('show_training')
 
     return render(request, 'edit_training.html',
-                  {'training': training, 'workout_exercises': workout_exercises, 'exercises': exercises, 'clients': clients})
+                  {'training': training,
+                   'workout_exercises': workout_exercises,
+                   'exercises': exercises,
+                   'clients': clients}
+                  )
 
 
 @login_required

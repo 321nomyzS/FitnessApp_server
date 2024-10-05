@@ -154,5 +154,3 @@ class ClientForm(forms.ModelForm):
 
             file.name = new_name
             return file
-
-
