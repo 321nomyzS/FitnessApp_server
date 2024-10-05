@@ -11,58 +11,70 @@
                 Trening {% if training.workout_date %} Personalny {% endif %} {% if not training.workout_date %} Ogólny {% endif %}#{{ training.id }}
             </p>
         </div>
-        <div class="flex-1 w-2/3">
-            <div class="mb-5 w-4/5">
-                <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">Nazwa treningu</label>
-                <input name="title" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.title }}" disabled>
-            </div>
-            <div class="mb-5 w-4/5">
-                {% if training.workout_date %}
-                <div class="flex items-center">
-                    <input checked disabled id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
-                </div>
-                {% endif %}
-                {% if not training.workout_date %}
-                <div class="flex items-center">
-                    <input checked disabled id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
-                </div>
-                {% endif %}
-                <p class="text-xs text-red-500">{{ form.errors.training_type }}</p>
-            </div>
-            {% if training.workout_date %}
-            <div class="mb-5 flex flex-row w-4/5 justify-between">
-                    <div class="w-2/5">
-                        <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
-                        <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.workout_date|date:'Y-m-d' }}" disabled>
-                  </div>
-                    <div class="w-2/5">
-                        <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>
-                        <input name="workout-person" id="training-person" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.client.first_name }} {{ training.client.last_name }}" disabled>
-                  </div>
-            </div>
-            {% endif %}
-            <div class="mb-5 w-4/5">
-            {% if training.visibility %}
-                <div class="flex items-center">
-                    <input  checked id="visible-yes-radio" type="radio" value="yes" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="visible-yes-radio" class="ms-2 text-sm font-medium text-gray-900">Widoczny</label>
-                </div>
-            {% endif %}
-            {% if not training.visibility %}
-                <div class="flex items-center">
-                    <input {% if form.visibility == "no" %} checked {% endif %} id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="visible-no-radio" class="ms-2 text-sm font-medium text-gray-900">Niewidoczny</label>
-                </div>
-            </div>
-            {% endif %}
-        </div>
+        <div class="flex flex-col mb-2 w-4/5">
+            <div class="flex flex-row mb-2 w-4/5">
+                <div class="flex-1 w-2/3">
+                    <div class="mb-5 w-4/5">
+                        <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">Nazwa treningu</label>
+                        <input name="title" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.title }}" disabled>
+                    </div>
+                    <div class="mb-5 w-4/5">
+                        {% if training.workout_date %}
+                        <div class="flex items-center">
+                            <input checked disabled id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
+                        </div>
+                        {% endif %}
+                        {% if not training.workout_date %}
+                        <div class="flex items-center">
+                            <input checked disabled id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
+                        </div>
+                        {% endif %}
+                        <p class="text-xs text-red-500">{{ form.errors.training_type }}</p>
+                    </div>
+                    {% if training.workout_date %}
+                    <div class="mb-5 flex flex-row w-4/5 justify-between">
+                            <div class="w-2/5">
+                                <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
+                                <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.workout_date|date:'Y-m-d' }}" disabled>
+                          </div>
+                            <div class="w-2/5">
+                                <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>
+                                <input name="workout-person" id="training-person" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.client.first_name }} {{ training.client.last_name }}" disabled>
+                          </div>
+                    </div>
+                    {% endif %}
+                    <div class="mb-5 w-4/5">
+                    {% if training.visibility %}
+                        <div class="flex items-center">
+                            <input  checked id="visible-yes-radio" type="radio" value="yes" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="visible-yes-radio" class="ms-2 text-sm font-medium text-gray-900">Widoczny</label>
+                        </div>
+                    {% endif %}
+                    {% if not training.visibility %}
+                        <div class="flex items-center">
+                            <input {% if form.visibility == "no" %} checked {% endif %} id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="visible-no-radio" class="ms-2 text-sm font-medium text-gray-900">Niewidoczny</label>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div></div>
+                <div class="flex-2 w-1/3">
+                    <div class="mb-5">
+                        <label for="id_image" class="block mb-2 text-sm font-medium text-gray-900">Zdjęcie lub GIF</label>
 
+                        {% if training.image %}
+                            <img class="rounded-md aspect-w-1 aspect-h-1 pb-0" src="{{ training.image.url }}" alt="Zdjęcie ćwiczenia">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
 
         <!-- Lista ćwiczeń -->
-                <table class="min-w-full border border-neutral-200 text-center text-sm font-light text-surface bg-white">
+        <table class="min-w-full border border-neutral-200 text-center text-sm font-light text-surface bg-white">
         <thead class="border-neutral-200 font-medium">
             <tr>
                 <th class="border-e border-neutral-200 px-6 py-4">L.p.</th>

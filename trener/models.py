@@ -22,6 +22,14 @@ def muscle_tag_directory_path(instance, filename):
     return f'tags/muscle/{instance.id}/{filename}'
 
 
+def general_workout_path(instance, filename):
+    return f'workout/general/{instance.id}/{filename}'
+
+
+def personal_workout_path(instance, filename):
+    return f'workout/personal/{instance.id}/{filename}'
+
+
 class ExerciseTypeTag(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
@@ -87,6 +95,7 @@ class GeneralWorkout(models.Model):
     title = models.CharField(max_length=100)
     exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
     visibility = models.BooleanField()
+    image = models.ImageField(upload_to=general_workout_path, blank=True, null=True)
 
     def __str__(self):
         return f"General Workout #{self.pk}"
@@ -138,6 +147,7 @@ class PersonalWorkout(models.Model):
     visibility = models.BooleanField()
     workout_date = models.DateField()
     client = models.ForeignKey(Person, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=personal_workout_path, blank=True, null=True)
 
     def __str__(self):
         return f"Personal Workout on {self.workout_date}"

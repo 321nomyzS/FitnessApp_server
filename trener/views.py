@@ -2,6 +2,7 @@ from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import os
+import random
 import shutil
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
@@ -171,6 +172,56 @@ def add_training(request):
 
                     workout_exercise.save()
 
+                # Add image
+                if request.FILES:
+                    image = request.FILES['image']
+
+                    if image:
+                        md5 = hashlib.md5()
+                        for chunk in image.chunks():
+                            md5.update(chunk)
+                        file_hash = md5.hexdigest()
+
+                        extension = os.path.splitext(image.name)[1]
+                        new_name = f"{file_hash}{extension}"
+                        image.name = new_name
+
+                        new_training.image = image
+                        new_training.save()
+                else:
+                    random_image_folder = os.path.join(settings.MEDIA_ROOT, 'random')
+                    random_image_files = os.listdir(random_image_folder)
+
+                    random_image_files = [f for f in random_image_files if
+                                          os.path.isfile(os.path.join(random_image_folder, f))]
+
+                    if random_image_files:
+                        random_image_name = random.choice(random_image_files)
+                        image_path = os.path.join(random_image_folder, random_image_name)
+
+                        # Otwórz plik jako obiekt
+                        with open(image_path, 'rb') as f:
+                            image = f.read()
+
+                        # Generuj nową nazwę na podstawie hash MD5
+                        md5 = hashlib.md5()
+                        md5.update(image)
+                        file_hash = md5.hexdigest()
+                        extension = os.path.splitext(random_image_name)[1]
+                        new_name = f"{file_hash}{extension}"
+
+                        # Skopiuj plik do nowej lokalizacji
+                        new_image_folder_path = os.path.join(settings.MEDIA_ROOT, 'workout/personal', str(new_training.id))
+                        if not os.path.exists(new_image_folder_path):
+                            os.makedirs(new_image_folder_path)
+
+                        new_image_path = os.path.join(new_image_folder_path, new_name)
+                        shutil.copyfile(image_path, new_image_path)
+
+                        # Zapisz nowy plik w bazie danych
+                        new_training.image = os.path.join('workout/personal', str(new_training.id), new_name)
+                        new_training.save()
+
             elif request.POST['training-type'] == 'general':
                 new_training = GeneralWorkout()
                 new_training.title = request.POST['title']
@@ -194,6 +245,55 @@ def add_training(request):
 
                     workout_exercise.save()
 
+                # Add image
+                if request.FILES:
+                    image = request.FILES['image']
+
+                    if image:
+                        md5 = hashlib.md5()
+                        for chunk in image.chunks():
+                            md5.update(chunk)
+                        file_hash = md5.hexdigest()
+
+                        extension = os.path.splitext(image.name)[1]
+                        new_name = f"{file_hash}{extension}"
+                        image.name = new_name
+
+                        new_training.image = image
+                        new_training.save()
+                else:
+                    random_image_folder = os.path.join(settings.MEDIA_ROOT, 'random')
+                    random_image_files = os.listdir(random_image_folder)
+
+                    random_image_files = [f for f in random_image_files if
+                                          os.path.isfile(os.path.join(random_image_folder, f))]
+
+                    if random_image_files:
+                        random_image_name = random.choice(random_image_files)
+                        image_path = os.path.join(random_image_folder, random_image_name)
+
+                        # Otwórz plik jako obiekt
+                        with open(image_path, 'rb') as f:
+                            image = f.read()
+
+                        # Generuj nową nazwę na podstawie hash MD5
+                        md5 = hashlib.md5()
+                        md5.update(image)
+                        file_hash = md5.hexdigest()
+                        extension = os.path.splitext(random_image_name)[1]
+                        new_name = f"{file_hash}{extension}"
+
+                        # Skopiuj plik do nowej lokalizacji
+                        new_image_folder_path = os.path.join(settings.MEDIA_ROOT, 'workout/general', str(new_training.id))
+                        if not os.path.exists(new_image_folder_path):
+                            os.makedirs(new_image_folder_path)
+
+                        new_image_path = os.path.join(new_image_folder_path, new_name)
+                        shutil.copyfile(image_path, new_image_path)
+
+                        # Zapisz nowy plik w bazie danych
+                        new_training.image = os.path.join('workout/general', str(new_training.id), new_name)
+                        new_training.save()
             return redirect('show_training')
         else:
             return render(request, 'add_training.html', {'exercises': exercises, 'form': form, 'clients': clients})
@@ -262,6 +362,23 @@ def edit_general_training(request, id):
 
             workout_exercise.save()
 
+        # Edit image
+        if request.FILES:
+            file = request.FILES['image']
+
+            if file:
+                md5 = hashlib.md5()
+                for chunk in file.chunks():
+                    md5.update(chunk)
+                file_hash = md5.hexdigest()
+
+                extension = os.path.splitext(file.name)[1]
+                new_name = f"{file_hash}{extension}"
+                file.name = new_name
+
+                training.image.delete()
+                training.image = file
+
         training.save()
         return redirect('show_training')
 
@@ -306,6 +423,23 @@ def edit_personal_training(request, id):
 
             workout_exercise.save()
 
+        # Edit image
+        if request.FILES:
+            file = request.FILES['image']
+
+            if file:
+                md5 = hashlib.md5()
+                for chunk in file.chunks():
+                    md5.update(chunk)
+                file_hash = md5.hexdigest()
+
+                extension = os.path.splitext(file.name)[1]
+                new_name = f"{file_hash}{extension}"
+                file.name = new_name
+
+                training.image.delete()
+                training.image = file
+
         training.save()
         return redirect('show_training')
 
@@ -322,6 +456,7 @@ def edit_personal_training(request, id):
 def delete_general_training(request, id):
     general_training = GeneralWorkout.objects.get(id=id)
     workout_exercises = WorkoutExercise.objects.filter(general_workout=general_training)
+    general_training.image.delete()
 
     for workout_exercise in workout_exercises:
         workout_exercise.delete()
@@ -336,6 +471,7 @@ def delete_general_training(request, id):
 def delete_personal_training(request, id):
     personal_training = PersonalWorkout.objects.get(id=id)
     workout_exercises = WorkoutExercise.objects.filter(personal_workout=personal_training)
+    personal_training.image.delete()
 
     for workout_exercise in workout_exercises:
         workout_exercise.delete()
