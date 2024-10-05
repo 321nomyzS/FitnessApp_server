@@ -40,7 +40,11 @@ def add_exercise(request):
             return render(request, 'add_exercise.html', {'form': form})
     else:
         form = ExerciseForm()
-        return render(request, 'add_exercise.html', {'form': form})
+        muscle_tags = MuscleTag.objects.all()
+        exercise_type_tags = ExerciseTypeTag.objects.all()
+        return render(request, 'add_exercise.html', {'form': form,
+                                                     'muscle_tags': muscle_tags,
+                                                     'exercise_type_tags': exercise_type_tags})
 
 
 @login_required
@@ -294,6 +298,125 @@ def delete_personal_training(request, id):
     personal_training.delete()
 
     return redirect('show_training')
+
+
+@login_required
+def show_tags(request):
+    muscle_tags = MuscleTag.objects.all()
+    exercise_type_tags = ExerciseTypeTag.objects.all()
+    return render(request, 'show_tags.html', {'muscle_tags': muscle_tags, 'exercise_type_tags': exercise_type_tags})
+
+
+@login_required
+def show_tag(request, tag_type, id):
+    if tag_type == 'muscle':
+        tag = MuscleTag.objects.get(id=id)
+    elif tag_type == 'exercise-type':
+        tag = ExerciseTypeTag.objects.get(id=id)
+    else:
+        return redirect('show_tags')
+    return render(request, 'show_tag.html', {'tag': tag, 'tag_type': tag_type})
+
+
+@login_required
+@csrf_protect
+def add_tag(request):
+    if request.method == 'POST':
+        tag_type = request.POST['tag-type']
+        if tag_type == 'muscle-tag':
+            new_muscle_tag = MuscleTag()
+            new_muscle_tag.name = request.POST['name']
+            new_muscle_tag.save()
+
+            if request.FILES:
+                image = request.FILES['image']
+
+                if image:
+                    md5 = hashlib.md5()
+                    for chunk in image.chunks():
+                        md5.update(chunk)
+                    file_hash = md5.hexdigest()
+
+                    extension = os.path.splitext(image.name)[1]
+                    new_name = f"{file_hash}{extension}"
+                    image.name = new_name
+
+                    new_muscle_tag.image = image
+            new_muscle_tag.save()
+
+        elif tag_type == 'exercise-type-tag':
+            new_exercise_type_tag = ExerciseTypeTag()
+            new_exercise_type_tag.name = request.POST['name']
+            new_exercise_type_tag.save()
+
+            if request.FILES:
+                image = request.FILES['image']
+
+                if image:
+                    md5 = hashlib.md5()
+                    for chunk in image.chunks():
+                        md5.update(chunk)
+                    file_hash = md5.hexdigest()
+
+                    extension = os.path.splitext(image.name)[1]
+                    new_name = f"{file_hash}{extension}"
+                    image.name = new_name
+
+                    new_exercise_type_tag.image = image
+
+            new_exercise_type_tag.save()
+
+        return redirect('show_tags')
+
+    return render(request, 'add_tag.html')
+
+
+@login_required
+@csrf_protect
+def edit_tag(request, tag_type, id):
+    if tag_type == 'muscle':
+        tag = MuscleTag.objects.get(id=id)
+    elif tag_type == 'exercise-type':
+        tag = ExerciseTypeTag.objects.get(id=id)
+    else:
+        return redirect('show_tags')
+
+    if request.method == 'POST':
+        tag.name = request.POST['name']
+
+        if request.FILES:
+            file = request.FILES['image']
+
+            if file:
+                md5 = hashlib.md5()
+                for chunk in file.chunks():
+                    md5.update(chunk)
+                file_hash = md5.hexdigest()
+
+                extension = os.path.splitext(file.name)[1]
+                new_name = f"{file_hash}{extension}"
+                file.name = new_name
+
+                tag.image.delete()
+                tag.image = file
+
+        tag.save()
+        return redirect('show_tags')
+
+    return render(request, 'edit_tag.html', {'tag': tag, 'tag_type': tag_type})
+
+
+@login_required
+def delete_tag(request, tag_type, id):
+    if tag_type == 'muscle':
+        tag = MuscleTag.objects.get(id=id)
+        tag.image.delete()
+        tag.delete()
+    elif tag_type == 'exercise-type':
+        tag = ExerciseTypeTag.objects.get(id=id)
+        tag.image.delete()
+        tag.delete()
+    return redirect('show_tags')
 
 
 @login_required

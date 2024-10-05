@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="Small fixes">
+    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/trener_style/templates/add_tag.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trener_style/templates/edit_tag.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trener_style/templates/show_tag.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trener_style/templates/show_tags.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/add_exercise.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/add_exercise.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trener_style/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +27,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -169,7 +177,7 @@
       <workItem from="1727690637937" duration="2009000" />
       <workItem from="1727776724212" duration="17682000" />
       <workItem from="1727989967187" duration="3061000" />
-      <workItem from="1728133679141" duration="1633000" />
+      <workItem from="1728133679141" duration="8854000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -502,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1728134595110</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Create tags models">
+      <created>1728135327106</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1728135327106</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,7 +549,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create alert on login page and change title" />
     <MESSAGE value="Change title in base" />
     <MESSAGE value="Fixing show_exercises.html styles" />
     <MESSAGE value="Fixing show_clients.html styles" />
@@ -559,6 +573,7 @@
     <MESSAGE value="Add edit client mechanics" />
     <MESSAGE value="Add delete client mechanics" />
     <MESSAGE value="Small fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small fixes" />
+    <MESSAGE value="Create tags models" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create tags models" />
   </component>
 </project>

@@ -21,6 +21,11 @@ urlpatterns = [
     path('client/<id>', views.show_client, name='show_client'),
     path('client/edit/<id>', views.edit_client, name='edit_client'),
     path('client/delete/<id>', views.delete_client, name='delete_client'),
+    path('tag', views.show_tags, name='show_tags'),
+    path('tag/add', views.add_tag, name='add_tag'),
+    path('tag/<tag_type>/<id>', views.show_tag, name='show_tag'),
+    path('tag/edit/<tag_type>/<id>', views.edit_tag, name='edit_tag'),
+    path('tag/delete/<tag_type>/<id>', views.delete_tag, name='delete_tag'),
     path('login', views.login_page, name='login'),
     path('logout', views.logout_tunnel, name='logout_tunnel')
 ]
