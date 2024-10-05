@@ -131,7 +131,7 @@ def delete_exercise(request, id):
     exercise.delete()
 
     if os.path.exists(exercise_dir):
-        shutil.rmtree(exercise_dir)
+        shutil.rmtree(os.path.dirname(os.path.join(settings.MEDIA_ROOT, exercise_dir)))
 
     return redirect('show_exercise')
 
@@ -301,6 +301,43 @@ def add_training(request):
     return render(request, 'add_training.html', {'exercises': exercises, 'clients': clients})
 
 
+def duplicate_training(request, id):
+    personal_training = PersonalWorkout.objects.get(id=id)
+    original_id = personal_training.pk
+    personal_training.pk = None
+    personal_training.visibility = False
+    personal_training.save()
+
+    # Duplikacja ćwiczeń
+    original_workouts = WorkoutExercise.objects.filter(personal_workout_id=original_id)
+    for original_workout in original_workouts:
+        copied_workout = WorkoutExercise()
+        copied_workout.personal_workout = personal_training
+        copied_workout.exercise = original_workout.exercise
+        copied_workout.sets = original_workout.sets
+        copied_workout.weight = original_workout.weight
+        copied_workout.comment = original_workout.comment
+        copied_workout.save()
+
+    # Duplikacja obrazu
+    original_training = PersonalWorkout.objects.get(id=original_id)
+    if original_training.image:
+        file_name = os.path.basename(original_training.image.path)
+        new_folder_path = os.path.join(settings.MEDIA_ROOT, 'workout', 'personal', str(personal_training.id))
+
+        if not os.path.exists(new_folder_path):
+            os.makedirs(new_folder_path)
+
+        new_file_image_path = os.path.join(new_folder_path, file_name)
+        shutil.copyfile(original_training.image.path, new_file_image_path)
+
+        relative_image_path = os.path.join('workout', 'personal', str(personal_training.id), file_name)
+        personal_training.image = relative_image_path
+        personal_training.save()
+
+    return redirect('edit_personal_training', id=personal_training.id)
+
+
 @login_required
 def show_training(request):
     general_workout = GeneralWorkout.objects.all()
@@ -456,7 +493,9 @@ def edit_personal_training(request, id):
 def delete_general_training(request, id):
     general_training = GeneralWorkout.objects.get(id=id)
     workout_exercises = WorkoutExercise.objects.filter(general_workout=general_training)
-    general_training.image.delete()
+    if general_training.image:
+        if os.path.exists(os.path.dirname(os.path.join(settings.MEDIA_ROOT, general_training.image.path))):
+            shutil.rmtree(os.path.dirname(os.path.join(settings.MEDIA_ROOT, general_training.image.path)))
 
     for workout_exercise in workout_exercises:
         workout_exercise.delete()
@@ -471,7 +510,9 @@ def delete_general_training(request, id):
 def delete_personal_training(request, id):
     personal_training = PersonalWorkout.objects.get(id=id)
     workout_exercises = WorkoutExercise.objects.filter(personal_workout=personal_training)
-    personal_training.image.delete()
+    if personal_training.image:
+        if os.path.exists(os.path.dirname(os.path.join(settings.MEDIA_ROOT, personal_training.image.path))):
+            shutil.rmtree(os.path.dirname(os.path.join(settings.MEDIA_ROOT, personal_training.image.path)))
 
     for workout_exercise in workout_exercises:
         workout_exercise.delete()
@@ -591,11 +632,11 @@ def edit_tag(request, tag_type, id):
 def delete_tag(request, tag_type, id):
     if tag_type == 'muscle':
         tag = MuscleTag.objects.get(id=id)
-        tag.image.delete()
+        shutil.rmtree(os.path.dirname(os.path.join(settings.MEDIA_ROOT, tag.image.path)))
         tag.delete()
     elif tag_type == 'exercise-type':
         tag = ExerciseTypeTag.objects.get(id=id)
-        tag.image.delete()
+        shutil.rmtree(os.path.dirname(os.path.join(settings.MEDIA_ROOT, tag.image.path)))
         tag.delete()
     return redirect('show_tags')
 

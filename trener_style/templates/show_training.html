@@ -54,10 +54,9 @@
                     {% endif %}
                     {% if not training.visibility %}
                         <div class="flex items-center">
-                            <input {% if form.visibility == "no" %} checked {% endif %} id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <input checked id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                             <label for="visible-no-radio" class="ms-2 text-sm font-medium text-gray-900">Niewidoczny</label>
                         </div>
-                    </div>
                     {% endif %}
                 </div></div>
                 <div class="flex-2 w-1/3">
