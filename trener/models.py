@@ -14,12 +14,32 @@ def person_directory_path(instance, filename):
     return f'client/{instance.id}/{filename}'
 
 
+def exercise_type_tag_directory_path(instance, filename):
+    return f'tags/exercise_type/{instance.id}/{filename}'
+
+
+def muscle_tag_directory_path(instance, filename):
+    return f'tags/muscle/{instance.id}/{filename}'
+
+
 class ExerciseType(models.Model):
     id = models.AutoField(primary_key=True)
     type_name = models.CharField(max_length=100)
 
     def __str__(self):
         return str(self.id)
+
+
+class ExerciseTypeTag(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to=exercise_type_tag_directory_path, blank=True, null=True)
+
+
+class MuscleTag(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to=muscle_tag_directory_path, blank=True, null=True)
 
 
 class ExerciseLanguage(models.Model):

@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="Add delete client mechanics">
+    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="Small fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/add_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/add_training.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_trainings.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_trainings.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +169,7 @@
       <workItem from="1727690637937" duration="2009000" />
       <workItem from="1727776724212" duration="17682000" />
       <workItem from="1727989967187" duration="3061000" />
-      <workItem from="1728133679141" duration="906000" />
+      <workItem from="1728133679141" duration="1633000" />
     </task>
     <task id="LOCAL-00001" summary="Create base template">
       <option name="closed" value="true" />
@@ -499,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1727812838872</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Small fixes">
+      <created>1728134595110</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1728134595110</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -531,7 +534,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixing date on pages" />
     <MESSAGE value="Create alert on login page and change title" />
     <MESSAGE value="Change title in base" />
     <MESSAGE value="Fixing show_exercises.html styles" />
@@ -556,6 +558,7 @@
     <MESSAGE value="Fix problem with adding training, add moving exercises in training, extent model WorkoutExercise" />
     <MESSAGE value="Add edit client mechanics" />
     <MESSAGE value="Add delete client mechanics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add delete client mechanics" />
+    <MESSAGE value="Small fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small fixes" />
   </component>
 </project>
