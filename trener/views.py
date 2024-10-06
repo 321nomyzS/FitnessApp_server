@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 import os
 import random
 import shutil
+import unidecode
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_protect
@@ -649,12 +650,23 @@ def add_client(request):
         form = ClientForm(request.POST, request.FILES)
 
         if form.is_valid():
+            first_name = unidecode.unidecode(form.cleaned_data['first_name']).lower()
+            last_name = unidecode.unidecode(form.cleaned_data['last_name']).lower()
+            base_username = f"{first_name[0]}.{last_name}"
+            username = base_username
+
+            counter = 1
+            while Person.objects.filter(username=username).exists():
+                username = f"{base_username}{str(counter)}"
+                counter += 1
+
             new_client = Person(
                 first_name=form.cleaned_data['first_name'],
                 last_name=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'],
                 status=form.cleaned_data['status'],
-                active_until=form.cleaned_data['active_until']
+                active_until=form.cleaned_data['active_until'],
+                username=username
             )
 
             new_client.set_password(form.cleaned_data['password'])
