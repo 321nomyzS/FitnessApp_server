@@ -151,3 +151,13 @@ class PersonalWorkout(models.Model):
 
     def __str__(self):
         return f"Personal Workout on {self.workout_date}"
+
+
+class Feedback(models.Model):
+    id = models.AutoField(primary_key=True)
+    message = models.TextField(blank=True)
+    rating = models.IntegerField(blank=True)
+    personal_workout = models.ForeignKey('PersonalWorkout', on_delete=models.CASCADE)
+    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    person = models.ForeignKey('Person', on_delete=models.CASCADE)

@@ -9,6 +9,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_protect
 from .forms import ExerciseForm, MyTrainingForm, ClientForm
 from .models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise
+from django.utils import timezone
 
 
 @login_required
@@ -361,8 +362,9 @@ def show_general_training(request, id):
 def show_personal_training(request, id):
     personal_training = PersonalWorkout.objects.get(id=id)
     workout_exercises = WorkoutExercise.objects.filter(personal_workout_id=id)
+    feedback = Feedback.objects.filter(personal_workout=personal_training)
     return render(request, 'show_training.html',
-                  {'training': personal_training, 'workout_exercises': workout_exercises})
+                  {'training': personal_training, 'workout_exercises': workout_exercises, 'feedback': feedback})
 
 
 @login_required

@@ -73,6 +73,11 @@
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
 
         <!-- Lista ćwiczeń -->
+        <div>
+            <p class="font-medium text-gray-900 text-lg mb-7">
+                Ćwiczenia w treningu
+            </p>
+        </div>
         <table class="min-w-full border border-neutral-200 text-center text-sm font-light text-surface bg-white">
         <thead class="border-neutral-200 font-medium">
             <tr>
@@ -97,6 +102,48 @@
         </table>
 
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
+
+    <!-- Lista ocen -->
+        <div>
+            <p class="font-medium text-gray-900 text-lg mb-7">
+                Oceny treningu
+            </p>
+        </div>
+    <table class="min-w-full border border-neutral-200 text-center text-sm font-light text-surface bg-white">
+        <thead class="border-neutral-200 font-medium">
+            <tr>
+                <th class="border-e border-neutral-200 px-6 py-4">L.p.</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Ćwiczenie</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Data</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Wiadomość</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Ocena</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Kto</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+            {% for feedback_i in feedback %}
+                {% if feedback_i.exercise %}
+                <tr>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ forloop.counter }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="rounded-m border-neutral-200 w-full" type="text" value="{{ feedback_i.exercise.title }}" disabled></td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.date|date:"Y-m-d H:i" }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="w-full border-none" type="text" value="{{ feedback_i.message }}" disabled></td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.rating }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.person.first_name }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            {% for feedback_i in feedback %}
+                {% if not feedback_i.exercise %}
+                    <th colspan="2" class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">Podsumowanie</th>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.date|date:"Y-m-d H:i" }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="w-full border-none" type="text" value="{{ feedback_i.message }}" disabled></td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.rating }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.person.first_name }}</td>
+                {% endif %}
+            {% endfor %}
+        </table>
     </form>
     <script src="{% static "scripts/add_training.js"%}"></script>
 {% endblock %}
