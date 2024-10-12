@@ -168,13 +168,6 @@ def add_training(request):
                     warmup_series = request.POST[f'warmup-series-{str(i)}']
                     main_series = request.POST[f'main-series-{str(i)}']
                     main_series_reps = request.POST[f'main-series-reps-{str(i)}']
-                    warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
-                    warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
-                    warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
-                    main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
-                    main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
-                    main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
-                    main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
                     alter_exercise_id = request.POST[f'alter-exercise-id-{str(i)}']
                     comment = request.POST[f'comment-{str(i)}']
 
@@ -194,15 +187,38 @@ def add_training(request):
                         workout_exercise.main_series = main_series
 
                     workout_exercise.main_series_reps = main_series_reps
-                    workout_exercise.warmup_series_1_rep = warmup_series_1_rep
-                    workout_exercise.warmup_series_2_rep = warmup_series_2_rep
-                    workout_exercise.warmup_series_3_rep = warmup_series_3_rep
-                    workout_exercise.main_series_1_rep = main_series_1_rep
-                    workout_exercise.main_series_2_rep = main_series_2_rep
-                    workout_exercise.main_series_3_rep = main_series_3_rep
-                    workout_exercise.main_series_4_rep = main_series_4_rep
                     workout_exercise.comment = comment
+
+                    if f'warmup-series-1-rep-{str(i)}' in request.POST:
+                        warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
+                        workout_exercise.warmup_series_1_rep = warmup_series_1_rep
+
+                    if f'warmup-series-2-rep-{str(i)}' in request.POST:
+                        warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
+                        workout_exercise.warmup_series_2_rep = warmup_series_2_rep
+
+                    if f'warmup-series-3-rep-{str(i)}' in request.POST:
+                        warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
+                        workout_exercise.warmup_series_3_rep = warmup_series_3_rep
+
+                    if f'main-series-1-rep-{str(i)}' in request.POST:
+                        main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
+                        workout_exercise.main_series_1_rep = main_series_1_rep
+                    if f'main-series-2-rep-{str(i)}' in request.POST:
+                        main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
+                        workout_exercise.main_series_2_rep = main_series_2_rep
+                    if f'main-series-3-rep-{str(i)}' in request.POST:
+                        main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
+                        workout_exercise.main_series_3_rep = main_series_3_rep
+                    if f'main-series-4-rep-{str(i)}' in request.POST:
+                        main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
+                        workout_exercise.main_series_4_rep = main_series_4_rep
+
                     workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
+
+                    if alter_exercise_id != "":
+                        workout_exercise.alter_exercise = Exercise.objects.get(id=alter_exercise_id)
+                    workout_exercise.save()
 
                     if alter_exercise_id != "":
                         workout_exercise.alter_exercise = Exercise.objects.get(id=alter_exercise_id)
@@ -274,13 +290,6 @@ def add_training(request):
                     warmup_series = request.POST[f'warmup-series-{str(i)}']
                     main_series = request.POST[f'main-series-{str(i)}']
                     main_series_reps = request.POST[f'main-series-reps-{str(i)}']
-                    warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
-                    warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
-                    warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
-                    main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
-                    main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
-                    main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
-                    main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
                     alter_exercise_id = request.POST[f'alter-exercise-id-{str(i)}']
                     comment = request.POST[f'comment-{str(i)}']
 
@@ -300,14 +309,34 @@ def add_training(request):
                         workout_exercise.main_series = main_series
 
                     workout_exercise.main_series_reps = main_series_reps
-                    workout_exercise.warmup_series_1_rep = warmup_series_1_rep
-                    workout_exercise.warmup_series_2_rep = warmup_series_2_rep
-                    workout_exercise.warmup_series_3_rep = warmup_series_3_rep
-                    workout_exercise.main_series_1_rep = main_series_1_rep
-                    workout_exercise.main_series_2_rep = main_series_2_rep
-                    workout_exercise.main_series_3_rep = main_series_3_rep
-                    workout_exercise.main_series_4_rep = main_series_4_rep
                     workout_exercise.comment = comment
+
+                    if f'warmup-series-1-rep-{str(i)}' in request.POST:
+                        warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
+                        workout_exercise.warmup_series_1_rep = warmup_series_1_rep
+
+                    if f'warmup-series-2-rep-{str(i)}' in request.POST:
+                        warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
+                        workout_exercise.warmup_series_2_rep = warmup_series_2_rep
+
+                    if f'warmup-series-3-rep-{str(i)}' in request.POST:
+                        warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
+                        workout_exercise.warmup_series_3_rep = warmup_series_3_rep
+
+                    if f'main-series-1-rep-{str(i)}' in request.POST:
+                        main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
+                        workout_exercise.main_series_1_rep = main_series_1_rep
+                    if f'main-series-2-rep-{str(i)}' in request.POST:
+                        main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
+                        workout_exercise.main_series_2_rep = main_series_2_rep
+                    if f'main-series-3-rep-{str(i)}' in request.POST:
+                        main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
+                        workout_exercise.main_series_3_rep = main_series_3_rep
+                    if f'main-series-4-rep-{str(i)}' in request.POST:
+                        main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
+                        workout_exercise.main_series_4_rep = main_series_4_rep
+
+                    workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
 
                     if alter_exercise_id != "":
                         workout_exercise.alter_exercise = Exercise.objects.get(id=alter_exercise_id)
@@ -472,13 +501,6 @@ def edit_general_training(request, id):
             warmup_series = request.POST[f'warmup-series-{str(i)}']
             main_series = request.POST[f'main-series-{str(i)}']
             main_series_reps = request.POST[f'main-series-reps-{str(i)}']
-            warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
-            warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
-            warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
-            main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
-            main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
-            main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
-            main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
             alter_exercise_id = request.POST[f'alter-exercise-id-{str(i)}']
             comment = request.POST[f'comment-{str(i)}']
 
@@ -498,14 +520,33 @@ def edit_general_training(request, id):
                 workout_exercise.main_series = main_series
 
             workout_exercise.main_series_reps = main_series_reps
-            workout_exercise.warmup_series_1_rep = warmup_series_1_rep
-            workout_exercise.warmup_series_2_rep = warmup_series_2_rep
-            workout_exercise.warmup_series_3_rep = warmup_series_3_rep
-            workout_exercise.main_series_1_rep = main_series_1_rep
-            workout_exercise.main_series_2_rep = main_series_2_rep
-            workout_exercise.main_series_3_rep = main_series_3_rep
-            workout_exercise.main_series_4_rep = main_series_4_rep
             workout_exercise.comment = comment
+
+            if f'warmup-series-1-rep-{str(i)}' in request.POST:
+                warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
+                workout_exercise.warmup_series_1_rep = warmup_series_1_rep
+
+            if f'warmup-series-2-rep-{str(i)}' in request.POST:
+                warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
+                workout_exercise.warmup_series_2_rep = warmup_series_2_rep
+
+            if f'warmup-series-3-rep-{str(i)}' in request.POST:
+                warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
+                workout_exercise.warmup_series_3_rep = warmup_series_3_rep
+
+            if f'main-series-1-rep-{str(i)}' in request.POST:
+                main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
+                workout_exercise.main_series_1_rep = main_series_1_rep
+            if f'main-series-2-rep-{str(i)}' in request.POST:
+                main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
+                workout_exercise.main_series_2_rep = main_series_2_rep
+            if f'main-series-3-rep-{str(i)}' in request.POST:
+                main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
+                workout_exercise.main_series_3_rep = main_series_3_rep
+            if f'main-series-4-rep-{str(i)}' in request.POST:
+                main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
+                workout_exercise.main_series_4_rep = main_series_4_rep
+
             workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
 
             if alter_exercise_id != "":
@@ -566,13 +607,6 @@ def edit_personal_training(request, id):
             warmup_series = request.POST[f'warmup-series-{str(i)}']
             main_series = request.POST[f'main-series-{str(i)}']
             main_series_reps = request.POST[f'main-series-reps-{str(i)}']
-            warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
-            warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
-            warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
-            main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
-            main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
-            main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
-            main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
             alter_exercise_id = request.POST[f'alter-exercise-id-{str(i)}']
             comment = request.POST[f'comment-{str(i)}']
 
@@ -592,14 +626,33 @@ def edit_personal_training(request, id):
                 workout_exercise.main_series = main_series
 
             workout_exercise.main_series_reps = main_series_reps
-            workout_exercise.warmup_series_1_rep = warmup_series_1_rep
-            workout_exercise.warmup_series_2_rep = warmup_series_2_rep
-            workout_exercise.warmup_series_3_rep = warmup_series_3_rep
-            workout_exercise.main_series_1_rep = main_series_1_rep
-            workout_exercise.main_series_2_rep = main_series_2_rep
-            workout_exercise.main_series_3_rep = main_series_3_rep
-            workout_exercise.main_series_4_rep = main_series_4_rep
             workout_exercise.comment = comment
+
+            if f'warmup-series-1-rep-{str(i)}' in request.POST:
+                warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
+                workout_exercise.warmup_series_1_rep = warmup_series_1_rep
+
+            if f'warmup-series-2-rep-{str(i)}' in request.POST:
+                warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
+                workout_exercise.warmup_series_2_rep = warmup_series_2_rep
+
+            if f'warmup-series-3-rep-{str(i)}' in request.POST:
+                warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
+                workout_exercise.warmup_series_3_rep = warmup_series_3_rep
+
+            if f'main-series-1-rep-{str(i)}' in request.POST:
+                main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
+                workout_exercise.main_series_1_rep = main_series_1_rep
+            if f'main-series-2-rep-{str(i)}' in request.POST:
+                main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
+                workout_exercise.main_series_2_rep = main_series_2_rep
+            if f'main-series-3-rep-{str(i)}' in request.POST:
+                main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
+                workout_exercise.main_series_3_rep = main_series_3_rep
+            if f'main-series-4-rep-{str(i)}' in request.POST:
+                main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
+                workout_exercise.main_series_4_rep = main_series_4_rep
+
             workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
 
             if alter_exercise_id != "":

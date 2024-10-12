@@ -3,6 +3,34 @@
 
 {% block extra_head %}
     <script>
+        function warmupSeriesUpdate(index){
+            const input = document.getElementsByName(`warmup-series-${index}`)
+            let value = input[0].value
+            for (let i = 1; i < 4; i++) {
+                const warmupInput = document.getElementsByName(`warmup-series-${i}-rep-${index}`)[0]
+                if (i <= value){
+                    warmupInput.disabled = false;
+                } else {
+                    warmupInput.disabled = true;
+                    warmupInput.value = '';
+                }
+            }
+        };
+
+        function mainSeriesUpdate(index){
+            const input = document.getElementsByName(`main-series-${index}`)
+            let value = input[0].value
+            for (let i = 1; i < 5; i++) {
+                const warmupInput = document.getElementsByName(`main-series-${i}-rep-${index}`)[0]
+                if (i <= value){
+                    warmupInput.disabled = false;
+                } else {
+                    warmupInput.disabled = true;
+                    warmupInput.value = '';
+                }
+            }
+        };
+
         function updateFieldNames() {
             const rows = document.querySelectorAll('tbody tr');
             rows.forEach((row, index) => {
@@ -19,7 +47,9 @@
                 inputs[1].name = `rest-min-${index + 1}`;
                 inputs[2].name = `rest-sec-${index + 1}`;
                 inputs[3].name = `warmup-series-${index + 1}`;
+                inputs[3].oninput = function() {warmupSeriesUpdate(index + 1);}
                 inputs[4].name = `main-series-${index + 1}`;
+                inputs[4].oninput = function() {mainSeriesUpdate(index + 1);}
                 inputs[5].name = `main-series-reps-${index + 1}`;
                 inputs[6].name = `warmup-series-1-rep-${index + 1}`;
                 inputs[7].name = `warmup-series-2-rep-${index + 1}`;
@@ -43,120 +73,123 @@
             tableBody.innerHTML = '';
 
             {% for workout_exercise in workout_exercises %}
-            const newRow{{ forloop.counter }} = document.createElement('tr');
-            newRow{{ forloop.counter }}.innerHTML = `
-                <div class="table-cell flex flex-col bg-white w-full p-10 mt-4 overflow-x-auto rounded-lg shadow-xl">
-                            <p class="exercise-hash-id mx-10 mb-8 block mb-2 text-xl font-medium text-gray-900">Ćwiczenie  #{{ forloop.counter }}</p>
-                            <div class="flex flex-row w-full mb-8">
-                                <div class="mx-10">
-                                    <label for="exercise-id" class="block mb-2 text-sm font-medium text-gray-900">Ćwiczenie</label>
-                                    <select type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                        {% for exercise in exercises %}
-                                            <option value="{{ exercise.id }}" {% if exercise.id == workout_exercise.exercise.id %}selected{% endif %}>{{ exercise.id }} {{ exercise.title }}</option>
-                                        {% endfor %}
+                const newRow{{ forloop.counter }} = document.createElement('tr');
+                newRow{{ forloop.counter }}.innerHTML = `
+                    <div class="table-cell flex flex-col bg-white w-full p-10 mt-4 overflow-x-auto rounded-lg shadow-xl">
+                                <p class="exercise-hash-id mx-10 mb-8 block mb-2 text-xl font-medium text-gray-900">Ćwiczenie  #{{ forloop.counter }}</p>
+                                <div class="flex flex-row w-full mb-8">
+                                    <div class="mx-10">
+                                        <label for="exercise-id" class="block mb-2 text-sm font-medium text-gray-900">Ćwiczenie</label>
+                                        <select type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                            {% for exercise in exercises %}
+                                                <option value="{{ exercise.id }}" {% if exercise.id == workout_exercise.exercise.id %}selected{% endif %}>{{ exercise.id }} {{ exercise.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="mx-10">
+                                        <label for="tempo" class="block mb-2 text-sm font-medium text-gray-900">Tempo</label>
+                                        <input value="{{ workout_exercise.tempo }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                    <div class="mx-10 flex flex-col justify-center">
+                                        <div class="flex flex-row">
+                                            <label for="rest" class="block mb-2 text-sm font-medium text-gray-900">Odpoczynek</label>
+                                        </div>
+                                        <div class="flex flex-row">
+                                            <input value="{{ workout_exercise.rest_min }}" type="number" class="w-16 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                            <div class="mx-4 flex text-center"><p>:</p></div>
+                                            <input value="{{ workout_exercise.rest_sec }}" type="number" class="w-16 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-row w-full mb-8">
+                                    <div class="mx-10">
+                                        <label for="warmup-series" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa</label>
+                                        <input value="{{ workout_exercise.warmup_series }}" type="number" min="0" max="3" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                    <div class="mx-10">
+                                        <label for="main-series" class="block mb-2 text-sm font-medium text-gray-900">Seria główna</label>
+                                        <input value="{{ workout_exercise.main_series }}" min="0" max="4" type="number" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                    <div class="mx-10">
+                                        <label for="main-series-reps" class="block mb-2 text-sm font-medium text-gray-900">Powtórzenia w serii głównej</label>
+                                        <input value="{{ workout_exercise.main_series }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                </div>
+                                <div class="flex flex-row w-full mb-8">
+                                    <div class="mx-10">
+                                        <label for="warmup-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 1</label>
+                                        <input value="{{ workout_exercise.warmup_series_1_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                    <div class="mx-10">
+                                        <label for="warmup-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 2</label>
+                                        <input value="{{ workout_exercise.warmup_series_2_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                    <div class="mx-10">
+                                        <label for="warmup-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 3</label>
+                                        <input value="{{ workout_exercise.warmup_series_3_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                </div>
+                                <div class="flex flex-row w-full mb-8">
+                                    <div class="mx-10">
+                                        <label for="main-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 1</label>
+                                        <input value="{{ workout_exercise.main_series_1_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                    <div class="mx-10">
+                                        <label for="main-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 2</label>
+                                        <input value="{{ workout_exercise.main_series_2_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                    <div class="mx-10">
+                                        <label for="main-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 3</label>
+                                        <input value="{{ workout_exercise.main_series_3_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                    <div class="mx-10">
+                                        <label for="main-series-4-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 4</label>
+                                        <input value="{{ workout_exercise.main_series_4_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                    </div>
+                                </div>
+                                <div class="flex flex-row w-full mb-8">
+                                    <div class="mx-10 w-1/3">
+                                        <label for="comment" class="block mb-2 text-sm font-medium text-gray-900">Komentarz</label>
+                                        <textarea class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">{{ workout_exercise.comment }}</textarea>
+                                    </div>
+                                    <div class="mx-10">
+                                        <label for="alter-exercise-id" class="block mb-2 text-sm font-medium text-gray-900">Alternatywne ćwiczenie</label>
+                                        <select type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                            <option value=""></option>
+                                            {% for exercise in exercises %}
+                                                <option value="{{ exercise.id }}" {% if exercise.id == workout_exercise.alter_exercise.id %}selected{% endif %}>{{ exercise.id }} {{ exercise.title }}</option>
+                                            {% endfor %}
                                     </select>
-                                </div>
-                                <div class="mx-10">
-                                    <label for="tempo" class="block mb-2 text-sm font-medium text-gray-900">Tempo</label>
-                                    <input value="{{ workout_exercise.tempo }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                                <div class="mx-10 flex flex-col justify-center">
-                                    <div class="flex flex-row">
-                                        <label for="rest" class="block mb-2 text-sm font-medium text-gray-900">Odpoczynek</label>
                                     </div>
-                                    <div class="flex flex-row">
-                                        <input value="{{ workout_exercise.rest_min }}" type="number" class="w-16 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                        <div class="mx-4 flex text-center"><p>:</p></div>
-                                        <input value="{{ workout_exercise.rest_sec }}" type="number" class="w-16 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                <div class="mx-10 flex flex-row w-1/4">
+                                    <div class="mx-1 flex flex-row items-center">
+                                        <button onclick="moveDown(this)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-2.5 py-2.5 text-center inline-flex items-center me-2 mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>
+                                        </button>
+                                    </div>
+                                    <div class="mx-1 flex flex-row items-center">
+                                        <button onclick="moveUp(this)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-2.5 py-2.5 text-center inline-flex items-center me-2 mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
+                                        </button>
+                                    </div>
+                                    <div class="mx-1 flex flex-row items-center">
+                                        <button onclick="deleteRow(this)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
+                                        <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            <p class="ml-2">Usuń</p>
+                                        </button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex flex-row w-full mb-8">
-                                <div class="mx-10">
-                                    <label for="warmup-series" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa</label>
-                                    <input value="{{ workout_exercise.warmup_series }}" type="number" min="0" max="3" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                                <div class="mx-10">
-                                    <label for="main-series" class="block mb-2 text-sm font-medium text-gray-900">Seria główna</label>
-                                    <input value="{{ workout_exercise.main_series }}" min="0" max="4" type="number" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                                <div class="mx-10">
-                                    <label for="main-series-reps" class="block mb-2 text-sm font-medium text-gray-900">Powtórzenia w serii głównej</label>
-                                    <input value="{{ workout_exercise.main_series }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
                                 </div>
                             </div>
-                            <div class="flex flex-row w-full mb-8">
-                                <div class="mx-10">
-                                    <label for="warmup-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 1</label>
-                                    <input value="{{ workout_exercise.warmup_series_1_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                                <div class="mx-10">
-                                    <label for="warmup-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 2</label>
-                                    <input value="{{ workout_exercise.warmup_series_2_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                                <div class="mx-10">
-                                    <label for="warmup-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 3</label>
-                                    <input value="{{ workout_exercise.warmup_series_3_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                            </div>
-                            <div class="flex flex-row w-full mb-8">
-                                <div class="mx-10">
-                                    <label for="main-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 1</label>
-                                    <input value="{{ workout_exercise.main_series_1_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                                <div class="mx-10">
-                                    <label for="main-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 2</label>
-                                    <input value="{{ workout_exercise.main_series_2_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                                <div class="mx-10">
-                                    <label for="main-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 3</label>
-                                    <input value="{{ workout_exercise.main_series_3_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                                <div class="mx-10">
-                                    <label for="main-series-4-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 4</label>
-                                    <input value="{{ workout_exercise.main_series_4_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                </div>
-                            </div>
-                            <div class="flex flex-row w-full mb-8">
-                                <div class="mx-10 w-1/3">
-                                    <label for="comment" class="block mb-2 text-sm font-medium text-gray-900">Komentarz</label>
-                                    <textarea class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">{{ workout_exercise.comment }}</textarea>
-                                </div>
-                                <div class="mx-10">
-                                    <label for="alter-exercise-id" class="block mb-2 text-sm font-medium text-gray-900">Alternatywne ćwiczenie</label>
-                                    <select type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
-                                        <option value=""></option>
-                                        {% for exercise in exercises %}
-                                            <option value="{{ exercise.id }}" {% if exercise.id == workout_exercise.alter_exercise.id %}selected{% endif %}>{{ exercise.id }} {{ exercise.title }}</option>
-                                        {% endfor %}
-                                </select>
-                                </div>
-                            <div class="mx-10 flex flex-row w-1/4">
-                                <div class="mx-1 flex flex-row items-center">
-                                    <button onclick="moveDown(this)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-2.5 py-2.5 text-center inline-flex items-center me-2 mb-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>
-                                    </button>
-                                </div>
-                                <div class="mx-1 flex flex-row items-center">
-                                    <button onclick="moveUp(this)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-2.5 py-2.5 text-center inline-flex items-center me-2 mb-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
-                                    </button>
-                                </div>
-                                <div class="mx-1 flex flex-row items-center">
-                                    <button onclick="deleteRow(this)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
-                                    <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                        <p class="ml-2">Usuń</p>
-                                    </button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-            `
-            tableBody.appendChild(newRow{{ forloop.counter }});
+                `
+                tableBody.appendChild(newRow{{ forloop.counter }});
             {% endfor %}
-
             updateFieldNames();
             updateRowNumbers();
+            {% for workout_exercise in workout_exercises %}
+                warmupSeriesUpdate({{ forloop.counter }});
+                mainSeriesUpdate({{ forloop.counter }});
+            {% endfor %}
             document.getElementById('rowCount').value = {{ workout_exercises | length }};
         }
 

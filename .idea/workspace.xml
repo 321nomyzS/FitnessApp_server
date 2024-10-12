@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/static/css/dist/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener_style/templates/add_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/add_training.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener_style/templates/edit_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/edit_training.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/show_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/show_training.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,14 +176,7 @@
       <workItem from="1728469013470" duration="3623000" />
       <workItem from="1728502151841" duration="5057000" />
       <workItem from="1728672188076" duration="3282000" />
-      <workItem from="1728733030060" duration="9392000" />
-    </task>
-    <task id="LOCAL-00004" summary="Create exercise models">
-      <created>1713985666209</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1713985666209</updated>
+      <workItem from="1728733030060" duration="12431000" />
     </task>
     <task id="LOCAL-00005" summary="Add exercise page with backend">
       <created>1714139913603</created>
@@ -524,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1728158597467</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Expend WorkoutExercise with more attributes">
+      <created>1728743468255</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1728743468255</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -556,7 +553,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Connecting Clients with PersonalWorkout" />
     <MESSAGE value="Fixing problem with Clients and convert to Person model" />
     <MESSAGE value="Add requirements.txt" />
     <MESSAGE value="Update settings.env.example" />
@@ -581,6 +577,7 @@
     <MESSAGE value="Connect tags mechanics to exercise and remove ExerciseType model" />
     <MESSAGE value="Upgrade Workout models with images" />
     <MESSAGE value="Create duplicate personal training feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create duplicate personal training feature" />
+    <MESSAGE value="Expend WorkoutExercise with more attributes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Expend WorkoutExercise with more attributes" />
   </component>
 </project>

@@ -2,6 +2,34 @@
 {% load static %}
 {% block extra_head %}
 <script>
+    function warmupSeriesUpdate(index){
+        const input = document.getElementsByName(`warmup-series-${index}`)
+        let value = input[0].value
+        for (let i = 1; i < 4; i++) {
+            const warmupInput = document.getElementsByName(`warmup-series-${i}-rep-${index}`)[0]
+            if (i <= value){
+                warmupInput.disabled = false;
+            } else {
+                warmupInput.disabled = true;
+                warmupInput.value = '';
+            }
+        }
+    };
+
+    function mainSeriesUpdate(index){
+        const input = document.getElementsByName(`main-series-${index}`)
+        let value = input[0].value
+        for (let i = 1; i < 5; i++) {
+            const warmupInput = document.getElementsByName(`main-series-${i}-rep-${index}`)[0]
+            if (i <= value){
+                warmupInput.disabled = false;
+            } else {
+                warmupInput.disabled = true;
+                warmupInput.value = '';
+            }
+        }
+    };
+
     function updateFieldNames() {
         const rows = document.querySelectorAll('tbody tr');
         rows.forEach((row, index) => {
@@ -18,7 +46,9 @@
             inputs[1].name = `rest-min-${index + 1}`;
             inputs[2].name = `rest-sec-${index + 1}`;
             inputs[3].name = `warmup-series-${index + 1}`;
+            inputs[3].oninput = function() {warmupSeriesUpdate(index + 1);}
             inputs[4].name = `main-series-${index + 1}`;
+            inputs[4].oninput = function() {mainSeriesUpdate(index + 1);}
             inputs[5].name = `main-series-reps-${index + 1}`;
             inputs[6].name = `warmup-series-1-rep-${index + 1}`;
             inputs[7].name = `warmup-series-2-rep-${index + 1}`;
@@ -76,7 +106,7 @@
             <div class="flex flex-row w-full mb-8">
                 <div class="mx-10">
                     <label for="warmup-series" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa</label>
-                    <input type="number" min="0" max="3" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                    <input min="0" max="3" type="number" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
                 </div>
                 <div class="mx-10">
                     <label for="main-series" class="block mb-2 text-sm font-medium text-gray-900">Seria główna</label>
@@ -90,33 +120,33 @@
             <div class="flex flex-row w-full mb-8">
                 <div class="mx-10">
                     <label for="warmup-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 1</label>
-                    <input type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
                 </div>
                 <div class="mx-10">
                     <label for="warmup-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 2</label>
-                    <input type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
                 </div>
                 <div class="mx-10">
                     <label for="warmup-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 3</label>
-                    <input type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
                 </div>
             </div>
             <div class="flex flex-row w-full mb-8">
                 <div class="mx-10">
                     <label for="main-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 1</label>
-                    <input type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
                 </div>
                 <div class="mx-10">
                     <label for="main-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 2</label>
-                    <input type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
                 </div>
                 <div class="mx-10">
                     <label for="main-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 3</label>
-                    <input type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
                 </div>
                 <div class="mx-10">
                     <label for="main-series-4-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 4</label>
-                    <input type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
                 </div>
             </div>
             <div class="flex flex-row w-full mb-8">
