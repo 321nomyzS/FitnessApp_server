@@ -93,7 +93,7 @@ class Exercise(models.Model):
 class GeneralWorkout(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
+    exercises = models.ManyToManyField('Exercise', through='WorkoutExercise', related_name='general_workouts', through_fields=('general_workout', 'exercise'))
     visibility = models.BooleanField()
     image = models.ImageField(upload_to=general_workout_path, blank=True, null=True)
 
@@ -105,10 +105,23 @@ class WorkoutExercise(models.Model):
     id = models.AutoField(primary_key=True)
     general_workout = models.ForeignKey('GeneralWorkout', on_delete=models.CASCADE, null=True, blank=True)
     personal_workout = models.ForeignKey('PersonalWorkout', on_delete=models.CASCADE, null=True, blank=True)
-    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)
-    sets = models.TextField(blank=True, null=True)
-    weight = models.TextField(blank=True, null=True)
+    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='main_workouts')
+    tempo = models.TextField(blank=True, null=True)
+    rest_min = models.IntegerField(blank=True, null=True)
+    rest_sec = models.IntegerField(blank=True, null=True)
+    warmup_series = models.IntegerField(blank=True, null=True)
+    main_series = models.IntegerField(blank=True, null=True)
+    main_series_reps = models.TextField(blank=True, null=True)
+    warmup_series_1_rep = models.TextField(blank=True, null=True)
+    warmup_series_2_rep = models.TextField(blank=True, null=True)
+    warmup_series_3_rep = models.TextField(blank=True, null=True)
+    main_series_1_rep = models.TextField(blank=True, null=True)
+    main_series_2_rep = models.TextField(blank=True, null=True)
+    main_series_3_rep = models.TextField(blank=True, null=True)
+    main_series_4_rep = models.TextField(blank=True, null=True)
     comment = models.TextField(blank=True, null=True)
+    alter_exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE, related_name='alternate_workouts',
+                                          null=True, blank=True)
 
     def __str__(self):
         return f"{self.exercise.title} in {self.personal_workout} or {self.general_workout}"
@@ -143,7 +156,7 @@ class Person(AbstractUser):
 class PersonalWorkout(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    exercises = models.ManyToManyField('Exercise', through='WorkoutExercise')
+    exercises = models.ManyToManyField('Exercise', through='WorkoutExercise', related_name='personal_workouts', through_fields=('personal_workout', 'exercise'))
     visibility = models.BooleanField()
     workout_date = models.DateField()
     client = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -155,8 +168,8 @@ class PersonalWorkout(models.Model):
 
 class Feedback(models.Model):
     id = models.AutoField(primary_key=True)
-    message = models.TextField(blank=True)
-    rating = models.IntegerField(blank=True)
+    message = models.TextField(blank=True, null=True)
+    rating = models.IntegerField(blank=True, null=True)
     personal_workout = models.ForeignKey('PersonalWorkout', on_delete=models.CASCADE)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)

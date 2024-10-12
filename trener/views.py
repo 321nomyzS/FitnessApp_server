@@ -141,10 +141,11 @@ def delete_exercise(request, id):
 @login_required
 @csrf_protect
 def add_training(request):
-    exercises = Exercise.objects.all()
+    exercises = Exercise.objects.filter(id__gte=1)
     clients = Person.objects.all()
 
     if request.method == 'POST':
+        print(request.POST)
         form = MyTrainingForm(request.POST)
 
         if form.is_valid():
@@ -160,18 +161,51 @@ def add_training(request):
                 # Add exercises
                 row_count = int(request.POST['rowCount'])
                 for i in range(1, row_count + 1):
-                    exercise_id = request.POST[f'exercise-{str(i)}']
-                    sets = request.POST[f'sets-{str(i)}']
-                    weight = request.POST[f'weight-{str(i)}']
+                    exercise_id = request.POST[f'exercise-id-{str(i)}']
+                    tempo = request.POST[f'tempo-{str(i)}']
+                    rest_min = request.POST[f'rest-min-{str(i)}']
+                    rest_sec = request.POST[f'rest-sec-{str(i)}']
+                    warmup_series = request.POST[f'warmup-series-{str(i)}']
+                    main_series = request.POST[f'main-series-{str(i)}']
+                    main_series_reps = request.POST[f'main-series-reps-{str(i)}']
+                    warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
+                    warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
+                    warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
+                    main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
+                    main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
+                    main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
+                    main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
+                    alter_exercise_id = request.POST[f'alter-exercise-id-{str(i)}']
                     comment = request.POST[f'comment-{str(i)}']
 
                     workout_exercise = WorkoutExercise()
-                    workout_exercise.personal_workout = new_training
                     workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
-                    workout_exercise.sets = sets
-                    workout_exercise.weight = weight
-                    workout_exercise.comment = comment
 
+                    workout_exercise.personal_workout = new_training
+                    workout_exercise.tempo = tempo
+
+                    if rest_min != '':
+                        workout_exercise.rest_min = rest_min
+                    if rest_sec != '':
+                        workout_exercise.rest_sec = rest_sec
+                    if warmup_series != '':
+                        workout_exercise.warmup_series = warmup_series
+                    if main_series != '':
+                        workout_exercise.main_series = main_series
+
+                    workout_exercise.main_series_reps = main_series_reps
+                    workout_exercise.warmup_series_1_rep = warmup_series_1_rep
+                    workout_exercise.warmup_series_2_rep = warmup_series_2_rep
+                    workout_exercise.warmup_series_3_rep = warmup_series_3_rep
+                    workout_exercise.main_series_1_rep = main_series_1_rep
+                    workout_exercise.main_series_2_rep = main_series_2_rep
+                    workout_exercise.main_series_3_rep = main_series_3_rep
+                    workout_exercise.main_series_4_rep = main_series_4_rep
+                    workout_exercise.comment = comment
+                    workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
+
+                    if alter_exercise_id != "":
+                        workout_exercise.alter_exercise = Exercise.objects.get(id=alter_exercise_id)
                     workout_exercise.save()
 
                 # Add image
@@ -233,18 +267,50 @@ def add_training(request):
                 # Add exercises
                 row_count = int(request.POST['rowCount'])
                 for i in range(1, row_count + 1):
-                    exercise_id = request.POST[f'exercise-{str(i)}']
-                    sets = request.POST[f'sets-{str(i)}']
-                    weight = request.POST[f'weight-{str(i)}']
+                    exercise_id = request.POST[f'exercise-id-{str(i)}']
+                    tempo = request.POST[f'tempo-{str(i)}']
+                    rest_min = request.POST[f'rest-min-{str(i)}']
+                    rest_sec = request.POST[f'rest-sec-{str(i)}']
+                    warmup_series = request.POST[f'warmup-series-{str(i)}']
+                    main_series = request.POST[f'main-series-{str(i)}']
+                    main_series_reps = request.POST[f'main-series-reps-{str(i)}']
+                    warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
+                    warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
+                    warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
+                    main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
+                    main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
+                    main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
+                    main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
+                    alter_exercise_id = request.POST[f'alter-exercise-id-{str(i)}']
                     comment = request.POST[f'comment-{str(i)}']
 
                     workout_exercise = WorkoutExercise()
-                    workout_exercise.general_workout = new_training
                     workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
-                    workout_exercise.sets = sets
-                    workout_exercise.weight = weight
+
+                    workout_exercise.general_workout = new_training
+                    workout_exercise.tempo = tempo
+
+                    if rest_min != '':
+                        workout_exercise.rest_min = rest_min
+                    if rest_sec != '':
+                        workout_exercise.rest_sec = rest_sec
+                    if warmup_series != '':
+                        workout_exercise.warmup_series = warmup_series
+                    if main_series != '':
+                        workout_exercise.main_series = main_series
+
+                    workout_exercise.main_series_reps = main_series_reps
+                    workout_exercise.warmup_series_1_rep = warmup_series_1_rep
+                    workout_exercise.warmup_series_2_rep = warmup_series_2_rep
+                    workout_exercise.warmup_series_3_rep = warmup_series_3_rep
+                    workout_exercise.main_series_1_rep = main_series_1_rep
+                    workout_exercise.main_series_2_rep = main_series_2_rep
+                    workout_exercise.main_series_3_rep = main_series_3_rep
+                    workout_exercise.main_series_4_rep = main_series_4_rep
                     workout_exercise.comment = comment
 
+                    if alter_exercise_id != "":
+                        workout_exercise.alter_exercise = Exercise.objects.get(id=alter_exercise_id)
                     workout_exercise.save()
 
                 # Add image
@@ -316,9 +382,20 @@ def duplicate_training(request, id):
         copied_workout = WorkoutExercise()
         copied_workout.personal_workout = personal_training
         copied_workout.exercise = original_workout.exercise
-        copied_workout.sets = original_workout.sets
-        copied_workout.weight = original_workout.weight
+        copied_workout.rest_min = original_workout.rest_min
+        copied_workout.rest_sec = original_workout.rest_sec
+        copied_workout.warmup_series = original_workout.warmup_series
+        copied_workout.main_series = original_workout.main_series
+        copied_workout.main_series_reps = original_workout.main_series_reps
+        copied_workout.warmup_series_1_rep = original_workout.warmup_series_1_rep
+        copied_workout.warmup_series_2_rep = original_workout.warmup_series_2_rep
+        copied_workout.warmup_series_3_rep = original_workout.warmup_series_3_rep
+        copied_workout.main_series_1_rep = original_workout.main_series_1_rep
+        copied_workout.main_series_2_rep = original_workout.main_series_2_rep
+        copied_workout.main_series_3_rep = original_workout.main_series_3_rep
+        copied_workout.main_series_4_rep = original_workout.main_series_4_rep
         copied_workout.comment = original_workout.comment
+        copied_workout.alter_exercise = original_workout.alter_exercise
         copied_workout.save()
 
     # Duplikacja obrazu
@@ -373,7 +450,7 @@ def show_personal_training(request, id):
 def edit_general_training(request, id):
     training = get_object_or_404(GeneralWorkout, id=id)
     workout_exercises = WorkoutExercise.objects.filter(general_workout_id=id)
-    exercises = Exercise.objects.all()
+    exercises = Exercise.objects.filter(id__gte=1)
 
     if request.method == 'POST':
         training.title = request.POST['title']
@@ -388,18 +465,51 @@ def edit_general_training(request, id):
         # Add exercises
         row_count = int(request.POST['rowCount'])
         for i in range(1, row_count + 1):
-            exercise_id = request.POST[f'exercise-{str(i)}']
-            sets = request.POST[f'sets-{str(i)}']
-            weight = request.POST[f'weight-{str(i)}']
+            exercise_id = request.POST[f'exercise-id-{str(i)}']
+            tempo = request.POST[f'tempo-{str(i)}']
+            rest_min = request.POST[f'rest-min-{str(i)}']
+            rest_sec = request.POST[f'rest-sec-{str(i)}']
+            warmup_series = request.POST[f'warmup-series-{str(i)}']
+            main_series = request.POST[f'main-series-{str(i)}']
+            main_series_reps = request.POST[f'main-series-reps-{str(i)}']
+            warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
+            warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
+            warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
+            main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
+            main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
+            main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
+            main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
+            alter_exercise_id = request.POST[f'alter-exercise-id-{str(i)}']
             comment = request.POST[f'comment-{str(i)}']
 
             workout_exercise = WorkoutExercise()
-            workout_exercise.general_workout = training
             workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
-            workout_exercise.sets = sets
-            workout_exercise.weight = weight
-            workout_exercise.comment = comment
 
+            workout_exercise.general_workout = training
+            workout_exercise.tempo = tempo
+
+            if rest_min != '':
+                workout_exercise.rest_min = rest_min
+            if rest_sec != '':
+                workout_exercise.rest_sec = rest_sec
+            if warmup_series != '':
+                workout_exercise.warmup_series = warmup_series
+            if main_series != '':
+                workout_exercise.main_series = main_series
+
+            workout_exercise.main_series_reps = main_series_reps
+            workout_exercise.warmup_series_1_rep = warmup_series_1_rep
+            workout_exercise.warmup_series_2_rep = warmup_series_2_rep
+            workout_exercise.warmup_series_3_rep = warmup_series_3_rep
+            workout_exercise.main_series_1_rep = main_series_1_rep
+            workout_exercise.main_series_2_rep = main_series_2_rep
+            workout_exercise.main_series_3_rep = main_series_3_rep
+            workout_exercise.main_series_4_rep = main_series_4_rep
+            workout_exercise.comment = comment
+            workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
+
+            if alter_exercise_id != "":
+                workout_exercise.alter_exercise = Exercise.objects.get(id=alter_exercise_id)
             workout_exercise.save()
 
         # Edit image
@@ -431,7 +541,7 @@ def edit_general_training(request, id):
 def edit_personal_training(request, id):
     training = get_object_or_404(PersonalWorkout, id=id)
     workout_exercises = WorkoutExercise.objects.filter(personal_workout_id=id)
-    exercises = Exercise.objects.all()
+    exercises = Exercise.objects.filter(id__gte=1)
     clients = Person.objects.all()
 
     if request.method == 'POST':
@@ -449,18 +559,51 @@ def edit_personal_training(request, id):
         # Add exercises
         row_count = int(request.POST['rowCount'])
         for i in range(1, row_count + 1):
-            exercise_id = request.POST[f'exercise-{str(i)}']
-            sets = request.POST[f'sets-{str(i)}']
-            weight = request.POST[f'weight-{str(i)}']
+            exercise_id = request.POST[f'exercise-id-{str(i)}']
+            tempo = request.POST[f'tempo-{str(i)}']
+            rest_min = request.POST[f'rest-min-{str(i)}']
+            rest_sec = request.POST[f'rest-sec-{str(i)}']
+            warmup_series = request.POST[f'warmup-series-{str(i)}']
+            main_series = request.POST[f'main-series-{str(i)}']
+            main_series_reps = request.POST[f'main-series-reps-{str(i)}']
+            warmup_series_1_rep = request.POST[f'warmup-series-1-rep-{str(i)}']
+            warmup_series_2_rep = request.POST[f'warmup-series-2-rep-{str(i)}']
+            warmup_series_3_rep = request.POST[f'warmup-series-3-rep-{str(i)}']
+            main_series_1_rep = request.POST[f'main-series-1-rep-{str(i)}']
+            main_series_2_rep = request.POST[f'main-series-2-rep-{str(i)}']
+            main_series_3_rep = request.POST[f'main-series-3-rep-{str(i)}']
+            main_series_4_rep = request.POST[f'main-series-4-rep-{str(i)}']
+            alter_exercise_id = request.POST[f'alter-exercise-id-{str(i)}']
             comment = request.POST[f'comment-{str(i)}']
 
             workout_exercise = WorkoutExercise()
-            workout_exercise.personal_workout = training
             workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
-            workout_exercise.sets = sets
-            workout_exercise.weight = weight
-            workout_exercise.comment = comment
 
+            workout_exercise.personal_workout = training
+            workout_exercise.tempo = tempo
+
+            if rest_min != '':
+                workout_exercise.rest_min = rest_min
+            if rest_sec != '':
+                workout_exercise.rest_sec = rest_sec
+            if warmup_series != '':
+                workout_exercise.warmup_series = warmup_series
+            if main_series != '':
+                workout_exercise.main_series = main_series
+
+            workout_exercise.main_series_reps = main_series_reps
+            workout_exercise.warmup_series_1_rep = warmup_series_1_rep
+            workout_exercise.warmup_series_2_rep = warmup_series_2_rep
+            workout_exercise.warmup_series_3_rep = warmup_series_3_rep
+            workout_exercise.main_series_1_rep = main_series_1_rep
+            workout_exercise.main_series_2_rep = main_series_2_rep
+            workout_exercise.main_series_3_rep = main_series_3_rep
+            workout_exercise.main_series_4_rep = main_series_4_rep
+            workout_exercise.comment = comment
+            workout_exercise.exercise = Exercise.objects.get(id=exercise_id)
+
+            if alter_exercise_id != "":
+                workout_exercise.alter_exercise = Exercise.objects.get(id=alter_exercise_id)
             workout_exercise.save()
 
         # Edit image
