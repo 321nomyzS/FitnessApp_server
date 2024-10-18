@@ -145,7 +145,6 @@ def add_training(request):
     clients = Person.objects.all()
 
     if request.method == 'POST':
-        print(request.POST)
         form = MyTrainingForm(request.POST)
 
         if form.is_valid():

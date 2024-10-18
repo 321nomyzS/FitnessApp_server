@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FitnessApp_server/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/FitnessApp_server/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trener/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/trener/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/add_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/add_training.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trener_style/templates/edit_training.html" beforeDir="false" afterPath="$PROJECT_DIR$/trener_style/templates/edit_training.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,14 +103,15 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="FitnessApp_server.settings" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Szymon\.conda\envs\django310\python.exe" />
+      <option name="SDK_NAME" value="django310" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
       <option name="port" value="8000" />
-      <option name="host" value="localhost" />
+      <option name="host" value="192.168.1.27" />
       <option name="additionalOptions" value="" />
       <option name="browserUrl" value="" />
       <option name="runTestServer" value="false" />
@@ -176,14 +179,8 @@
       <workItem from="1728469013470" duration="3623000" />
       <workItem from="1728502151841" duration="5057000" />
       <workItem from="1728672188076" duration="3282000" />
-      <workItem from="1728733030060" duration="12431000" />
-    </task>
-    <task id="LOCAL-00005" summary="Add exercise page with backend">
-      <created>1714139913603</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1714139913603</updated>
+      <workItem from="1728733030060" duration="12979000" />
+      <workItem from="1729244956576" duration="1126000" />
     </task>
     <task id="LOCAL-00006" summary="Update sidebar">
       <created>1714208478005</created>
@@ -521,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1728743468255</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Add features on add_training.html and edit_training.html with series inputs">
+      <created>1728746422372</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1728746422372</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -553,7 +557,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixing problem with Clients and convert to Person model" />
     <MESSAGE value="Add requirements.txt" />
     <MESSAGE value="Update settings.env.example" />
     <MESSAGE value="Fixing problem with editing general workout" />
@@ -578,6 +581,7 @@
     <MESSAGE value="Upgrade Workout models with images" />
     <MESSAGE value="Create duplicate personal training feature" />
     <MESSAGE value="Expend WorkoutExercise with more attributes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Expend WorkoutExercise with more attributes" />
+    <MESSAGE value="Add features on add_training.html and edit_training.html with series inputs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add features on add_training.html and edit_training.html with series inputs" />
   </component>
 </project>
