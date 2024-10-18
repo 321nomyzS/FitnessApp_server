@@ -71,3 +71,10 @@ class ExerciseTypeTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExerciseTypeTag
         fields = '__all__'
+
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = ['id', 'message', 'rating', 'personal_workout', 'exercise', 'person', 'date']
+        read_only_fields = ['id', 'person', 'date']

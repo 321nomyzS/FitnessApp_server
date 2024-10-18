@@ -66,7 +66,7 @@ def add_exercise(request):
 
 @login_required
 def show_exercises(request):
-    exercises = Exercise.objects.all()
+    exercises = Exercise.objects.filter(id__gte=1)
     return render(request, 'show_exercises.html', {"exercises": exercises})
 
 

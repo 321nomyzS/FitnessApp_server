@@ -9,6 +9,7 @@ router.register(r'generalworkout', GeneralWorkoutViewSet)
 router.register(r'personalworkout', PersonalWorkoutViewSet)
 router.register(r'muscletag', MuscleTagViewSet)
 router.register(r'exercisetypetag', ExerciseTypeTagViewSet)
+router.register(r'feedback', FeedbackViewSet, basename='feedback')
 
 
 urlpatterns = [
