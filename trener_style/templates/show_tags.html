@@ -12,11 +12,11 @@
 
 {% block content %}
     <p class="font-medium text-gray-900 text-2xl mb-7">
-        Pokaż ćwiczenia
+        Pokaż tagi
     </p>
     <div class="flex flex-col">
-        <p class="font-medium text-gray-900 text-xl mb-2">Treningi ogólne</p>
-        <table class="w-1/3 table-fixed" datatable id="general-table">
+        <p class="font-medium text-gray-900 text-xl mb-2">Mięśnie</p>
+        <table class="w-1/3 table-fixed" datatable id="muscle-tags-table">
             <thead class="">
               <tr class="bg-white my-5">
                 <th class="w-1/5 py-5 px-6 text-left text-gray-600 font-bold uppercase">ID</th>
@@ -25,18 +25,18 @@
               </tr>
             </thead>
             <tbody class="bg-white">
-              {% for workout in general_workout %}
+              {% for muscle_tag in muscle_tags %}
               <tr>
-                <td class="py-5 px-6 border-b border-r border-gray-200">{{ workout.id }}</td>
-                <td class="py-5 px-6 border-b border-r border-gray-200">{{ workout.title }}</td>
+                <td class="py-5 px-6 border-b border-r border-gray-200">{{ muscle_tag.id }}</td>
+                <td class="py-5 px-6 border-b border-r border-gray-200">{{ muscle_tag.name }}</td>
                 <td class="py-5 px-6 border-b border-r border-gray-200 flex flex-row justify-around">
-                    <a href="{% url 'show_general_training' id=workout.id %}" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
+                    <a href="{% url 'show_tag' tag_type='muscle' id=muscle_tag.id %}" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
                         <p class="text-white my-auto">
                             Pokaż
                         </p>
                         <svg  class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
                     </a>
-                    <a href="{% url 'edit_general_training' id=workout.id %}" class="bg-blue-500 flex flex-row w-20 h-6 justify-around rounded-md text-sm hover:bg-blue-700">
+                    <a href="{% url 'edit_tag' tag_type='muscle' id=muscle_tag.id %}" class="bg-blue-500 flex flex-row w-20 h-6 justify-around rounded-md text-sm hover:bg-blue-700">
                         <p class="text-white my-auto">
                             Edytuj
                         </p>
@@ -44,7 +44,7 @@
                         <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
                     </svg>
                     </a>
-                    <a href="{% url 'delete_general_training' id=workout.id %}" class="bg-red-700 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-red-900">
+                    <a href="{% url 'delete_tag' tag_type='muscle' id=muscle_tag.id %}" class="bg-red-700 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-red-900">
                         <p class="text-white my-auto">
                             Usuń
                         </p>
@@ -62,32 +62,28 @@
             </tbody>
       </table>
 
-        <p class="font-medium text-gray-900 text-xl mt-12 mb-2">Treningi personalne</p>
-        <table class="w-1/3 table-fixed overflow-auto" datatable id="personal-table">
+        <p class="font-medium text-gray-900 text-xl mt-12 mb-2">Typ ćwiczeń</p>
+        <table class="w-1/3 table-fixed" datatable id="exercise-type-tags-table">
             <thead class="">
               <tr class="bg-white my-5">
                 <th class="w-1/5 py-5 px-6 text-left text-gray-600 font-bold uppercase">ID</th>
                 <th class="py-5 px-6 text-left text-gray-600 font-bold uppercase">Nazwa</th>
-                <th class="py-5 px-6 text-left text-gray-600 font-bold uppercase">Data</th>
-                <th class="py-5 px-6 text-left text-gray-600 font-bold uppercase">Osoba</th>
                 <th class="w-1/5 py-5 px-6 text-left text-gray-600 font-bold uppercase">Akcje</th>
               </tr>
             </thead>
             <tbody class="bg-white">
-              {% for workout in personal_workout %}
+              {% for exercise_type_tag in exercise_type_tags %}
               <tr>
-                <td class="py-5 px-6 border-b border-r border-gray-200">{{ workout.id }}</td>
-                <td class="py-5 px-6 border-b border-r border-gray-200">{{ workout.title }}</td>
-                <td class="py-5 px-6 border-b border-r border-gray-200">{{ workout.workout_date | date:'Y-m-d' }}</td>
-                <td class="py-5 px-6 border-b border-r border-gray-200"><a href="{% url 'show_client' id=workout.client.id %}">{{ workout.client.first_name }} {{ workout.client.last_name }}</a></td>
+                <td class="py-5 px-6 border-b border-r border-gray-200">{{ exercise_type_tag.id }}</td>
+                <td class="py-5 px-6 border-b border-r border-gray-200">{{ exercise_type_tag.name }}</td>
                 <td class="py-5 px-6 border-b border-r border-gray-200 flex flex-row justify-around">
-                    <a href="{% url 'show_personal_training' id=workout.id %}" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
+                    <a href="{% url 'show_tag' tag_type='exercise-type' id=exercise_type_tag.id %}" class="bg-green-600 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-green-800">
                         <p class="text-white my-auto">
                             Pokaż
                         </p>
                         <svg  class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
                     </a>
-                    <a href="{% url 'edit_personal_training' id=workout.id %}" class="bg-blue-500 flex flex-row w-20 h-6 justify-around rounded-md text-sm hover:bg-blue-700">
+                    <a href="{% url 'edit_tag' tag_type='exercise-type' id=exercise_type_tag.id %}" class="bg-blue-500 flex flex-row w-20 h-6 justify-around rounded-md text-sm hover:bg-blue-700">
                         <p class="text-white my-auto">
                             Edytuj
                         </p>
@@ -95,13 +91,7 @@
                         <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
                     </svg>
                     </a>
-                    <a href="{% url 'duplicate_training' id=workout.id %}" class="bg-violet-500 flex flex-row w-20 h-6 justify-around rounded-md text-sm hover:bg-violet-900">
-                        <p class="text-white my-auto">
-                            Duplikuj
-                        </p>
-                        <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="bevel"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
-                    </a>
-                    <a href="{% url 'delete_personal_training' id=workout.id %}" class="bg-red-700 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-red-900">
+                    <a href="{% url 'delete_tag' tag_type='exercise-type' id=exercise_type_tag.id %}" class="bg-red-700 flex flex-row w-20 justify-around rounded-md text-sm hover:bg-red-900">
                         <p class="text-white my-auto">
                             Usuń
                         </p>
@@ -124,20 +114,20 @@
 
     <script>
         $(document).ready( function () {
-            $('#general-table').DataTable({
-                "paging": false,
-                "ordering": true,
-                "info": false,
-                "searching": false
+            $('#muscle-tags-table').DataTable({
+                "paging": false,  // Wyłącza paginację
+                "ordering": true,  // Wyłącza sortowanie
+                "info": false,  // Wyłącza informacje o stronach
+                "searching": false  // Wyłącza pasek wyszukiwania
             });
         } );
 
         $(document).ready( function () {
-            $('#personal-table').DataTable({
-                "paging": false,
-                "ordering": true,
-                "info": false,
-                "searching": false
+            $('#exercise-type-tags-table').DataTable({
+                "paging": false,  // Wyłącza paginację
+                "ordering": true,  // Wyłącza sortowanie
+                "info": false,  // Wyłącza informacje o stronach
+                "searching": false  // Wyłącza pasek wyszukiwania
             });
         } );
     </script>

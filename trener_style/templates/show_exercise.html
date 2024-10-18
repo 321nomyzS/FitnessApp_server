@@ -21,12 +21,28 @@
                 </div>
                 <div class="mb-5 flex flex-row w-4/5 justify-between">
                         <div class="w-2/5">
-                          <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Typ ćwiczenia</label>
-                                <input value="{{ exercise.type.type_name }}" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" disabled>
-                      </div>
-                        <div class="w-2/5">
                           <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Język</label>
                                 <input value="{{ exercise.language.language_name }}" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" disabled>
+                      </div>
+                </div>
+                <div class="mb-5 flex flex-row w-4/5 justify-between">
+                        <div class="w-2/5">
+                          <div class="block mb-2 text-sm font-medium text-gray-900">Typ ćwiczenia</div>
+                            {% for exercise_type_tag in exercise_type_tags %}
+                                <div class="flex flex-row justify-between center">
+                                    <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" disabled type="checkbox" {% if exercise_type_tag in exercise.exercise_type_tags.all %} checked {% endif %} name="exercise-type-tag-{{ exercise_type_tag.id }}">
+                                    <label class="block mb-2 text-xs font-medium text-gray-900" for="exercise-type-tag-{{ exercise_type_tag.id }}">{{ exercise_type_tag.name }}</label>
+                                </div>
+                            {% endfor %}
+                      </div>
+                        <div class="w-2/5">
+                          <div class="block mb-2 text-sm font-medium text-gray-900">Mięśnie</div>
+                            {% for muscle_tag in muscle_tags %}
+                                <div class="flex flex-row justify-between center">
+                                    <input class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" disabled type="checkbox" {% if muscle_tag in exercise.muscle_tags.all %} checked {% endif %} name="muscle-tag-{{ muscle_tag.id }}">
+                                    <label class="block mb-2 text-xs font-medium text-gray-900" for="muscle-tag-{{ muscle_tag.id }}">{{ muscle_tag.name }}</label>
+                                </div>
+                            {% endfor %}
                       </div>
                 </div>
                 <div class="mb-5 w-4/5">
@@ -55,7 +71,7 @@
                         Edytuj
                     </a>
 
-                    <a href="#" onclick="confirmDelete({{ exercise.id }});" class="bg-red-700 hover:bg-red-900 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
+                    <a href="{% url 'delete_exercise' id=exercise.id %}" class="bg-red-700 hover:bg-red-900 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
                         Usuń
                     </a>
                 </div>
@@ -63,23 +79,4 @@
         </div>
 
     </form>
-       <script>
-    function confirmDelete(id) {
-        const token = '{{ csrf_token }}'; // Zapewnia dostępność tokena CSRF
-        if (confirm("Czy na pewno chcesz usunąć to ćwiczenie?")) {
-            fetch(`{% url 'delete_exercise' id=999 %}`.replace('999', id), {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': token
-                }
-            }).then(response => {
-                if (response.ok) {
-                    window.location.href = '/exercise';
-                } else {
-                    alert('Nie udało się usunąć ćwiczenia.');
-                }
-            });
-        }
-    }
-    </script>
 {% endblock %}

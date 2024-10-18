@@ -11,74 +11,203 @@
                 Trening {% if training.workout_date %} Personalny {% endif %} {% if not training.workout_date %} Ogólny {% endif %}#{{ training.id }}
             </p>
         </div>
-        <div class="flex-1 w-2/3">
-            <div class="mb-5 w-4/5">
-                <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">Nazwa treningu</label>
-                <input name="title" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.title }}" disabled>
-            </div>
-            <div class="mb-5 w-4/5">
-                {% if training.workout_date %}
-                <div class="flex items-center">
-                    <input checked disabled id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
-                </div>
-                {% endif %}
-                {% if not training.workout_date %}
-                <div class="flex items-center">
-                    <input checked disabled id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
-                </div>
-                {% endif %}
-                <p class="text-xs text-red-500">{{ form.errors.training_type }}</p>
-            </div>
-            {% if training.workout_date %}
-            <div class="mb-5 flex flex-row w-4/5 justify-between">
-                    <div class="w-2/5">
-                        <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
-                        <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.workout_date|date:'Y-m-d' }}" disabled>
-                  </div>
-                    <div class="w-2/5">
-                        <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>
-                        <select name="workout-person" id="training-person" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
-                        </select>
-                  </div>
-            </div>
-            {% endif %}
-            <div class="mb-5 w-4/5">
-            {% if training.visibility %}
-                <div class="flex items-center">
-                    <input  checked id="visible-yes-radio" type="radio" value="yes" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="visible-yes-radio" class="ms-2 text-sm font-medium text-gray-900">Widoczny</label>
-                </div>
-            {% endif %}
-            {% if not training.visibility %}
-                <div class="flex items-center">
-                    <input {% if form.visibility == "no" %} checked {% endif %} id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="visible-no-radio" class="ms-2 text-sm font-medium text-gray-900">Niewidoczny</label>
-                </div>
-            </div>
-            {% endif %}
-        </div>
+        <div class="flex flex-col mb-2 w-4/5">
+            <div class="flex flex-row mb-2 w-4/5">
+                <div class="flex-1 w-2/3">
+                    <div class="mb-5 w-4/5">
+                        <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">Nazwa treningu</label>
+                        <input name="title" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.title }}" disabled>
+                    </div>
+                    <div class="mb-5 w-4/5">
+                        {% if training.workout_date %}
+                        <div class="flex items-center">
+                            <input checked disabled id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
+                        </div>
+                        {% endif %}
+                        {% if not training.workout_date %}
+                        <div class="flex items-center">
+                            <input checked disabled id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
+                        </div>
+                        {% endif %}
+                        <p class="text-xs text-red-500">{{ form.errors.training_type }}</p>
+                    </div>
+                    {% if training.workout_date %}
+                    <div class="mb-5 flex flex-row w-4/5 justify-between">
+                            <div class="w-2/5">
+                                <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
+                                <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.workout_date|date:'Y-m-d' }}" disabled>
+                          </div>
+                            <div class="w-2/5">
+                                <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>
+                                <input name="workout-person" id="training-person" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ training.client.first_name }} {{ training.client.last_name }}" disabled>
+                          </div>
+                    </div>
+                    {% endif %}
+                    <div class="mb-5 w-4/5">
+                    {% if training.visibility %}
+                        <div class="flex items-center">
+                            <input  checked id="visible-yes-radio" type="radio" value="yes" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="visible-yes-radio" class="ms-2 text-sm font-medium text-gray-900">Widoczny</label>
+                        </div>
+                    {% endif %}
+                    {% if not training.visibility %}
+                        <div class="flex items-center">
+                            <input checked id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                            <label for="visible-no-radio" class="ms-2 text-sm font-medium text-gray-900">Niewidoczny</label>
+                        </div>
+                    {% endif %}
+                </div></div>
+                <div class="flex-2 w-1/3">
+                    <div class="mb-5">
+                        <label for="id_image" class="block mb-2 text-sm font-medium text-gray-900">Zdjęcie lub GIF</label>
 
+                        {% if training.image %}
+                            <img class="rounded-md aspect-w-1 aspect-h-1 pb-0" src="{{ training.image.url }}" alt="Zdjęcie ćwiczenia">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
 
         <!-- Lista ćwiczeń -->
-        <div id="exercises-container" class="space-y-4 flex flex-col">
-            {% for workout_exercise in workout_exercises %}
-            <div class="flex flex-row justify-between" id="exercise">
-                <div class="w-1/3">
-                    <label for="exercise-list" class="block mb-2 text-sm font-medium text-gray-900">Ćwiczenie</label>
-                    <input value="{{ workout_exercise.exercise.id }} {{ workout_exercise.exercise.title }}" id="exercise-list" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" disabled>
-                </div>
-                <div class="w-1/2">
-                    <label for="tips" class="block mb-2 text-sm font-medium text-gray-900">Wskazówki</label>
-                    <textarea disabled id="tips" class="w-full block p-1.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" rows="2">{{ workout_exercise.comment }}</textarea>
-                </div>
-            </div>
-            {% endfor %}
+        <div>
+            <p class="font-medium text-gray-900 text-lg mb-7">
+                Ćwiczenia w treningu
+            </p>
         </div>
+        <table>
+        <tbody id="exercise-list">
+            {% for workout_exercise in workout_exercises %}
+                <div class="flex flex-col bg-white w-full p-10 mt-4 overflow-x-auto rounded-lg shadow-xl">
+                    <p class="exercise-hash-id mx-10 mb-8 block mb-2 text-xl font-medium text-gray-900">Ćwiczenie  #{{ forloop.counter }}</p>
+                    <div class="flex flex-row w-full mb-8">
+                        <div class="mx-10">
+                            <label for="exercise-id" class="block mb-2 text-sm font-medium text-gray-900">Ćwiczenie</label>
+                            <input disabled value="{{ workout_exercise.exercise.title }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                        <div class="mx-10">
+                            <label for="tempo" class="block mb-2 text-sm font-medium text-gray-900">Tempo</label>
+                            <input disabled value="{{ workout_exercise.tempo }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                        <div class="mx-10 flex flex-col justify-center">
+                            <div class="flex flex-row">
+                                <label for="rest" class="block mb-2 text-sm font-medium text-gray-900">Odpoczynek</label>
+                            </div>
+                            <div class="flex flex-row">
+                                <input disabled value="{{ workout_exercise.rest_min }}" type="number" class="w-16 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                                <div class="mx-4 flex text-center"><p>:</p></div>
+                                <input disabled value="{{ workout_exercise.rest_sec }}" type="number" class="w-16 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-row w-full mb-8">
+                        <div class="mx-10">
+                            <label for="warmup-series" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa</label>
+                            <input disabled value="{{ workout_exercise.warmup_series }}" type="number" min="0" max="3" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                        <div class="mx-10">
+                            <label for="main-series" class="block mb-2 text-sm font-medium text-gray-900">Seria główna</label>
+                            <input disabled value="{{ workout_exercise.main_series }}" min="0" max="4" type="number" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                        <div class="mx-10">
+                            <label for="main-series-reps" class="block mb-2 text-sm font-medium text-gray-900">Powtórzenia w serii głównej</label>
+                            <input disabled value="{{ workout_exercise.main_series_reps }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                    </div>
+                    <div class="flex flex-row w-full mb-8">
+                        <div class="mx-10">
+                            <label for="warmup-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 1</label>
+                            <input disabled value="{{ workout_exercise.warmup_series_1_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                        <div class="mx-10">
+                            <label for="warmup-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 2</label>
+                            <input disabled value="{{ workout_exercise.warmup_series_2_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                        <div class="mx-10">
+                            <label for="warmup-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 3</label>
+                            <input disabled value="{{ workout_exercise.warmup_series_3_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                    </div>
+                    <div class="flex flex-row w-full mb-8">
+                        <div class="mx-10">
+                            <label for="main-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 1</label>
+                            <input disabled value="{{ workout_exercise.main_series_1_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                        <div class="mx-10">
+                            <label for="main-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 2</label>
+                            <input disabled value="{{ workout_exercise.main_series_2_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                        <div class="mx-10">
+                            <label for="main-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 3</label>
+                            <input disabled value="{{ workout_exercise.main_series_3_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                        <div class="mx-10">
+                            <label for="main-series-4-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 4</label>
+                            <input disabled value="{{ workout_exercise.main_series_4_rep }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+                    </div>
+                    <div class="flex flex-row w-full mb-8">
+                        <div class="mx-10 w-1/3">
+                            <label for="comment" class="block mb-2 text-sm font-medium text-gray-900">Komentarz</label>
+                            <textarea disabled class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">{{ workout_exercise.comment }}</textarea>
+                        </div>
+                        <div class="mx-10">
+                            <label for="alter-exercise-id" class="block mb-2 text-sm font-medium text-gray-900">Alternatywne ćwiczenie</label>
+                            <input disabled value="{{ workout_exercise.alter_exercise.title }}" type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </tbody>
+        </table>
 
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
+
+    <!-- Lista ocen -->
+        <div>
+            <p class="font-medium text-gray-900 text-lg mb-7">
+                Oceny treningu
+            </p>
+        </div>
+    <table class="min-w-full border border-neutral-200 text-center text-sm font-light text-surface bg-white">
+        <thead class="border-neutral-200 font-medium">
+            <tr>
+                <th class="border-e border-neutral-200 px-6 py-4">L.p.</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Ćwiczenie</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Data</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Wiadomość</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Ocena</th>
+                <th class="border-e border-neutral-200 px-6 py-4">Kto</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+            {% for feedback_i in feedback %}
+                {% if feedback_i.exercise.id != 0 %}
+                <tr>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ forloop.counter }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="rounded-m border-neutral-200 w-full" type="text" value="{{ feedback_i.exercise.title }}" disabled></td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.date|date:"Y-m-d H:i" }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="w-full border-none" type="text" value="{{ feedback_i.message }}" disabled></td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.rating }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.person.first_name }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            {% for feedback_i in feedback %}
+                {% if feedback_i.exercise.id == 0 %}
+                    <th colspan="2" class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">Podsumowanie</th>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.date|date:"Y-m-d H:i" }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4"><input class="w-full border-none" type="text" value="{{ feedback_i.message }}" disabled></td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.rating }}</td>
+                    <td class="whitespace-nowrap border-e border-t border-neutral-200 px-6 py-4">{{ feedback_i.person.first_name }}</td>
+                {% endif %}
+            {% endfor %}
+        </table>
     </form>
     <script src="{% static "scripts/add_training.js"%}"></script>
 {% endblock %}

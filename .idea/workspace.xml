@@ -16,13 +16,18 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="d0e7ba250c102bb30ffbf11e6ac5c2bb6aae62ea" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -53,13 +58,14 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;X:/Python Projects/FitnessApp_server/trener_style/templates&quot;,
+    &quot;last_opened_file_path&quot;: &quot;X:/FitnessApp_server/trener_style/templates&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -70,10 +76,13 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="X:\FitnessApp_server\trener_style\templates" />
       <recent name="X:\Python Projects\FitnessApp_server\trener_style\templates" />
       <recent name="X:\Repositories\FitnessApp_server\trener_style\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="X:\FitnessApp_server\media\random" />
+      <recent name="X:\Repositories\FitnessApp_server" />
       <recent name="X:\Repositories\FitnessApp_server\trener_style\static\icons" />
       <recent name="X:\Python Projects\FitnessApp_server\trener" />
     </key>
@@ -87,14 +96,15 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="FitnessApp_server.settings" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Szymon\.conda\envs\django310\python.exe" />
+      <option name="SDK_NAME" value="django310" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
       <option name="port" value="8000" />
-      <option name="host" value="localhost" />
+      <option name="host" value="192.168.1.27" />
       <option name="additionalOptions" value="" />
       <option name="browserUrl" value="" />
       <option name="runTestServer" value="false" />
@@ -147,86 +157,23 @@
       <workItem from="1717758254171" duration="1650000" />
       <workItem from="1719474146265" duration="882000" />
       <workItem from="1719487241192" duration="2705000" />
-      <workItem from="1719561351589" duration="15321000" />
-      <workItem from="1719932871038" duration="17687000" />
-      <workItem from="1721040145913" duration="5805000" />
-      <workItem from="1721202740466" duration="4339000" />
-      <workItem from="1721561383145" duration="366000" />
-      <workItem from="1721624268101" duration="1216000" />
-      <workItem from="1721650517406" duration="615000" />
-      <workItem from="1721920398249" duration="16818000" />
-      <workItem from="1724062237440" duration="2009000" />
-      <workItem from="1724358600113" duration="1171000" />
-      <workItem from="1724674095909" duration="209000" />
-      <workItem from="1724851835290" duration="4273000" />
-      <workItem from="1725362497053" duration="911000" />
-      <workItem from="1725455104999" duration="6559000" />
-      <workItem from="1725488375475" duration="5211000" />
-    </task>
-    <task id="LOCAL-00001" summary="Create base template">
-      <option name="closed" value="true" />
-      <created>1713472636943</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1713472636943</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Create base template">
-      <option name="closed" value="true" />
-      <created>1713472647005</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1713472647005</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Create add_exercise.html page">
-      <created>1713985625835</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1713985625835</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Create exercise models">
-      <created>1713985666209</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1713985666209</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Add exercise page with backend">
-      <created>1714139913603</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1714139913603</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Update sidebar">
-      <created>1714208478005</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1714208478005</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Update show exercises table">
-      <created>1715245725084</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1715245725084</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Add Workout models">
-      <created>1715771990960</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1715771990960</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Update database">
-      <created>1715772036613</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1715772036613</updated>
+      <workItem from="1719561351589" duration="8950000" />
+      <workItem from="1720292416611" duration="305000" />
+      <workItem from="1720298659399" duration="400000" />
+      <workItem from="1720299112209" duration="12000" />
+      <workItem from="1720871768244" duration="4638000" />
+      <workItem from="1727442030891" duration="881000" />
+      <workItem from="1727634158394" duration="6670000" />
+      <workItem from="1727687134217" duration="3489000" />
+      <workItem from="1727690637937" duration="2009000" />
+      <workItem from="1727776724212" duration="17682000" />
+      <workItem from="1727989967187" duration="3061000" />
+      <workItem from="1728133679141" duration="27612000" />
+      <workItem from="1728469013470" duration="3623000" />
+      <workItem from="1728502151841" duration="5057000" />
+      <workItem from="1728672188076" duration="3282000" />
+      <workItem from="1728733030060" duration="12979000" />
+      <workItem from="1729244956576" duration="15660000" />
     </task>
     <task id="LOCAL-00010" summary="add_training.html page with mechanics">
       <created>1715858038541</created>
@@ -368,11 +315,228 @@
       <option name="project" value="LOCAL" />
       <updated>1716483126083</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Add requirements.txt">
+      <created>1720298932207</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1720298932208</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Update settings.env.example">
+      <created>1720299057273</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1720299057273</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Fixing problem with editing general workout">
+      <created>1720873154017</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1720873154017</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Fixing problem with editing personal workout">
+      <created>1720873332162</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1720873332162</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Quick fix with display clients name in show_training.html page">
+      <created>1720873614057</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1720873614057</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Small update show_clients.html">
+      <created>1720873982567</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1720873982567</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Delete all print for debuging">
+      <created>1720874071409</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1720874071410</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Add delete exercise">
+      <created>1720877276321</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1720877276321</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Checkpoint from server">
+      <created>1727634764237</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1727634764237</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Fixing problem with editing exercise">
+      <created>1727638498596</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1727638498596</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Fixing problem with icons in page show_exercises.html">
+      <created>1727689910639</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1727689910639</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Update gitignore">
+      <created>1727690057190</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1727690057190</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Quick fix with show_exercises.html">
+      <created>1727690515177</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1727690515177</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Small fixes in views.py">
+      <created>1727776827371</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1727776827371</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Fix problem with adding training, add moving exercises in training, extent model WorkoutExercise">
+      <created>1727810120724</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1727810120724</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Add edit client mechanics">
+      <created>1727812352713</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1727812352713</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Add delete client mechanics">
+      <created>1727812838872</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1727812838872</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Small fixes">
+      <created>1728134595110</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1728134595110</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Create tags models">
+      <created>1728135327106</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1728135327106</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Create tags mechanics CRUD">
+      <created>1728143099585</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1728143099585</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Connect tags mechanics to exercise and remove ExerciseType model">
+      <created>1728149868712</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1728149868712</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Upgrade Workout models with images">
+      <created>1728154697138</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1728154697138</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Create duplicate personal training feature">
+      <created>1728158597467</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1728158597467</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Expend WorkoutExercise with more attributes">
+      <created>1728743468255</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1728743468255</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Add features on add_training.html and edit_training.html with series inputs">
+      <created>1728746422372</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1728746422372</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Quick fix with print">
+      <created>1729246351218</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1729246351219</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Fixing API Authorization">
+      <created>1729254375811</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1729254375811</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Creating Feedback endpoint in API">
+      <created>1729256935380</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1729256935381</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Creating currentuser endpoint with GET and PATCH">
+      <created>1729264475692</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1729264475692</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -386,31 +550,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create add_exercise.html page" />
-    <MESSAGE value="Create exercise models" />
-    <MESSAGE value="Add exercise page with backend" />
-    <MESSAGE value="Update show exercises table" />
-    <MESSAGE value="Add Workout models" />
-    <MESSAGE value="Update database" />
-    <MESSAGE value="add_training.html page with mechanics" />
-    <MESSAGE value="Adding training to database with server validation" />
-    <MESSAGE value="Add show_trainings page" />
-    <MESSAGE value="Add show_training page" />
-    <MESSAGE value="Create login and logout" />
-    <MESSAGE value="Update sidebar" />
-    <MESSAGE value="Add adding client" />
-    <MESSAGE value="Add show clients page" />
-    <MESSAGE value="Add show client page" />
-    <MESSAGE value="Commit database changes" />
-    <MESSAGE value="Fixing styles" />
-    <MESSAGE value="Fixing date on pages" />
-    <MESSAGE value="Create alert on login page and change title" />
-    <MESSAGE value="Change title in base" />
-    <MESSAGE value="Fixing show_exercises.html styles" />
-    <MESSAGE value="Fixing show_clients.html styles" />
-    <MESSAGE value="Creating API app" />
-    <MESSAGE value="Connecting Clients with PersonalWorkout" />
-    <MESSAGE value="Fixing problem with Clients and convert to Person model" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing problem with Clients and convert to Person model" />
+    <MESSAGE value="Quick fix with display clients name in show_training.html page" />
+    <MESSAGE value="Small update show_clients.html" />
+    <MESSAGE value="Delete all print for debuging" />
+    <MESSAGE value="Add delete exercise" />
+    <MESSAGE value="Checkpoint from server" />
+    <MESSAGE value="Fixing problem with editing exercise" />
+    <MESSAGE value="Fixing problem with icons in page show_exercises.html" />
+    <MESSAGE value="Update gitignore" />
+    <MESSAGE value="Quick fix with show_exercises.html" />
+    <MESSAGE value="Small fixes in views.py" />
+    <MESSAGE value="Fix problem with adding training, add moving exercises in training, extent model WorkoutExercise" />
+    <MESSAGE value="Add edit client mechanics" />
+    <MESSAGE value="Add delete client mechanics" />
+    <MESSAGE value="Small fixes" />
+    <MESSAGE value="Create tags models" />
+    <MESSAGE value="Create tags mechanics CRUD" />
+    <MESSAGE value="Connect tags mechanics to exercise and remove ExerciseType model" />
+    <MESSAGE value="Upgrade Workout models with images" />
+    <MESSAGE value="Create duplicate personal training feature" />
+    <MESSAGE value="Expend WorkoutExercise with more attributes" />
+    <MESSAGE value="Add features on add_training.html and edit_training.html with series inputs" />
+    <MESSAGE value="Quick fix with print" />
+    <MESSAGE value="Fixing API Authorization" />
+    <MESSAGE value="Creating Feedback endpoint in API" />
+    <MESSAGE value="Creating currentuser endpoint with GET and PATCH" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating currentuser endpoint with GET and PATCH" />
   </component>
 </project>

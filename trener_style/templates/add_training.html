@@ -1,5 +1,223 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block extra_head %}
+<script>
+    function warmupSeriesUpdate(index){
+        const input = document.getElementsByName(`warmup-series-${index}`)
+        let value = input[0].value
+        for (let i = 1; i < 4; i++) {
+            const warmupInput = document.getElementsByName(`warmup-series-${i}-rep-${index}`)[0]
+            if (i <= value){
+                warmupInput.disabled = false;
+            } else {
+                warmupInput.disabled = true;
+                warmupInput.value = '';
+            }
+        }
+    };
+
+    function mainSeriesUpdate(index){
+        const input = document.getElementsByName(`main-series-${index}`)
+        let value = input[0].value
+        for (let i = 1; i < 5; i++) {
+            const warmupInput = document.getElementsByName(`main-series-${i}-rep-${index}`)[0]
+            if (i <= value){
+                warmupInput.disabled = false;
+            } else {
+                warmupInput.disabled = true;
+                warmupInput.value = '';
+            }
+        }
+    };
+
+    function updateFieldNames() {
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach((row, index) => {
+            // Get all input elements in the row
+            const inputs = row.querySelectorAll('input');
+            const selects = row.querySelectorAll('select');
+            const textareas = row.querySelectorAll('textarea');
+            const hash_id = row.querySelectorAll('.exercise-hash-id');
+
+            hash_id[0].innerHTML = `Ćwiczenie #${index + 1}`;
+            selects[0].name = `exercise-id-${index + 1}`;
+            selects[1].name = `alter-exercise-id-${index + 1}`;
+            inputs[0].name = `tempo-${index + 1}`;
+            inputs[1].name = `rest-min-${index + 1}`;
+            inputs[2].name = `rest-sec-${index + 1}`;
+            inputs[3].name = `warmup-series-${index + 1}`;
+            inputs[3].oninput = function() {warmupSeriesUpdate(index + 1);}
+            inputs[4].name = `main-series-${index + 1}`;
+            inputs[4].oninput = function() {mainSeriesUpdate(index + 1);}
+            inputs[5].name = `main-series-reps-${index + 1}`;
+            inputs[6].name = `warmup-series-1-rep-${index + 1}`;
+            inputs[7].name = `warmup-series-2-rep-${index + 1}`;
+            inputs[8].name = `warmup-series-3-rep-${index + 1}`;
+            inputs[9].name = `main-series-1-rep-${index + 1}`;
+            inputs[10].name = `main-series-2-rep-${index + 1}`;
+            inputs[11].name = `main-series-3-rep-${index + 1}`;
+            inputs[12].name = `main-series-4-rep-${index + 1}`;
+            textareas[0].name = `comment-${index + 1}`;
+        });
+    }
+    function updateRowNumbers() {
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach((row, index) => {
+            row.querySelector('.exercise-hash-id').textContent = `Ćwiczenie #${index + 1}`;
+        });
+        document.getElementById('rowCount').value = document.querySelectorAll('tbody tr').length;
+    }
+    function initializeTable() {
+        const tableBody = document.getElementById('exercise-list')
+        tableBody.innerHTML = '';
+        addRow();
+    }
+
+    function addRow() {
+        const tableBody = document.getElementById('exercise-list')
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+        <div class="flex flex-col bg-white w-full p-10 mt-4 overflow-x-auto rounded-lg shadow-xl">
+            <p class="exercise-hash-id mx-10 mb-8 block mb-2 text-xl font-medium text-gray-900"></p>
+            <div class="flex flex-row w-full mb-8">
+                <div class="mx-10">
+                    <label for="exercise-id" class="block mb-2 text-sm font-medium text-gray-900">Ćwiczenie</label>
+                    <select type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        {% for exercise in exercises %}
+                            <option value="{{ exercise.id }}">{{ exercise.id }} {{ exercise.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mx-10">
+                    <label for="tempo" class="block mb-2 text-sm font-medium text-gray-900">Tempo</label>
+                    <input type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+                <div class="mx-10 flex flex-col justify-center">
+                    <div class="flex flex-row">
+                        <label for="rest" class="block mb-2 text-sm font-medium text-gray-900">Odpoczynek</label>
+                    </div>
+                    <div class="flex flex-row">
+                        <input type="number" class="w-16 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        <div class="mx-4 flex text-center"><p>:</p></div>
+                        <input type="number" class="w-16 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-row w-full mb-8">
+                <div class="mx-10">
+                    <label for="warmup-series" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa</label>
+                    <input min="0" max="3" type="number" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+                <div class="mx-10">
+                    <label for="main-series" class="block mb-2 text-sm font-medium text-gray-900">Seria główna</label>
+                    <input min="0" max="4" type="number" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+                <div class="mx-10">
+                    <label for="main-series-reps" class="block mb-2 text-sm font-medium text-gray-900">Powtórzenia w serii głównej</label>
+                    <input type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+            </div>
+            <div class="flex flex-row w-full mb-8">
+                <div class="mx-10">
+                    <label for="warmup-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 1</label>
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+                <div class="mx-10">
+                    <label for="warmup-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 2</label>
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+                <div class="mx-10">
+                    <label for="warmup-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria rozgrzewkowa 3</label>
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+            </div>
+            <div class="flex flex-row w-full mb-8">
+                <div class="mx-10">
+                    <label for="main-series-1-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 1</label>
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+                <div class="mx-10">
+                    <label for="main-series-2-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 2</label>
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+                <div class="mx-10">
+                    <label for="main-series-3-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 3</label>
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+                <div class="mx-10">
+                    <label for="main-series-4-rep" class="block mb-2 text-sm font-medium text-gray-900">Seria główna 4</label>
+                    <input disabled type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                </div>
+            </div>
+            <div class="flex flex-row w-full mb-8">
+                <div class="mx-10 w-1/3">
+                    <label for="comment" class="block mb-2 text-sm font-medium text-gray-900">Komentarz</label>
+                    <textarea class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"></textarea>
+                </div>
+                <div class="mx-10">
+                    <label for="alter-exercise-id" class="block mb-2 text-sm font-medium text-gray-900">Alternatywne ćwiczenie</label>
+                    <select type="text" class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+                        <option value="" selected></option>
+                        {% for exercise in exercises %}
+                            <option value="{{ exercise.id }}">{{ exercise.id }} {{ exercise.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mx-10 flex flex-row w-1/4">
+                    <div class="mx-1 flex flex-row items-center">
+                        <button onclick="moveDown(this)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-2.5 py-2.5 text-center inline-flex items-center me-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>
+                        </button>
+                    </div>
+                    <div class="mx-1 flex flex-row items-center">
+                        <button onclick="moveUp(this)" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-2.5 py-2.5 text-center inline-flex items-center me-2 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
+                        </button>
+                    </div>
+                    <div class="mx-1 flex flex-row items-center">
+                        <button onclick="deleteRow(this)" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
+                        <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                            <p class="ml-2">Usuń</p>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        `
+        tableBody.appendChild(newRow);
+        updateRowNumbers();
+        updateFieldNames();
+    }
+
+    function deleteRow(button) {
+        const row = button.closest('tr');
+        row.remove();
+        updateRowNumbers();
+        updateFieldNames();
+    }
+
+    function moveUp(button) {
+        const row = button.closest('tr');
+        const previousRow = row.previousElementSibling;
+        if (previousRow) {
+            row.parentNode.insertBefore(row, previousRow);
+            updateRowNumbers();
+        }
+        updateFieldNames();
+    }
+
+    function moveDown(button) {
+        const row = button.closest('tr');
+        const nextRow = row.nextElementSibling;
+        if (nextRow) {
+            row.parentNode.insertBefore(nextRow, row);
+            updateRowNumbers();
+        }
+        updateFieldNames();
+    }
+</script>
+{% endblock %}
 
 {% block content %}
     <form class="mx-auto mb-2 w-4/5 items-center" method="post" enctype="multipart/form-data">
@@ -7,208 +225,96 @@
         <div>
             <p class="font-medium text-gray-900 text-2xl mb-7">Dodaj nowe trening</p>
         </div>
-        <div class="flex-1 w-2/3">
-            <div class="mb-5 w-4/5">
-                <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">Nazwa treningu</label>
-                <input name="title" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ form.title }}">
-                <p class="text-xs text-red-500">{{ form.errors.title }}</p>
+        <div class="flex flex-row mb-2 w-4/5">
+            <div class="flex-1 w-2/3">
+                <div class="mb-5 w-4/5">
+                    <label for="id_title" class="block mb-2 text-sm font-medium text-gray-900">Nazwa treningu</label>
+                    <input name="title" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5" value="{{ form.title }}">
+                    <p class="text-xs text-red-500">{{ form.errors.title }}</p>
+                </div>
+                <div class="flex flex-row justify-around mb-5 w-4/5">
+                    <div class="flex items-center">
+                        <input {% if form.training_type == "personal" or not form %} checked {% endif %} id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input {% if form.training_type == "general" %} checked {% endif %} id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
+                    </div>
+                    <p class="text-xs text-red-500">{{ form.errors.training_type }}</p>
+                </div>
+                <div class="mb-5 flex flex-row w-4/5 justify-between">
+                    <div class="w-2/5">
+                        <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
+                        <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                    </div>
+                    <div class="w-2/5">
+                        <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>
+                        <select name="workout-person" id="training-person" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                            {% for client in clients %}
+                                <option value="{{ client.id }}">{{ client.id }} {{ client.first_name }} {{ client.last_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-around mb-5 w-4/5">
+                    <div class="flex items-center">
+                        <input {% if form.visibility == "yes" or not form %} checked {% endif %} id="visible-yes-radio" type="radio" value="yes" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <label for="visible-yes-radio" class="ms-2 text-sm font-medium text-gray-900">Widoczny</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input {% if form.visibility == "no" %} checked {% endif %} id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <label for="visible-no-radio" class="ms-2 text-sm font-medium text-gray-900">Niewidoczny</label>
+                    </div>
+                </div>
             </div>
-            <div class="flex flex-row justify-around mb-5 w-4/5">
-                <div class="flex items-center">
-                    <input {% if form.training_type == "personal" or not form %} checked {% endif %} id="personal-training-radio" type="radio" value="personal" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="personal-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening personalny</label>
-                </div>
-                <div class="flex items-center">
-                    <input {% if form.training_type == "general" %} checked {% endif %} id="general-training-radio" type="radio" value="general" name="training-type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="general-training-radio" class="ms-2 text-sm font-medium text-gray-900">Trening ogólny</label>
-                </div>
-                <p class="text-xs text-red-500">{{ form.errors.training_type }}</p>
-            </div>
-            <div class="mb-5 flex flex-row w-4/5 justify-between">
-                <div class="w-2/5">
-                    <label for="training-date" class="block mb-2 text-sm font-medium text-gray-900">Data treningu</label>
-                    <input name="workout_date" id="training-date" type="date" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
-                </div>
-                <div class="w-2/5">
-                    <label for="training-person" class="block mb-2 text-sm font-medium text-gray-900">Osoba</label>
-                    <select name="workout-person" id="training-person" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
-                        {% for client in clients %}
-                            <option value="{{ client.id }}">{{ client.id }} {{ client.first_name }} {{ client.last_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-            <div class="flex flex-row justify-around mb-5 w-4/5">
-                <div class="flex items-center">
-                    <input {% if form.visibility == "yes" or not form %} checked {% endif %} id="visible-yes-radio" type="radio" value="yes" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="visible-yes-radio" class="ms-2 text-sm font-medium text-gray-900">Widoczny</label>
-                </div>
-                <div class="flex items-center">
-                    <input {% if form.visibility == "no" %} checked {% endif %} id="visible-no-radio" type="radio" value="no" name="visible-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                    <label for="visible-no-radio" class="ms-2 text-sm font-medium text-gray-900">Niewidoczny</label>
-                </div>
+            <div class="flex-2 w-1/3">
+                    <div class="mb-5">
+                        <label for="id_image" class="block mb-2 text-sm font-medium text-gray-900">Zdjęcie lub GIF</label>
+
+                            <div class="font-[sans-serif] max-w-md mx-auto">
+                                  <input name="image" type="file" class="w-full text-gray-400 font-semibold text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:mr-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-gray-600 rounded" />
+
+                                  <div
+                                    class="mt-5 bg-gray-50 text-gray-600 text-base rounded w-full h-48 flex flex-col items-center justify-center border-2 border-gray-300 border-dashed">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 mb-2 fill-gray-400" viewBox="0 0 32 32">
+                                      <path
+                                        d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+                                        data-original="#000000" />
+                                      <path
+                                        d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+                                        data-original="#000000" />
+                                    </svg>
+                                    <p class="text-sm font-semibold text-gray-600">Drag & Drop files here</p>
+                                  </div>
+                                </div>
+
+                        <p class="text-xs text-red-500">{{ form.errors.image }}</p>
+                    </div>
             </div>
         </div>
-
         <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
+    <input type="hidden" id="rowCount" name="rowCount" value="1">
 
-        <div id="exercises-container" class="space-y-4 flex flex-col">
-            <div class="flex flex-row justify-between w-4/5" id="exercise" style="display: none">
-                <div>
-                    <label for="exercise-list" class="block mb-2 text-sm font-medium text-gray-900">Ćwiczenie</label>
-                    <select id="exercise-list" class="exercise-select w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
-                        {% for exercise in exercises %}
-                            <option value="{{ exercise.id }}">{{ exercise.id }} {{ exercise.title }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="w-1/2">
-                    <label for="tips" class="block mb-2 text-sm font-medium text-gray-900">Wskazówki</label>
-                    <textarea id="tips" class="exercise-tips w-full block p-1.5 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" rows="2"></textarea>
-                </div>
-                <div class="flex items-end justify-center flex-col">
-                    <a id="exercise-delete" class="delete-button bg-red-600 flex flex-row w-24 h-6 justify-around rounded-md text-sm hover:bg-red-900 my-auto">
-                        <p class="text-white my-auto">Usuń</p>
-                        <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="3 6 5 6 21 6"></polyline>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                        </svg>
-                    </a>
-                    <a id="exercise-duplicate" class="duplicate-button bg-emerald-500 flex flex-row w-24 h-6 justify-around rounded-md text-sm hover:bg-emerald-700 my-auto">
-                        <p class="text-white my-auto">Duplikuj</p>
-                        <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+    <table>
+        <tbody id="exercise-list"></tbody>
+    </table>
+    <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
+    <div class="flex flex-row">
+        <div class="flex justify-center mr-auto">
+            <button onclick="addRow()" type="button" id="add-exercise" class="bg-blue-500 hover:bg-blue-700 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
+                Dodaj ćwiczenie
+            </button>
         </div>
-
-        <hr class="h-px mx-auto w-full my-8 bg-gray-700 border-0">
-
-        <div class="flex flex-row">
-            <div class="flex justify-center mr-auto">
-                <button type="button" id="add-exercise" class="bg-blue-500 hover:bg-blue-700 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
-                    Dodaj ćwiczenie
-                </button>
-            </div>
-            <div class="flex justify-center">
-                <button type="submit" class="bg-blue-700 hover:bg-blue-900 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
-                    Zatwierdź
-                </button>
-            </div>
+        <div class="flex justify-center">
+            <button type="submit" class="bg-blue-700 hover:bg-blue-900 inline-flex items-center px-10 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800">
+                Zatwierdź
+            </button>
         </div>
+    </div>
     </form>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log('DOM w pełni załadowany i przetworzony');
-            const container = document.getElementById('exercises-container');
-            let exerciseId = 0;
-
-            const defaultExercise = document.getElementById('exercise');
-            if (defaultExercise) {
-                exerciseId++;
-                const newExercise = createExerciseElement(exerciseId, defaultExercise.cloneNode(true));
-                if (newExercise) {
-                    container.appendChild(newExercise);
-                }
-            } else {
-                console.error('Nie znaleziono domyślnego ćwiczenia');
-            }
-
-            document.getElementById('add-exercise').addEventListener('click', function () {
-                console.log('Dodaj ćwiczenie kliknięte');
-                exerciseId++;
-                const newExercise = createExerciseElement(exerciseId, defaultExercise.cloneNode(true));
-                if (newExercise) {
-                    container.appendChild(newExercise);
-                }
-            });
-
-            function createExerciseElement(id, element) {
-                console.log('Tworzenie elementu ćwiczenia', id);
-                element.id = 'exercise-' + id;
-                element.style.display = "";
-
-                const deleteButton = element.querySelector('.delete-button');
-                const duplicateButton = element.querySelector('.duplicate-button');
-                const selectElement = element.querySelector('select');
-                const textAreaElement = element.querySelector('textarea');
-
-                // Sprawdzanie czy elementy istnieją
-                if (!deleteButton || !duplicateButton || !selectElement || !textAreaElement) {
-                    console.error('Nie znaleziono jednego z wymaganych elementów', {
-                        deleteButton,
-                        duplicateButton,
-                        selectElement,
-                        textAreaElement
-                    });
-                    return null;
-                }
-
-                deleteButton.id = 'exercise-delete-' + id;
-                duplicateButton.id = 'exercise-duplicate-' + id;
-                selectElement.name = 'exercise-id-' + id;
-                textAreaElement.name = 'exercise-tips-' + id;
-
-                deleteButton.addEventListener('click', function () {
-                    console.log('Usuń ćwiczenie kliknięte', id);
-                    element.remove();
-                });
-
-                duplicateButton.addEventListener('click', function () {
-                    console.log('Duplikuj ćwiczenie kliknięte', id);
-                    exerciseId++;
-                    const duplicatedExercise = createExerciseElement(exerciseId, element.cloneNode(true));
-
-                    if (!duplicatedExercise) {
-                        console.error('Błąd podczas duplikacji ćwiczenia', id);
-                        return;
-                    }
-
-                    // Logowanie wartości oryginalnego elementu select
-                    console.log("Oryginalna wartość select:", selectElement.value);
-
-                    // Ustawienie wartości dla duplikowanego elementu select
-                    const originalSelectValue = selectElement.value;
-                    const duplicatedSelectElement = duplicatedExercise.querySelector('select');
-                    duplicatedSelectElement.name = 'exercise-id-' + exerciseId; // Poprawna nazwa dla duplikowanego elementu
-                    duplicatedSelectElement.value = originalSelectValue;
-
-                    // Upewnij się, że wartość jest poprawnie ustawiona
-                    if (duplicatedSelectElement.value !== originalSelectValue) {
-                        for (let i = 0; i < duplicatedSelectElement.options.length; i++) {
-                            if (duplicatedSelectElement.options[i].value === originalSelectValue) {
-                                duplicatedSelectElement.selectedIndex = i;
-                                break;
-                            }
-                        }
-                    }
-
-                    // Logowanie wartości zduplikowanego elementu select
-                    console.log("Zduplikowana wartość select:", duplicatedSelectElement.value);
-
-                    // Ustawienie wartości dla duplikowanego pola textarea
-                    const originalTextAreaValue = textAreaElement.value;
-                    const duplicatedTextAreaElement = duplicatedExercise.querySelector('textarea');
-                    duplicatedTextAreaElement.name = 'exercise-tips-' + exerciseId; // Poprawna nazwa dla duplikowanego elementu
-                    duplicatedTextAreaElement.value = originalTextAreaValue;
-
-                    // Logowanie wartości zduplikowanego elementu textarea
-                    console.log("Oryginalna wartość textarea:", textAreaElement.value);
-                    console.log("Zduplikowana wartość textarea:", duplicatedTextAreaElement.value);
-
-                    container.appendChild(duplicatedExercise);
-                });
-
-                return element;
-            }
-        });
-
         function toggleFields() {
             console.log('Wywołanie toggleFields');
             const isPersonalTraining = document.getElementById('personal-training-radio').checked;
@@ -219,5 +325,6 @@
         document.getElementById('personal-training-radio').addEventListener('change', toggleFields);
         document.getElementById('general-training-radio').addEventListener('change', toggleFields);
         window.onload = toggleFields;
+        window.onload = initializeTable;
     </script>
 {% endblock %}
