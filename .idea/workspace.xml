@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="e1744ffb-e314-45dc-901d-25d70176b1b9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -178,14 +173,7 @@
       <workItem from="1728502151841" duration="5057000" />
       <workItem from="1728672188076" duration="3282000" />
       <workItem from="1728733030060" duration="12979000" />
-      <workItem from="1729244956576" duration="15009000" />
-    </task>
-    <task id="LOCAL-00009" summary="Update database">
-      <created>1715772036613</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1715772036613</updated>
+      <workItem from="1729244956576" duration="15660000" />
     </task>
     <task id="LOCAL-00010" summary="add_training.html page with mechanics">
       <created>1715858038541</created>
@@ -523,7 +511,14 @@
       <option name="project" value="LOCAL" />
       <updated>1729256935381</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Creating currentuser endpoint with GET and PATCH">
+      <created>1729264475692</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1729264475692</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -555,7 +550,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixing problem with editing personal workout" />
     <MESSAGE value="Quick fix with display clients name in show_training.html page" />
     <MESSAGE value="Small update show_clients.html" />
     <MESSAGE value="Delete all print for debuging" />
@@ -580,6 +574,7 @@
     <MESSAGE value="Quick fix with print" />
     <MESSAGE value="Fixing API Authorization" />
     <MESSAGE value="Creating Feedback endpoint in API" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating Feedback endpoint in API" />
+    <MESSAGE value="Creating currentuser endpoint with GET and PATCH" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating currentuser endpoint with GET and PATCH" />
   </component>
 </project>
