@@ -1,78 +1,61 @@
 from rest_framework import viewsets
-from .serializers import (PersonSerializer, ExerciseSerializer, ExerciseTypeSerializer, GeneralWorkoutSerializer, PersonalWorkoutSerializer, WorkoutExerciseSerializer)
-from trener.models import Exercise, ExerciseType, GeneralWorkout, PersonalWorkout, WorkoutExercise, Person
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework import generics, status
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import AllowAny
-from .serializers import RegisterSerializer, MyTokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
-from trener.models import Person
-from rest_framework_simplejwt.views import TokenBlacklistView
+from .serializers import *
+from trener.models import *
+from rest_framework.authentication import TokenAuthentication
 from trener.models import Exercise
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
 
-class BlacklistTokenUpdateView(TokenBlacklistView):
-    permission_classes = [IsAuthenticated]
 
-class RegisterView(generics.CreateAPIView):
-    queryset = Person.objects.all()
-    permission_classes = (AllowAny,)
-    serializer_class = RegisterSerializer
+class CustomObtainAuthToken(ObtainAuthToken):
+    serializer_class = CustomAuthTokenSerializer
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        refresh = RefreshToken.for_user(user)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
         return Response({
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-        }, status=status.HTTP_201_CREATED)
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    permission_classes = (AllowAny,)
-    serializer_class = MyTokenObtainPairSerializer
-
-
+            'token': token.key,
+            'user_id': user.pk,
+        })
 
 
 class ExerciseViewSet(viewsets.ModelViewSet):
-    queryset = Exercise.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    queryset = Exercise.objects.filter(id__gte=1)
     serializer_class = ExerciseSerializer
 
 
 class GeneralWorkoutViewSet(viewsets.ModelViewSet):
-    #permission_classes = [IsAuthenticated]
+    authentication_classes = (TokenAuthentication,)
     queryset = GeneralWorkout.objects.filter(visibility=True)
     serializer_class = GeneralWorkoutSerializer
 
 
 class PersonalWorkoutViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = (TokenAuthentication,)
     queryset = PersonalWorkout.objects.all()
     serializer_class = PersonalWorkoutSerializer
 
     def get_queryset(self):
-        return self.queryset.filter(client=1)
+        user = self.request.user
+        return self.queryset.filter(client=user)
 
 
 class WorkoutExerciseViewSet(viewsets.ModelViewSet):
     queryset = WorkoutExercise.objects.all()
     serializer_class = WorkoutExerciseSerializer
 
-class ExerciseTypeListView(APIView):
-    def get(self, request):
-        categories = ExerciseType.objects.all()
-        serializer = ExerciseTypeSerializer(categories, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
-class UserProfileView(APIView):
-    permission_classes = [IsAuthenticated]
+class MuscleTagViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    queryset = MuscleTag.objects.all()
+    serializer_class = MuscleTagSerializer
 
-    def get(self, request):
-        user = request.user
-        serializer = PersonSerializer(user)
-        return Response(serializer.data)
+
+class ExerciseTypeTagViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    queryset = ExerciseTypeTag.objects.all()
+    serializer_class = ExerciseTypeTagSerializer

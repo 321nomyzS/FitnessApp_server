@@ -1,37 +1,29 @@
+from trener.models import *
 from rest_framework import serializers
-from trener.models import Exercise, GeneralWorkout, PersonalWorkout, WorkoutExercise, Person
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from django.contrib.auth.hashers import check_password
-from django.core.exceptions import ValidationError
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import authenticate
 from trener.models import Person
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-class RegisterSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Person
-        fields = ('email', 'password', 'first_name', 'last_name', 'status', 'active_until')
-        extra_kwargs = {'password': {'write_only': True}}
 
-    def create(self, validated_data):
-        user = Person.objects.create_user(
-            email=validated_data['email'],
-            password=validated_data['password'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            status=validated_data['status'],
-            active_until=validated_data['active_until'],
-        )
-        return user
+class CustomAuthTokenSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
 
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token['email'] = user.email
-        token['first_name'] = user.first_name
-        token['last_name'] = user.last_name
-        return token
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        if email and password:
+            user = authenticate(request=self.context.get('request'), email=email, password=password)
+
+            if not user:
+                raise serializers.ValidationError('Unable to log in with provided credentials.')
+
+        else:
+            raise serializers.ValidationError('Must include "email" and "password".')
+
+        attrs['user'] = user
+        return attrs
+
 
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,7 +36,9 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WorkoutExercise
-        fields = ['exercise', 'comment']
+        fields = ['exercise', 'comment', 'tempo', 'rest_min', 'rest_sec', 'warmup_series', 'main_series',
+                  'main_series_reps', 'warmup_series_1_rep', 'warmup_series_2_rep', 'warmup_series_3_rep',
+                  'main_series_1_rep', 'main_series_2_rep', 'main_series_3_rep', 'main_series_4_rep', 'alter_exercise']
 
 
 class PersonalWorkoutSerializer(serializers.ModelSerializer):
@@ -63,7 +57,17 @@ class GeneralWorkoutSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'visibility', 'exercises']
 
 
-class PersonSerializer(serializers.ModelSerializer):
+class MuscleTagSerializer(serializers.ModelSerializer):
+    exercises = ExerciseSerializer(many=True)
+
     class Meta:
-        model = Person
-        fields = ['first_name', 'last_name', 'email', 'photo', 'status', 'active_until']
+        model = MuscleTag
+        fields = '__all__'
+
+
+class ExerciseTypeTagSerializer(serializers.ModelSerializer):
+    exercises = ExerciseSerializer(many=True)
+
+    class Meta:
+        model = ExerciseTypeTag
+        fields = '__all__'
