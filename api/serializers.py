@@ -1,7 +1,6 @@
 from trener.models import *
 from rest_framework import serializers
 from django.contrib.auth import authenticate
-from trener.models import Person
 
 
 class CustomAuthTokenSerializer(serializers.Serializer):
@@ -46,7 +45,7 @@ class PersonalWorkoutSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PersonalWorkout
-        fields = ['id', 'title', 'visibility', 'workout_date', 'client', 'exercises']
+        fields = '__all__'
 
 
 class GeneralWorkoutSerializer(serializers.ModelSerializer):
@@ -54,7 +53,7 @@ class GeneralWorkoutSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GeneralWorkout
-        fields = ['id', 'title', 'visibility', 'exercises']
+        fields = '__all__'
 
 
 class MuscleTagSerializer(serializers.ModelSerializer):
@@ -78,3 +77,11 @@ class FeedbackSerializer(serializers.ModelSerializer):
         model = Feedback
         fields = ['id', 'message', 'rating', 'personal_workout', 'exercise', 'person', 'date']
         read_only_fields = ['id', 'person', 'date']
+
+
+class PersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ['id', 'status', 'active_until', 'email', 'first_name', 'last_name', 'photo']
+        read_only_fields = ['id', 'status', 'active_until', 'photo']
+
