@@ -36,7 +36,7 @@ To run the application, follow these steps:
 1. Clone the repository:
    ```bash
    git clone https://github.com/321nomyzS/FitnessApp_server.git
-   cd FitnessApp_server```
+   cd FitnessApp_server
 
 2. Create a virtual environment and activate it:
 ```bash
@@ -48,8 +48,8 @@ venv\Scripts\activate  # on Windows
 3. Install the required packages:
 ```bash
 pip install -r requirements.txt
-Configure the database in the settings.py file
 ```
+Configure the database in the settings.py file
 
 4. Run the migrations:
 
